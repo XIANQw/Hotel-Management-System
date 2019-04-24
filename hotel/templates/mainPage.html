@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="create_demande">
+    <input type="date" name="checkin" required="required" placeholder="checkin date"/>
+    <input type="date" name="checkout" required="required" placeholder="checkout date"/>
+    <input type="number" name="taille" required="required" placeholder="nombre de clients"/>
+    <input type="submit"/>
+    </form>>
+
+    <fieldset>
+    <legend>Vos demandes</legend>
+    <table border="1">
+        <thead>
+        <tr>
+            <td>checkin</td>
+            <td>checkout</td>
+            <td>status</td>
+            <td>client</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in data %}
+        <tr>
+            <td>{{item.checkin}}</td>
+            <td>{{item.checkout}}</td>
+            <td>{{item.status}}</td>
+            <td>{{item.client}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <p>{{info}}</p>
+</fieldset>
+
+</body>
+</html>
