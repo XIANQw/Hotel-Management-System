@@ -9,50 +9,50 @@
     <legend>login</legend>
     <form action="/login/" method="post">
         {% csrf_token %}
-        <input type="text" name="login"\>
-        <input type="password" name="pwd"\>
-        <input type="submit"\>
+        <input type="text" name="login"/>
+        <input type="password" name="pwd"/>
+        <input type="submit"/>
     </form>
     <legend>sign up</legend>
     <form action="/signUp/" method="post">
         {% csrf_token %}
-        <input type="text" name="nom" placeholder="nom"required="required">
-        <input type="text" name="prenom" placeholder="prenom"required="required">
-        <input type="text" name="email" placeholder="email"required="required">
-        <input type="password" name="pwd" placeholder="password" required="required">
-        <input type="text" name="adresse" placeholder="adresse">
-        <input type="text" name="tel" placeholder="telphone">
-        <input type="submit"\>
+        <input type="text" name="nom" placeholder="nom" required="required" />
+        <input type="text" name="prenom" placeholder="prenom" required="required" />
+        <input type="text" name="email" placeholder="email" required="required" />
+        <input type="password" name="pwd" placeholder="password" required="required" />
+        <input type="text" name="adresse" placeholder="adresse" />
+        <input type="text" name="tel" placeholder="telphone" />
+        <input type="submit" />
     </form>
 </fieldset>
 
-<fieldset>
-<legend>Information</legend>
-    <table border="1">
-        <thead>
-        <tr>
-            <td>login</td>
-            <td>password</td>
-            <td>nom</td>
-            <td>prenom</td>
-            <td>adresse</td>
-            <td>tel</td>
-        </tr>
-        </thead>
-        <tbody>
-        {% for item in data %}
-        <tr>
-            <td>{{item.login}}</td>
-            <td>{{item.pwd}}</td>
-            <td>{{item.nom}}</td>
-            <td>{{item.prenom}}</td>
-            <td>{{item.adresse}}</td>
-            <td>{{item.tel}}</td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <p>{{info}}</p>
-</fieldset>
+<div id="zoneClient">
+    <fieldset>
+    <legend>Information des clients</legend>
+        <table border="1">
+            <thead>
+            <tr>
+                <td>login</td>
+                <td>nom</td>
+                <td>prenom</td>
+                <td>adresse</td>
+                <td>tel</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in users %}
+            <tr>
+                <td>{{item.login}}</td>
+                <td>{{item.nom}}</td>
+                <td>{{item.prenom}}</td>
+                <td>{{item.adresse}}</td>
+                <td>{{item.tel}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <p>{{info}}</p>
+    </fieldset>
+</div>
 </body>
 </html>

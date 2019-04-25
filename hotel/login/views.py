@@ -1,11 +1,13 @@
 from django.shortcuts import render
-from login import models
-
+from login.models import *
+from gestion.models import *
 
 # Create your views here.
 
 def index(request):
-    return render(request,'index.html')
+    users = Client.objects.all()
+    res = Ressource.objects.all()
+    return render(request,'index.html',{'users': users,'res':res })
 
 def signUp(request):
 
@@ -18,43 +20,40 @@ def signUp(request):
         email = request.POST.get("email")
         adresse = request.POST.get("adresse")
         tel = request.POST.get("tel")
-        users = models.Client.objects.all()
+        users = Client.objects.filter(login=login)
         info = ""
-        b = False
-        if users == []:
-            for i in users:
-                if i.login == login:
-                    info = "user exist"
-                    b = True
-                    break
-        if not b:
+        if users:
+            info = "user exist"
+            b = True
+        else:
             info = "new user was added"
             # save Client in database
-            models.Client.objects.create(login=login, pwd=pwd,nom=nom,prenom=prenom,email=email,adresse=adresse,tel=tel)
+            Client.objects.create(login=login, pwd=pwd,nom=nom,prenom=prenom,email=email,adresse=adresse,tel=tel)
     # read data from database
-    users = models.Client.objects.all()
-    return render(request, 'index.html', {'data': users, 'info': info})
+    res = Ressource.objects.all()
+    return render(request, 'index.html', {'res': res, 'info': info})
 
 def login(request):
 
     if request.method == "POST":
         login = request.POST.get("login")
         pwd = request.POST.get("pwd")
-        users = models.Client.objects.all()
-        for tmp in users:
-            if tmp.login == login:
-                if tmp.pwd != pwd:
-                    info = "your password is not correct"
-                else:
-                    info = "welcome back our VIP " + login
-                    return render(request, 'mainPage.html', {'info': info})
-        info = "This profile do not exist"
-    return render(request,'index.html',{'info':info},{'data':users})
+        res = Ressource.objects.all()
+        users = Client.objects.all()
+        if login == "root":
+            ro = Gestionnaire.objects.get(login="root")
+            if ro.pwd == pwd:
+                info = "Welcome back, gestionnaire"
+                return render(request,'gestionnaire.html',{'info':info,'users':users,'res':res})
+        user = Client.objects.filter(login=login)
+        if user:
+            if user[0].pwd != pwd:
+                info = "your password is not correct"
+            else:
+                info = "welcome back our VIP " + login
+                return render(request, 'mainPage.html', {'info': info})
+        else:
+            info = "This profile do not exist"
+    return render(request,'index.html',{'info':info},{'users':users})
 
-def create_demande(request):
-    if request.method == "POST":
-        checkin = request.POST.get("checkin")
-        checkout = request.POST.get("checkout")
-        num = request.POST.get("taille")
-        ressources = models.Ressource.objects.get(status="disponible")
-        for i in ressources:
+

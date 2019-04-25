@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>gestionnaire</title>
+</head>
+<body>
+<h3>Page gestion</h3>
+<div id="zoneRessource">
+    <fieldset>
+        <legend>Les informations des ressources</legend>
+        <div id="createRessource">
+            <form action="/createRessource/" method="post">{% csrf_token %}
+                <input type="text" name="numero" placeholder="numero de ressource"required="required"/>
+                <input type="number" name="prix" placeholder="prix"required="required"/>
+                <input type="text" name="type" placeholder="type de ressource"required="required"/>
+                <input type="number" name="taille" placeholder="taille" required="required"/>
+                <input type="submit"/>
+            </form>
+        </div>
+        <div id="modifyRessource">
+            <p>modifier une ressource en fonction de son numero</p>
+            <form action="/modifyRessource/" method="post">{% csrf_token %}
+                <input type="text" name="numero" placeholder="numero de ressource"required="required"/>
+                <input type="number" name="prix" placeholder="prix"required="required"/>
+                <input type="text" name="type" placeholder="type de ressource"required="required"/>
+                <input type="number" name="taille" placeholder="taille" required="required"/>
+                <input type="submit"/>
+            </form>
+        </div>
+        <div id="infoRessource">
+            <table border="1">
+                <thead>
+                <tr>
+                    <td>numero</td>
+                    <td>taille</td>
+                    <td>type</td>
+                    <td>prix</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in res %}
+                <tr>
+                    <td>{{item.numero}}</td>
+                    <td>{{item.type}}</td>
+                    <td>{{item.taille}}</td>
+                    <td>{{item.prix}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+</div>
+
+
+<div id="infoClient">
+<fieldset>
+<legend>Les informations des clients</legend>
+    <table border="1">
+        <thead>
+        <tr>
+            <td>login</td>
+            <td>nom</td>
+            <td>prenom</td>
+            <td>adresse</td>
+            <td>tel</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in users %}
+        <tr>
+            <td>{{item.login}}</td>
+            <td>{{item.nom}}</td>
+            <td>{{item.prenom}}</td>
+            <td>{{item.adresse}}</td>
+            <td>{{item.tel}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</fieldset>
+</div>
+<p>{{info}}</p>
+</body>
+</html>
