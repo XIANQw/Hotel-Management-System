@@ -40,3 +40,20 @@ def modifyRessource(request):
     res = Ressource.objects.all()
     users = Client.objects.all()
     return render(request, 'gestionnaire.html', {'users':users,'res': res, 'info': info})
+
+def deleteRessource(request):
+    info = "error"
+    if request.method == "POST":
+        numero = request.POST.get("numero")
+        prix = request.POST.get("prix")
+        type = request.POST.get("type")
+        taille = request.POST.get("taille")
+        res = Ressource.objects.filter(numero=numero)
+        if res:
+            info="Cette ressource est bien supprimee"
+            res[0].delete()
+        else:
+            info = "Cette ressource n'existe pas"
+    res = Ressource.objects.all()
+    users = Client.objects.all()
+    return render(request, 'gestionnaire.html', {'users':users,'res': res, 'info': info})

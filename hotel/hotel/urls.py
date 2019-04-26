@@ -25,4 +25,5 @@ urlpatterns = [
     path('signUp/', signUp),
     path('createRessource/',createRessource),
     path('modifyRessource/',modifyRessource),
+    path('deleteRessource/',deleteRessource),
 ]

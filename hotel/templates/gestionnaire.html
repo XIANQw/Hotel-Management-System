@@ -8,8 +8,12 @@
 <h3>Page gestion</h3>
 <div id="zoneRessource">
     <fieldset>
-        <legend>Les informations des ressources</legend>
+        <legend>Gestion des ressources</legend>
+        <button>Creation</button>
+        <button>Modification</button>
+        <button>Cancellation</button>
         <div id="createRessource">
+            <p>Creer une nouvelle ressource</p>
             <form action="/createRessource/" method="post">{% csrf_token %}
                 <input type="text" name="numero" placeholder="numero de ressource"required="required"/>
                 <input type="number" name="prix" placeholder="prix"required="required"/>
@@ -19,7 +23,7 @@
             </form>
         </div>
         <div id="modifyRessource">
-            <p>modifier une ressource en fonction de son numero</p>
+            <p>Modifier une ressource en fonction de son numero</p>
             <form action="/modifyRessource/" method="post">{% csrf_token %}
                 <input type="text" name="numero" placeholder="numero de ressource"required="required"/>
                 <input type="number" name="prix" placeholder="prix"required="required"/>
@@ -28,7 +32,15 @@
                 <input type="submit"/>
             </form>
         </div>
+        <div id="deleteRessource">
+            <p>Supprimer une ressource en fonction de son numero</p>
+            <form action="/deleteRessource/" method="post">{% csrf_token %}
+                <input type="text" name="numero" placeholder="numero de ressource"required="required"/>
+                <input type="submit"/>
+            </form>
+        </div>
         <div id="infoRessource">
+            <p>Les informations des ressource</p>
             <table border="1">
                 <thead>
                 <tr>
