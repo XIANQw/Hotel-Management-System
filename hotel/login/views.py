@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from login.models import *
 from gestion.models import *
 
 # Create your views here.
@@ -50,10 +49,10 @@ def login(request):
             if user[0].pwd != pwd:
                 info = "your password is not correct"
             else:
-                info = "welcome back our VIP " + login
-                return render(request, 'mainPage.html', {'info': info})
+                info = "welcome back our VIP " + user[0].nom
+                return render(request, 'mainPage.html', {'info': info,"user":user[0]})
         else:
             info = "This profile do not exist"
-    return render(request,'index.html',{'info':info},{'users':users})
+    return render(request,'index.html',{'info':info,'users':users})
 
 

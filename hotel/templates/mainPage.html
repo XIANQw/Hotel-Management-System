@@ -2,40 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="/static/js/jquery.min.js" ></script>
+    <script src='/static/js/page.js' ></script>
     <title>Title</title>
 </head>
 <body>
-    <form action="create_demande">
-    <input type="date" name="checkin" required="required" placeholder="checkin date"/>
-    <input type="date" name="checkout" required="required" placeholder="checkout date"/>
-    <input type="number" name="taille" required="required" placeholder="nombre de clients"/>
-    <input type="submit"/>
-    </form>>
-
+    <h3>{{user.prenom}} {{user.nom}}</h3>
+    <button id="gotoModifyCompte">modifiez votre compte</button>
     <fieldset>
-    <legend>Vos demandes</legend>
-    <table border="1">
-        <thead>
-        <tr>
-            <td>checkin</td>
-            <td>checkout</td>
-            <td>status</td>
-            <td>client</td>
-        </tr>
-        </thead>
-        <tbody>
-        {% for item in data %}
-        <tr>
-            <td>{{item.checkin}}</td>
-            <td>{{item.checkout}}</td>
-            <td>{{item.status}}</td>
-            <td>{{item.client}}</td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <p>{{info}}</p>
-</fieldset>
-
+    <legend>Espace de client</legend>
+        <button id="gotoCreateDemande">creez demande</button>
+        <button id="gotoSupprimerDemande">supprimez demande</button>
+        <div id="modifyCompte"style="display:none">
+            <h4>Modifiez votre profil</h4>
+            <form action="/modifyCompte/">
+                <input type="text" name="nom" placeholder="nom" required="required" />
+                <input type="text" name="prenom" placeholder="prenom" required="required" />
+                <input type="password" name="pwd" placeholder="password" required="required" />
+                <input type="text" name="adresse" placeholder="adresse" />
+                <input type="text" name="tel" placeholder="telphone" />
+                <input type="submit" value="submit" />
+            </form>
+        </div>
+        <div id="createDemande">
+            <h4>Trouvez les meilleures offres d'hébergement</h4>
+            <form action="/createDemande/">
+                <input type="date" name="checkin" required="required" placeholder="checkin date"/>
+                <input type="date" name="checkout" required="required" placeholder="checkout date"/>
+                <input type="number" name="taille" required="required" placeholder="nombre de clients"/>
+                <input type="submit" value="submit"/>
+            </form>
+        </div>
+        <div id="infoDemande">
+            <h4>Vos demandes</h4>
+            <table border="1">
+                <thead>
+                <tr>
+                    <td>checkin</td>
+                    <td>checkout</td>
+                    <td>status</td>
+                    <td>client</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in data %}
+                <tr>
+                    <td>{{item.checkin}}</td>
+                    <td>{{item.checkout}}</td>
+                    <td>{{item.status}}</td>
+                    <td>{{item.client}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+    <p id="alert">{{info}}</p>
 </body>
 </html>
