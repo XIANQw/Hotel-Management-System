@@ -6,6 +6,9 @@ from gestion.models import  *
 
 def createRessource(request):
     info = "error"
+    if request.session.get("username") != "root":
+        info = "Reconnectez-vous s'il vous plait"
+        return render(request,"index.html",{'info':info})
     if request.method == "POST":
         numero = request.POST.get("numero")
         prix = request.POST.get("prix")
@@ -22,6 +25,8 @@ def createRessource(request):
     return render(request, 'gestionnaire.html', {'res': res, 'users':users, 'info': info})
 
 def modifyRessource(request):
+    if request.session.get("username") != "root":
+        return render(request,"index.html",{'message':"Reconnectez s'il vous plait"})
     info = "error"
     if request.method == "POST":
         numero = request.POST.get("numero")
@@ -42,6 +47,8 @@ def modifyRessource(request):
     return render(request, 'gestionnaire.html', {'users':users,'res': res, 'info': info})
 
 def deleteRessource(request):
+    if request.session.get("username") != "root":
+        return render(request,"index.html",{'message':"Reconnectez s'il vous plait"})
     info = "error"
     if request.method == "POST":
         numero = request.POST.get("numero")
@@ -57,3 +64,16 @@ def deleteRessource(request):
     res = Ressource.objects.all()
     users = Client.objects.all()
     return render(request, 'gestionnaire.html', {'users':users,'res': res, 'info': info})
+
+
+def consulterRes(request):
+    if request.method == "GET":
+        numero = request.GET['numero']
+        res = Ressource.objects.get(numero=numero)
+        if res:
+            info = "succes"
+            return render(request,'ressource.html',{'res':res,'info':info})
+    info = "error"
+    return render(request,'gestionnaire.html',{'info':info})
+
+

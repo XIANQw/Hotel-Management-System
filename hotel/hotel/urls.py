@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from login.views import *
 from gestion.views import *
+from client.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,4 +27,7 @@ urlpatterns = [
     path('createRessource/',createRessource),
     path('modifyRessource/',modifyRessource),
     path('deleteRessource/',deleteRessource),
+    path('logout/',logout),
+    path('modifyCompte/',modifyCompte),
+    path('consulterRes/',consulterRes),
 ]

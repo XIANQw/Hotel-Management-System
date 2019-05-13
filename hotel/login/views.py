@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from gestion.models import *
 
 # Create your views here.
@@ -9,23 +9,20 @@ def index(request):
     return render(request,'index.html',{'users': users,'res':res })
 
 def signUp(request):
-
     info = "error"
     if request.method == "POST":
-        login = request.POST.get("email")
-        pwd = request.POST.get("pwd")
-        nom = request.POST.get("nom")
-        prenom = request.POST.get("prenom")
-        email = request.POST.get("email")
-        adresse = request.POST.get("adresse")
-        tel = request.POST.get("tel")
+        login = request.POST.get("email").strip()
+        pwd = request.POST.get("pwd").strip()
+        nom = request.POST.get("nom").strip()
+        prenom = request.POST.get("prenom").strip()
+        email = request.POST.get("email").strip()
+        adresse = request.POST.get("adresse").strip()
+        tel = request.POST.get("tel").strip()
         users = Client.objects.filter(login=login)
-        info = ""
         if users:
-            info = "user exist"
-            b = True
+            info = "Compte existe"
         else:
-            info = "new user was added"
+            info = "Nouveau utilisateur est bien enregistre"
             # save Client in database
             Client.objects.create(login=login, pwd=pwd,nom=nom,prenom=prenom,email=email,adresse=adresse,tel=tel)
     # read data from database
@@ -33,7 +30,6 @@ def signUp(request):
     return render(request, 'index.html', {'res': res, 'info': info})
 
 def login(request):
-
     if request.method == "POST":
         login = request.POST.get("login")
         pwd = request.POST.get("pwd")
@@ -42,17 +38,29 @@ def login(request):
         if login == "root":
             ro = Gestionnaire.objects.get(login="root")
             if ro.pwd == pwd:
-                info = "Welcome back, gestionnaire"
+                info = "Bienvenue, gestionnaire"
+                request.session["username"] = login
                 return render(request,'gestionnaire.html',{'info':info,'users':users,'res':res})
+            else:
+                info = "votre mot de pass n'est pas correct"
+                return render(request, 'index.html', {'info': info, 'users': users, 'res': res})
         user = Client.objects.filter(login=login)
         if user:
             if user[0].pwd != pwd:
-                info = "your password is not correct"
+                info = "votre mot de pass n'est pas correct"
             else:
-                info = "welcome back our VIP " + user[0].nom
-                return render(request, 'mainPage.html', {'info': info,"user":user[0]})
+                info = "Bienvenue notre VIP " + user[0].nom
+                request.session["username"] = login
+                return render(request, 'mainPage.html', {'info': info})
         else:
             info = "This profile do not exist"
     return render(request,'index.html',{'info':info,'users':users})
+
+def logout(request):
+    if not request.session.get("username",None):
+        return redirect("/index/")
+    request.session.flush()
+    return redirect("/index/")
+
 
 
