@@ -15,9 +15,14 @@
 <body>
     <div class="container">
         <h3>{{request.session.username}}</h3>
-        <a id="gotoModifyCompte" class="text-success" >modifiez votre compte</a>
-        <a href="/logout/" class="text-success">Deconnexion</a>
-
+        <ul>
+            <li>
+                <a href="/consulterProfile/" class="text-success">votre profile</a>
+            </li>
+            <li>
+                <a href="/logout/" class="text-success">deconnexion</a>
+            </li>
+        </ul>
         {% if info %}
         <div id="alert" class="alert alert-warning">{{info}}</div>
         {% endif %}
@@ -26,19 +31,8 @@
         <legend>Espace de client</legend>
             <a id="gotoCreateDemande">creez demande</a>
             <a id="gotoSupprimerDemande">supprimez demande</a>
-            <div id="modifyCompte"style="display:none">
-                <h4>Modifiez votre profil</h4>
-                <form action="/modifyCompte/" method = "post">{% csrf_token %}
-                    <input type="text" name="nom" placeholder="nom" required="required" />
-                    <input type="text" name="prenom" placeholder="prenom" required="required" />
-                    <input type="password" name="pwd" placeholder="password" required="required" />
-                    <input type="text" name="adresse" placeholder="adresse" />
-                    <input type="text" name="tel" placeholder="telphone" />
-                    <input type="submit" value="submit" />
-                </form>
-            </div>
             <div id="createDemande">
-                <h4>Trouvez les meilleures offres d'hébergement</h4>
+                <h5>Trouvez les meilleures offres d'hébergement</h5>
                 <form action="/createDemande/" method = "post">{% csrf_token %}
                     <input type="date" name="checkin" required="required" placeholder="checkin date"/>
                     <input type="date" name="checkout" required="required" placeholder="checkout date"/>
@@ -47,7 +41,7 @@
                 </form>
             </div>
             <div id="infoDemande">
-                <h4>Vos demandes</h4>
+                <h5>Vos demandes</h5>
                 <table border="1">
                     <thead>
                     <tr>

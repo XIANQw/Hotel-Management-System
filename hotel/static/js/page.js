@@ -1,13 +1,10 @@
 $(function(){
    $("#ModeLogin").click(ModeSignIn);
    $("#ModeSignUp").click(ModeSignUp);
-   $('#ModeCreation').click(creationRessource);
-   $('#ModeModification').click(modifyRessource);
-   $('#ModeCancellation').click(deleteRessource);
-   $('#gotoModifyCompte').click(gotoModifyCompte);
+   $('#ModeCreation').click(gotoCreationRessource);
+   $('#quitCreation').click(quitCreationRessource);
    $('#gotoCreateDemande').click(gotoCreateDemande);
 })
-
 
 function ModeSignIn(){
   $('#zoneLogin').css('display','block');
@@ -20,33 +17,13 @@ function ModeSignUp(){
   $('#zoneLogin').css('display','none');
 }
 
-function creationRessource() {
+function gotoCreationRessource() {
   $('#createRessource').css('display','block');
-  $('#modifyRessource').css('display','none');
-  $('#deleteRessource').css('display','none');
-    affiche("Creez une nouvelle ressource");
 }
-
-function modifyRessource() {
+function quitCreationRessource() {
   $('#createRessource').css('display','none');
-  $('#modifyRessource').css('display','block');
-  $('#deleteRessource').css('display','none');
-  affiche("Modifiez une ressource");
 }
 
-function deleteRessource() {
-  $('#createRessource').css('display','none');
-  $('#modifyRessource').css('display','none');
-  $('#deleteRessource').css('display','block');
-  affiche("Supprimez une ressource");
-}
-
-function gotoModifyCompte() {
-    $('#modifyCompte').css('display', 'block');
-    $('#createDemande').css('display', 'none');
-    $('#infoDemande').css('display', 'none');
-    affiche("Modifiez vos informations");
-}
 
 function gotoCreateDemande() {
     $('#modifyCompte').css('display', 'none');

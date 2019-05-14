@@ -2,6 +2,37 @@ from django.shortcuts import render
 from login.models import *
 from gestion.models import *
 # Create your views here.
+
+
+
+def mainPage(request):
+    if not request.session.get("username", None):
+        info = "Reconnectez-vous s'il vous plait"
+        return render(request,"index.html",{'info':info})
+    info = "Bienvenue notre VIP " + request.session.get('username')
+    return render(request,'mainPage.html',{'info':info})
+
+
+
+def consulterProfile(request):
+    if not request.session.get("username", None):
+        info = "Reconnectez-vous s'il vous plait"
+        return render(request,"index.html",{'info':info})
+    user = Client.objects.get(login=request.session.get('username'))
+    return render(request,'profile.html',{'user':user})
+
+
+
+def gotoModifyAccount(request):
+    if not request.session.get("username", None):
+        info = "Reconnectez-vous s'il vous plait"
+        return render(request,"index.html",{'info':info})
+    login = request.session.get("username")
+    user = Client.objects.get(login=login)
+    return render(request,'modifyAccount.html',{'user':user})
+
+
+
 def modifyCompte(request):
     info = "error"
     if not request.session.get("username", None):
@@ -27,4 +58,4 @@ def modifyCompte(request):
             info = "Cette ressource n'existe pas"
     res = Ressource.objects.all()
     users = Client.objects.all()
-    return render(request, 'gestionnaire.html', {'users':users,'res': res, 'info': info})
+    return render(request, 'mainPage.html', {'users':users,'res': res, 'info': info})

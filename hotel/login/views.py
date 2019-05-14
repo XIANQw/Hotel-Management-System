@@ -4,9 +4,8 @@ from gestion.models import *
 # Create your views here.
 
 def index(request):
-    users = Client.objects.all()
-    res = Ressource.objects.all()
-    return render(request,'index.html',{'users': users,'res':res })
+    return render(request,'index.html')
+
 
 def signUp(request):
     info = "error"
@@ -28,6 +27,7 @@ def signUp(request):
     # read data from database
     res = Ressource.objects.all()
     return render(request, 'index.html', {'res': res, 'info': info})
+
 
 def login(request):
     if request.method == "POST":
@@ -55,6 +55,7 @@ def login(request):
         else:
             info = "This profile do not exist"
     return render(request,'index.html',{'info':info,'users':users})
+
 
 def logout(request):
     if not request.session.get("username",None):

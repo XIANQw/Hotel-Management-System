@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="/static/js/jquery.min.js" ></script>
+    <script src="/static/js/popper.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src='/static/js/page.js' ></script>
+    <title>modify {{res.id}}}</title>
+</head>
+<body>
+<div class="container">
+    <div id="modifyRessource">
+        <form action="/modifyRes/" method="post">{% csrf_token %}
+            <input type="text" name="id" value="{{res.id}}" style="display: none" />
+            <div class="form-group">
+                <label for="id_modify_numero">Numero: </label>
+                <input type="text" name="numero" value="{{res.numero}}" id="id_modify_numero" class="form-control" placeholder="numero de ressource"required="required"/>
+            </div>
+            <div class="form-group">
+                <label>Prix: </label>
+                <input type="number" name="prix" value="{{res.prix}}" class="form-control" placeholder="prix"required="required"/>
+            </div>
+            <div class="form-group">
+                <label>Type: </label>
+                <input type="text" name="type" value="{{res.type}}" class="form-control" placeholder="type de ressource"required="required"/>
+            </div>
+            <div class="form-group">
+                <label>Taille: </label>
+                <input type="number" name="taille" value="{{res.taille}}" class="form-control" placeholder="taille" required="required"/>
+            </div>
+            <a type="button" href="/consulterRes/?id={{res.id}}" class="btn btn-primary">Annuler</a>
+            <button type="submit" class="btn btn-primary float-right">Modifier</button>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>
