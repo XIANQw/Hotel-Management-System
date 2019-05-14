@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="/static/js/jquery.min.js" ></script>
     <script src="/static/js/popper.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
@@ -14,27 +13,25 @@
 </head>
 <body>
     <div class="container">
-        <h1>{{user.prenom}} {{user.nom}}</h1>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand">{{user.prenom}} {{user.nom}} </a>
+                </div>
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li><a href="/gotoModifyAccount/" class="text-success" >modifiez votre compte</a></li>
+                        <li><a href="/mainPage/" class="text-success">retour</a></li>
+                        <li><a href="/logout/" class="text-success">deconnexion</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
         <ul>
-            <li>
-                <a href="/gotoModifyAccount/" class="text-success" >modifiez votre compte</a>
-            </li>
-            <li>
-                <a href="/mainPage/" class="text-success">retour</a>
-            </li>
-            <li>
-                <a href="/logout/" class="text-success">deconnexion</a>
-            </li>
+            <li>Email: {{user.email}}</li>
+            <li>Adresse: {{user.adresse}}</li>
+            <li>Telephone: {{user.tel}}</li>
         </ul>
-
-        <fieldset>
-            <legend>Vos informations</legend>
-            <ul>
-                <li>Email: {{user.email}}</li>
-                <li>Adresse: {{user.adresse}}</li>
-                <li>Telephone: {{user.tel}}</li>
-            </ul>
-        </fieldset>
     </div>
 </body>
 </html>

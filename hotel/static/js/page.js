@@ -4,6 +4,10 @@ $(function(){
    $('#ModeCreation').click(gotoCreationRessource);
    $('#quitCreation').click(quitCreationRessource);
    $('#gotoCreateDemande').click(gotoCreateDemande);
+   $('#gotoRes').click(gotoRes);
+   $('#gotoUsers').click(gotoUser);
+   $('#gotoCreateDemande').click(gotoCreateDemande);
+   $('#gotoInfoDemande').click(gotoInfoDemande);
 })
 
 function ModeSignIn(){
@@ -24,14 +28,24 @@ function quitCreationRessource() {
   $('#createRessource').css('display','none');
 }
 
+function gotoRes() {
+  $('#infoRessource').css('display','block');
+  $('#infoClient').css('display','none');
+}
+function gotoUser() {
+  $('#infoRessource').css('display','none');
+  $('#infoClient').css('display','block');
+}
+
 
 function gotoCreateDemande() {
-    $('#modifyCompte').css('display', 'none');
+    $('#infoDemande').css('display', 'none');
     $('#createDemande').css('display', 'block');
-    $('#infoDemande').css('display', 'block');
-    affiche("Creez une nouvelle demande");
 }
 
-function affiche(chaine){
-    $('#alert').html(chaine);
+function gotoInfoDemande(){
+    $('#infoDemande').css('display', 'block');
+    $('#createDemande').css('display', 'none');
+
 }
+

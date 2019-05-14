@@ -3,19 +3,24 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from gestion.models import  *
 
-def gestionnaire(request):
+def verifier(request):
     if request.session.get("username") != "root":
-        info = "Reconnectez-vous s'il vous plait"
-        return render(request,"index.html",{'info':info})
+        infoType='warning'
+        info = "Reconnectez s'il vous plait"
+        return render(request,"index.html",{'info':info,'infoType':infoType})
+
+
+def gestionnaire(request):
+    verifier(request)
     res = Ressource.objects.all()
     users = Client.objects.all()
-    return render(request,'gestionnaire.html',{'res':res,'users':users})
+    return render(request,'gestionnaire.html',{'res':res, 'users':users})
+
 
 def createRessource(request):
     info = "error"
-    if request.session.get("username") != "root":
-        info = "Reconnectez-vous s'il vous plait"
-        return render(request,"index.html",{'info':info})
+    infoType = 'danger'
+    verifier(request)
     if request.method == "POST":
         numero = request.POST.get("numero")
         prix = request.POST.get("prix")
@@ -27,25 +32,23 @@ def createRessource(request):
             info = "Cette ressource est deja existe"
         else:
             info = "Nouvelle ressource est bien cree"
+            infoType = 'success'
             Ressource.objects.create(numero=numero, prix=prix,type=type,taille=taille)
     res = Ressource.objects.all()
-    return render(request, 'gestionnaire.html', {'res': res, 'users':users, 'info': info})
+    return render(request, 'gestionnaire.html', {'res': res,'info': info,'infoType':infoType})
 
 def gotoModifyRes(request):
-    if request.session.get("username") != "root":
-        return render(request,"index.html",{'message':"Reconnectez s'il vous plait"})
-
+    verifier(request)
     if request.method == "GET":
         id = request.GET['id']
         res = Ressource.objects.get(id=id)
         return render(request,'modifyRes.html',{'res':res})
     info = "error"
-    return render(request,'gestionnaire.html',{'info':info})
+    return render(request,'gestionnaire.html',{'info':info,'infoType':'danger'})
 
 
 def modifyRessource(request):
-    if request.session.get("username") != "root":
-        return render(request,"index.html",{'message':"Reconnectez s'il vous plait"})
+    verifier(request)
     info = "error"
     if request.method == "POST":
         id = request.POST.get("id")
@@ -68,24 +71,26 @@ def modifyRessource(request):
         info = "Cette ressource n'existe pas"
     return render(request,"ressource.html",{'res':res,'info':info})
 
+
 def deleteRessource(request):
-    if request.session.get("username") != "root":
-        return render(request,"index.html",{'message':"Reconnectez s'il vous plait"})
+    verifier(request)
     info = "error"
+    infoType = 'danger'
     if request.method == "GET":
         id = request.GET['id']
         res = Ressource.objects.get(id=id)
         if res:
             info="Cette ressource est bien supprimee"
+            infoType = 'success'
             res.delete()
         else:
             info = "Cette ressource n'existe pas"
     res = Ressource.objects.all()
-    users = Client.objects.all()
-    return render(request, 'gestionnaire.html', {'users':users,'res': res, 'info': info})
+    return render(request, 'gestionnaire.html', {'res':res,'infoType': infoType, 'info': info})
 
 
 def consulterRes(request):
+    verifier(request)
     if request.method == "GET":
         id = request.GET['id']
         res = Ressource.objects.get(id=id)

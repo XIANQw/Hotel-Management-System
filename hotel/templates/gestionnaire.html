@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 
     <script src="/static/js/jquery.min.js" ></script>
     <script src="/static/js/popper.js"></script>
@@ -14,10 +13,26 @@
 </head>
 <body>
     <div class="container">
-        <h3>Gestionnaire</h3>
-            <a href="/logout/" class="text-success">Deconnexion</a>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand">Gestionnaire</a>
+                </div>
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li role="presentation">
+                            <a id="gotoRes">Ressources</a>
+                        </li>
+                        <li role="presentation">
+                            <a id="gotoUsers">Clients</a>
+                        </li>
+                        <li><a href="/logout/">deconnexion</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
             {% if info %}
-            <div id="alert" class="alert alert-warning">{{info}}</div>
+            <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
             {% endif %}
         <div id="zoneRessource">
             <div id="createRessource" style="display:none">
@@ -46,6 +61,7 @@
 
             </fieldset>
             </div>
+
             <div id="infoRessource">
                 <fieldset>
                     <legend>Les informations des ressources</legend>
@@ -80,9 +96,10 @@
                     </table>
                 </fieldset>
             </div>
+
         </div>
 
-        <div id="infoClient">
+        <div id="infoClient" style="display: none">
         <fieldset>
         <legend>Les informations des clients</legend>
             <table border="1">
@@ -109,6 +126,7 @@
             </table>
         </fieldset>
         </div>
+
     </div>
 </body>
 </html>

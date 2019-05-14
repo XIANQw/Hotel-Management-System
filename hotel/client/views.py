@@ -3,14 +3,12 @@ from login.models import *
 from gestion.models import *
 # Create your views here.
 
-
-
 def mainPage(request):
     if not request.session.get("username", None):
         info = "Reconnectez-vous s'il vous plait"
         return render(request,"index.html",{'info':info})
     info = "Bienvenue notre VIP " + request.session.get('username')
-    return render(request,'mainPage.html',{'info':info})
+    return render(request,'mainPage.html',{'info':info,'infoType':'success'})
 
 
 
@@ -59,3 +57,4 @@ def modifyCompte(request):
     res = Ressource.objects.all()
     users = Client.objects.all()
     return render(request, 'mainPage.html', {'users':users,'res': res, 'info': info})
+
