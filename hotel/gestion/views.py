@@ -100,3 +100,14 @@ def consulterRes(request):
     return render(request,'gestionnaire.html',{'info':info})
 
 
+def consulterClient(request):
+    verifier(request)
+    if request.method == "GET":
+        id = request.GET['id']
+        client = Client.objects.get(id=id)
+        demandes = Demande.objects.filter(client=client)
+        if demandes:
+            return render(request, 'clientDemande.html', {'demandes': demandes,'user':client})
+    info = "error"
+    infoType = 'danger'
+    return render(request, 'gestionnaire.html', {'info': info,'infoType': infoType})

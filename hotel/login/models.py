@@ -13,7 +13,7 @@ class Client(models.Model):
     nom = models.CharField(max_length=32,default='defaut')
     prenom = models.CharField(max_length=32,default='defaut')
     email = models.EmailField(max_length= 32,default='defaut')
-    adresse = models.CharField(max_length=32,null=True,blank=True)
+    adresse = models.CharField(max_length=100,null=True,blank=True)
     tel = models.CharField(max_length=32,null=True,blank=True)
     def __unicode__(self):
         return self.login

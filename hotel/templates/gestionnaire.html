@@ -141,6 +141,7 @@
                     <td>prenom</td>
                     <td>adresse</td>
                     <td>tel</td>
+                    <td>detail</td>
                 </tr>
                 </thead>
                 <tbody>
@@ -151,8 +152,9 @@
                     <td>{{item.prenom}}</td>
                     <td>{{item.adresse}}</td>
                     <td>{{item.tel}}</td>
-                </tr>
-                {% endfor %}
+                    <td><a href="/consulterClient/?id={{item.id}}" class="text-success"> Consulter</a></td>
+                </tr> {% endfor %}
+
                 </tbody>
             </table>
         </fieldset>

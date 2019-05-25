@@ -36,4 +36,5 @@ urlpatterns = [
     path('gotoModifyAccount/',gotoModifyAccount),
     path('modifyCompte/',modifyCompte),
     path('createDemande/',createDemande),
+    path('consulterClient/',consulterClient),
 ]
