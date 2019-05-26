@@ -35,5 +35,5 @@ urlpatterns = [
     path('logout/',logout),
     path('gotoModifyAccount/',gotoModifyAccount),
     path('modifyCompte/',modifyCompte),
-
+    path('createDemande/',createDemande),
 ]

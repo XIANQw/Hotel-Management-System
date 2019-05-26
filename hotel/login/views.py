@@ -53,10 +53,11 @@ def login(request):
             if user[0].pwd != pwd:
                 info = "votre mot de pass n'est pas correct"
             else:
+                demandes = Demande.objects.filter(client=user[0])
                 info = "Bienvenue notre VIP " + user[0].nom
                 infoType = "success"
                 request.session["username"] = login
-                return render(request, 'mainPage.html', {'info': info,'infoType':infoType})
+                return render(request, 'mainPage.html', {'info': info,'infoType':infoType,'demandes':demandes})
         else:
             info = "This profile do not exist"
     return render(request,'index.html',{'info':info,'infoType':infoType})

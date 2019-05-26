@@ -15,5 +15,6 @@ class Client(models.Model):
     email = models.EmailField(max_length= 32,default='defaut')
     adresse = models.CharField(max_length=32,null=True,blank=True)
     tel = models.CharField(max_length=32,null=True,blank=True)
-
+    def __unicode__(self):
+        return self.login
 

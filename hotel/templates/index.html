@@ -19,7 +19,7 @@
                 <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
             {% endif %}
             <div id="zoneLogin">
-                <legend>login</legend>
+                <h3>login</h3>
                 <form action="/login/" method="post">{% csrf_token %}
                     <div class="form-group">
                         <label for="id_username">username: </label>
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div id="zoneSignUp" style="display:none">
-                <legend>sign up</legend>
+                <h3>sign up</h3>
                 <form action="/signUp/" method="post">{% csrf_token %}
                     <div class="form-group">
                         <label for="id_nom">Nom: </label>
