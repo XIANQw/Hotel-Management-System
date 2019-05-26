@@ -14,7 +14,8 @@ def gestionnaire(request):
     verifier(request)
     res = Ressource.objects.all()
     users = Client.objects.all()
-    return render(request,'gestionnaire.html',{'res':res, 'users':users})
+    demandes = Demande.objects.all()
+    return render(request,'gestionnaire.html',{'res':res, 'users':users,'demandes':demandes})
 
 
 def createRessource(request):
