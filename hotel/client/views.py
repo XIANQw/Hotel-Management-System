@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from login.models import *
 from gestion.models import *
+from django.core.exceptions import ObjectDoesNotExist
 import datetime
 # Create your views here.
 
@@ -59,20 +60,48 @@ def modifyCompte(request):
 def createDemande(request):
     checkSession(request)
     if request.method == "POST":
-        checkin = request.POST.get("checkin")
-        checkout = request.POST.get("checkout")
-        nb = request.POST.get("nb")
+        nbPlan = int(request.POST.get("nbPlan"))
+        forms = []
+        for i in range(1,nbPlan+1):
+            checkin = datetime.datetime.strptime(request.POST.get("checkin"+str(i)),"%Y-%m-%d").date()
+            checkout = datetime.datetime.strptime(request.POST.get("checkout"+str(i)), "%Y-%m-%d").date()
+            nb = request.POST.get("nb" + str(i))
+            forms.append([checkin,checkout,nb])
         client = Client.objects.get(login=request.session.get("username"))
         infoType = "danger"
-        checkin = datetime.datetime.strptime(checkin,"%Y-%m-%d").date()
-        checkout = datetime.datetime.strptime(checkout,"%Y-%m-%d").date()
-        if checkin<datetime.date.today():
-            info = "date de checkin ne peut pas etre inferieur a aujoud'hui"
-        elif checkin>=checkout:
-            info = "date de checkin doit etre inferieur a celle de checkout"
-        else:
-            info = "Merci de votre demande !"
-            infoType="success"
-            Demande.objects.create(checkin=checkin,checkout=checkout,nbPerson=nb,client=client)
+        for i in range(len(forms)):
+            if forms[i][0] < datetime.date.today():
+                demandes = Demande.objects.filter(client=client)
+                info = "Erreur sur plan{} : date de checkin ne peut pas etre inferieur a aujoud'hui".format(i+1)
+                return render(request, 'mainPage.html', {'info': info, 'infoType': infoType, 'demandes': demandes})
+            elif forms[i][0] >= forms[i][1]:
+                demandes = Demande.objects.filter(client=client)
+                info = "Erreur sur plan{} : date de checkin doit etre inferieur a celle de checkout".format(i+1)
+                return render(request, 'mainPage.html', {'info': info, 'infoType': infoType, 'demandes': demandes})
+        try:
+            numero = Demande.objects.filter(client=client).latest('numero').numero+1
+        except ObjectDoesNotExist:
+            numero =1
+        demande = Demande.objects.create(numero=numero,client=client)
+        for i in range(len(forms)):
+            plan = Plan.objects.create(numero= i+1, checkin=forms[i][0], checkout=forms[i][1], nbPerson=forms[i][2], owner=client)
+            DemandePlan.objects.create(demande=demande,plan=plan)
+        info = "Merci de votre demande !"
+        infoType ="success"
         demandes = Demande.objects.filter(client=client)
         return render(request,'mainPage.html',{'info':info,'infoType':infoType,'demandes':demandes})
+
+
+def consulterDemande(request):
+    checkSession(request)
+    if request.method == "GET":
+        id = request.GET['id']
+        demande = Demande.objects.get(id=id)
+        demandePlans = DemandePlan.objects.filter(demande=demande)
+        plans = []
+        for i in demandePlans:
+            plans.append(i.plan)
+        if plans:
+            print(plans)
+            return render(request,'demande.html',{'plans':plans})
+    return redirect('/mainPage/')

@@ -98,6 +98,6 @@ def consulterRes(request):
         if res:
             return render(request,'ressource.html',{'res':res})
     info = "error"
-    return render(request,'gestionnaire.html',{'info':info})
+    return render(request,'gestionnaire.html',{'info':info,'infoType':'danger'})
 
 

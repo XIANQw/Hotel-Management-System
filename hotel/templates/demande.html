@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="/static/js/jquery.min.js" ></script>
+    <script src="/static/js/popper.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src='/static/js/page.js' ></script>
+    <title>Demande {{demande.id}}</title>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand">Information de demande {{demande.id}} </a>
+                </div>
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="" class="text-success">modifier</a>
+                        </li>
+                        <li>
+                            <a href="" class="text-success">supprimer</a>
+                        </li>
+                        <li>
+                            <a href="/mainPage/" class="text-success">retour</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        {% if info %}
+            <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
+        {% endif %}
+        <table border="1">
+            <thead>
+            <tr>
+                <td>Plan</td>
+                <td>Date de checkin</td>
+                <td>Date de checkout</td>
+                <td>Nomber des personnes</td>
+                <td>Temps de creation</td>
+                <td>status</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in plans %}
+            <tr>
+                <td>{{item.numero}}</td>
+                <td>{{item.checkin}}</td>
+                <td>{{item.checkout}}</td>
+                <td>{{item.nbPerson}}</td>
+                <td>{{item.createTime}}</td>
+                <td>{{item.status}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
