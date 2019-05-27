@@ -57,21 +57,21 @@
             <div id="infoDemande" style="display: none">
                 <legend>Vos demandes</legend>
                 <p>Vous voulez louer une autre ressource? cliquez <a id="gotoCreateDemande" class="text-success">ici</a> </p>
-                <table border="1">
+                <table class="table table-striped">
                     <thead>
                     <tr>
-                        <td>id</td>
-                        <td>personnes</td>
-                        <td>date de demande</td>
-                        <td>date de checkin</td>
-                        <td>date de checkout</td>
-                        <td>status</td>
+                        <th scope="col">ID</th>
+                        <th scope="col">Personnes</th>
+                        <th scope="col">Date de Demande</th>
+                        <th scope="col">Date de Checkin</th>
+                        <th scope="col">Date de Checkout</th>
+                        <th scope="col">Status</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for item in demandes %}
                     <tr>
-                        <td>{{item.id}}</td>
+                        <th scope="row">{{item.id}}</th>
                         <td>{{item.nbPerson}}</td>
                         <td>{{item.demandeTime}}</td>
                         <td>{{item.checkin}}</td>
