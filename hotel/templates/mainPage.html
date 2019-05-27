@@ -38,57 +38,49 @@
             {% endif %}
             <div id="createDemande">
                 <legend>Trouvez les meilleures offres d'hébergement</legend>
-                <form id="formDemande"  action="/createDemande/" method = "post">{% csrf_token %}
+                <form action="/createDemande/" method = "post">{% csrf_token %}
                     <div class="form-group">
-                        <label>Vous avez plusieurs plans ?</label>
-                        <input id="nbPlan" name="nbPlan" type="number" class="form-control" required placeholder="nombre des plans"/>
+                        <label>Check in date</label>
+                        <input type="date" name="checkin" class="form-control" required="required" placeholder="checkin date"/>
                     </div>
-                    <button id="subNbPlan" type="submit" class="btn btn-primary float-right">Ajouter</button>
-
-                    <div id="inputDemande">
-                        <div id="plan1">
-                            <h3>Plan1</h3>
-                            <div class="form-group">
-                                <label>Check in date</label>
-                                <input type="date" name="checkin1" class="form-control" required placeholder="checkin date"/>
-                            </div>
-                            <div class="form-group">
-                                <label>Check out date</label>
-                                <input type="date" name="checkout1" class="form-control" required placeholder="checkout date"/>
-                            </div>
-                            <div class="form-group">
-                                <label>Nombre des personnes</label>
-                                <input type="number" name="nb1" class="form-control" required placeholder="nombre de clients"/>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label>Check out date</label>
+                        <input type="date" name="checkout" class="form-control" required="required" placeholder="checkout date"/>
                     </div>
-                    <button type="submit" class="btn btn-primary float-right">cherchez</button>
+                    <div class="form-group">
+                        <label>Nombre des personnes</label>
+                        <input type="number" name="nb" class="form-control" required="required" placeholder="nombre de clients"/>
+                    </div>
+                    <button type="submit">cherchez</button>
                 </form>
             </div>
             <div id="infoDemande" style="display: none">
                 <legend>Vos demandes</legend>
                 <p>Vous voulez louer une autre ressource? cliquez <a id="gotoCreateDemande" class="text-success">ici</a> </p>
-                {% if demandes %}
                 <table border="1">
                     <thead>
                     <tr>
-                        <td>Number</td>
-                        <td>Status</td>
-                        <td>Details</td>
+                        <td>id</td>
+                        <td>personnes</td>
+                        <td>date de demande</td>
+                        <td>date de checkin</td>
+                        <td>date de checkout</td>
+                        <td>status</td>
                     </tr>
                     </thead>
                     <tbody>
-
                     {% for item in demandes %}
                     <tr>
-                        <td>{{item.numero}}</td>
+                        <td>{{item.id}}</td>
+                        <td>{{item.nbPerson}}</td>
+                        <td>{{item.demandeTime}}</td>
+                        <td>{{item.checkin}}</td>
+                        <td>{{item.checkout}}</td>
                         <td>{{item.status}}</td>
-                        <td><a href="/consulterDemande/?id={{item.id}}" class="text-success"> Consulter</a></td>
                     </tr>
                     {% endfor %}
                     </tbody>
                 </table>
-                {% endif %}
             </div>
         </fieldset>
     </div>
