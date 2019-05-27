@@ -36,16 +36,13 @@
     {% if info %}
     <div class="alert alert-{{infoType}}" id="alert">{{info}}</div>
     {% endif %}
-    <div class="col-sm-5">
+    <div class="col">
         <ul class="list-group">
             <li class="list-group-item text-muted">Ressource</li>
             <li class="list-group-item text-right"><span class="pull-left"><strong>Numero</strong></span> {{res.numero}}
             </li>
             <li class="list-group-item text-right"><span class="pull-left"><strong>Type</strong></span>
                 {{res.type}}
-            </li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Taille</strong></span>
-                {{res.taille}}
             </li>
             <li class="list-group-item text-right"><span class="pull-left"><strong>Prix</strong></span>{{res.prix}}</li>
         </ul>
