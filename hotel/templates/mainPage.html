@@ -43,13 +43,46 @@
                         <label>Check in date</label>
                         <input type="date" name="checkin" class="form-control" required="required" placeholder="checkin date"/>
                     </div>
-                    <div class="form-group">
-                        <label>Check out date</label>
-                        <input type="date" name="checkout" class="form-control" required="required" placeholder="checkout date"/>
-                    </div>
-                    <div class="form-group">
-                        <label>Nombre des personnes</label>
-                        <input type="number" name="nb" class="form-control" required="required" placeholder="nombre de clients"/>
+                    <button id="subNbPlan" type="submit" class="btn btn-primary float-right">Ajouter</button>
+
+                    <div id="inputDemande">
+                        <div id="plan1">
+                            <h3>Plan1</h3>
+                            <div class="form-group">
+                                <label>Check in date</label>
+                                <input name="checkin1" type="date" class="form-control" required placeholder="checkin date"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Check out date</label>
+                                <input name="checkout1" type="date" class="form-control" required placeholder="checkout date"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Nombre des personnes</label>
+                                <input name="nb1" type="number" class="form-control" required placeholder="nombre de clients"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Type: </label>
+                                <input name="type1" id="id_chambre1" value="Chambre" type="radio" checked>Chambre
+                                <input name="type1" id="id_SDC1" value="SalleDeConference" type="radio" />Salle de conference
+                            </div>
+                            <div id="optionCh1">
+                                <div class="form-group">
+                                    <label>Niveau: </label>
+                                    <select name="niveau1" id="id_niveau" class="form-control" placeholder="type de ressource" required>
+                                        <option value="Standard">Standard</option>
+                                        <option value="Premium">Premium</option>
+                                        <option value="President">President</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Fumeurs: </label>
+                                    <select name="fumeur1" id="id_fumeur" class="form-control" placeholder="type de ressource" required>
+                                        <option value="Fumeur">Oui</option>
+                                        <option value="Non Fumeur">Non</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <button type="submit">cherchez</button>
                 </form>
