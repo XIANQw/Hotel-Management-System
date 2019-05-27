@@ -2,54 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/static/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="/static/js/jquery.min.js" ></script>
     <script src="/static/js/popper.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
-    <script src='/static/js/page.js'></script>
+    <script src='/static/js/page.js' ></script>
     <title>{{res.id}}</title>
 </head>
 <body>
-<div class="container">
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand">Information de ressource {{res.id}} </a>
+    <div class="container">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand">Information de ressource {{res.id}} </a>
+                </div>
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="/consulterRes/modifyRessource/?id={{res.id}}" class="text-success">modifier</a>
+                        </li>
+                        <li>
+                            <a href="/consulterRes/deleteRessource/?id={{res.id}}" class="text-success">supprimer</a>
+                        </li>
+                        <li>
+                            <a href="/gestionnaire/" class="text-success">retour</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div>
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a class="text-success" href="/consulterRes/modifyRessource/?id={{res.id}}">modifier</a>
-                    </li>
-                    <li>
-                        <a class="text-success" href="/consulterRes/deleteRessource/?id={{res.id}}">supprimer</a>
-                    </li>
-                    <li>
-                        <a class="text-success" href="/gestionnaire/">retour</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    {% if info %}
-    <div class="alert alert-{{infoType}}" id="alert">{{info}}</div>
-    {% endif %}
-    <div class="col-sm-5">
-        <ul class="list-group">
-            <li class="list-group-item text-muted">Ressource</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Numero</strong></span> {{res.numero}}
-            </li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Type</strong></span>
-                {{res.type}}
-            </li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Taille</strong></span>
-                {{res.taille}}
-            </li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Prix</strong></span>{{res.prix}}</li>
+        </nav>
+        {% if info %}
+            <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
+        {% endif %}
+
+        <ul>
+            <li>Numero: {{res.numero}}</li>
+            <li>Type: {{res.type}}</li>
+            <li>Taille: {{res.taille}}</li>
+            <li>Prix: {{res.prix}}</li>
         </ul>
     </div>
-</div>
 </body>
 </html>
