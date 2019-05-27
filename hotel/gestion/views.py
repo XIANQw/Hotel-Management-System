@@ -26,7 +26,8 @@ def createRessource(request):
         numero = request.POST.get("numero")
         prix = request.POST.get("prix")
         type = request.POST.get("type")
-        taille = request.POST.get("taille")
+        niveau = request.POST.get("niveau")
+        fumeur = request.POST.get("fumeur")
         users = Client.objects.all()
         res = Ressource.objects.filter(numero=numero)
         if res:
@@ -34,9 +35,9 @@ def createRessource(request):
         else:
             info = "Nouvelle ressource est bien cree"
             infoType = 'success'
-            Ressource.objects.create(numero=numero, prix=prix,type=type,taille=taille)
+            Ressource.objects.create(numero=numero, prix=prix,type="{}-{}-{}".format(niveau,type,fumeur))
     res = Ressource.objects.all()
-    return render(request, 'gestionnaire.html', {'res': res,'info': info,'infoType':infoType})
+    return render(request, 'gestionnaire.html', {'res': res,'user':users,'info': info,'infoType':infoType})
 
 def gotoModifyRes(request):
     verifier(request)
@@ -95,8 +96,8 @@ def consulterRes(request):
     if request.method == "GET":
         id = request.GET['id']
         res = Ressource.objects.get(id=id)
-        if res:
-            return render(request,'ressource.html',{'res':res})
+
+        return render(request,'ressource.html',{'res':res})
     info = "error"
     return render(request,'gestionnaire.html',{'info':info,'infoType':'danger'})
 

@@ -66,7 +66,13 @@ def createDemande(request):
             checkin = datetime.datetime.strptime(request.POST.get("checkin"+str(i)),"%Y-%m-%d").date()
             checkout = datetime.datetime.strptime(request.POST.get("checkout"+str(i)), "%Y-%m-%d").date()
             nb = request.POST.get("nb" + str(i))
-            forms.append([checkin,checkout,nb])
+            type = request.POST.get("type"+str(i))
+            if type == "Chambre":
+                niveau = request.POST.get("niveau"+str(i))
+                fumeur = request.POST.get("fumeur"+str(i))
+                forms.append([checkin,checkout,nb,type,niveau,fumeur])
+            else:
+                forms.append([checkin,checkout,nb,type])
         client = Client.objects.get(login=request.session.get("username"))
         infoType = "danger"
         for i in range(len(forms)):
@@ -83,9 +89,15 @@ def createDemande(request):
         except ObjectDoesNotExist:
             numero =1
         demande = Demande.objects.create(numero=numero,client=client)
+
         for i in range(len(forms)):
-            plan = Plan.objects.create(numero= i+1, checkin=forms[i][0], checkout=forms[i][1], nbPerson=forms[i][2], owner=client)
-            DemandePlan.objects.create(demande=demande,plan=plan)
+            if forms[i][3] == "Chambre":
+                typeRessource = "{}-{}-{}".format(forms[i][4],forms[i][3],forms[i][5])
+                plan = Plan.objects.create(numero = i+1, checkin=forms[i][0], checkout=forms[i][1], nbPerson=forms[i][2], typeRessource=typeRessource, owner=client)
+            else:
+                plan = Plan.objects.create(numero = i+1, checkin=forms[i][0], checkout=forms[i][1], nbPerson=forms[i][2], typeRessource=forms[i][3], owner=client)
+            DemandePlan.objects.create(demande=demande, plan=plan)
+
         info = "Merci de votre demande !"
         infoType ="success"
         demandes = Demande.objects.filter(client=client)
