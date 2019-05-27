@@ -38,10 +38,10 @@
             {% endif %}
             <div id="createDemande">
                 <legend>Trouvez les meilleures offres d'hébergement</legend>
-                <form id="formDemande"  action="/createDemande/" method = "post">{% csrf_token %}
+                <form action="/createDemande/" method = "post">{% csrf_token %}
                     <div class="form-group">
-                        <label>Vous avez plusieurs plans ?</label>
-                        <input id="nbPlan" name="nbPlan" type="number" class="form-control" required placeholder="nombre des plans"/>
+                        <label>Check in date</label>
+                        <input type="date" name="checkin" class="form-control" required="required" placeholder="checkin date"/>
                     </div>
                     <button id="subNbPlan" type="submit" class="btn btn-primary float-right">Ajouter</button>
 
@@ -84,33 +84,36 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary float-right">cherchez</button>
+                    <button type="submit">cherchez</button>
                 </form>
             </div>
             <div id="infoDemande" style="display: none">
                 <legend>Vos demandes</legend>
                 <p>Vous voulez louer une autre ressource? cliquez <a id="gotoCreateDemande" class="text-success">ici</a> </p>
-                {% if demandes %}
-                <table border="1">
+                <table class="table table-striped">
                     <thead>
                     <tr>
-                        <td>Number</td>
-                        <td>Status</td>
-                        <td>Details</td>
+                        <th scope="col">ID</th>
+                        <th scope="col">Personnes</th>
+                        <th scope="col">Date de Demande</th>
+                        <th scope="col">Date de Checkin</th>
+                        <th scope="col">Date de Checkout</th>
+                        <th scope="col">Status</th>
                     </tr>
                     </thead>
                     <tbody>
-
                     {% for item in demandes %}
                     <tr>
-                        <td>{{item.numero}}</td>
+                        <th scope="row">{{item.id}}</th>
+                        <td>{{item.nbPerson}}</td>
+                        <td>{{item.demandeTime}}</td>
+                        <td>{{item.checkin}}</td>
+                        <td>{{item.checkout}}</td>
                         <td>{{item.status}}</td>
-                        <td><a href="/consulterDemande/?id={{item.id}}" class="text-success"> Consulter</a></td>
                     </tr>
                     {% endfor %}
                     </tbody>
                 </table>
-                {% endif %}
             </div>
         </fieldset>
     </div>

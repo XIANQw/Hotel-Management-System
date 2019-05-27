@@ -5,40 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <script src="/static/js/jquery.min.js" ></script>
+    <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/popper.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
-    <script src='/static/js/page.js' ></script>
+    <script src='/static/js/page.js'></script>
     <title>Gestionnaire</title>
 </head>
 <body>
-    <div class="container">
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand">Gestionnaire</a>
-                </div>
-                <div>
-                    <ul class="nav navbar-nav">
-                        <li role="presentation">
-                            <a id="gotoRes">Ressources</a>
-                        </li>
-                        <li role="presentation">
-                            <a id="gotoUsers">Clients</a>
-                        </li>
-                        <li role="presentation">
-                            <a id="gotoDemendes">Demandes</a>
-                        </li>
-                        <li><a href="/logout/">deconnexion</a></li>
-                    </ul>
-                </div>
+<div class="container">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">Gestionnaire</a>
             </div>
-        </nav>
-            {% if info %}
-            <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
-            {% endif %}
-        <div id="zoneRessource">
-            <div id="createRessource" style="display:none">
+            <div>
+                <ul class="nav navbar-nav">
+                    <li role="presentation">
+                        <a id="gotoRes">Ressources</a>
+                    </li>
+                    <li role="presentation">
+                        <a id="gotoUsers">Clients</a>
+                    </li>
+                    <li role="presentation">
+                        <a id="gotoDemendes">Demandes</a>
+                    </li>
+                    <li><a href="/logout/">Déconnexion</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% if info %}
+    <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
+    {% endif %}
+    <div id="zoneRessource">
+        <div id="createRessource" style="display:none">
             <fieldset>
                 <legend>Creer une ressource</legend>
                     <form action="/createRessource/" method="post">{% csrf_token %}
@@ -92,64 +92,63 @@
                         <button id="quitCreation" class="btn btn-primary">Annuler</button>
                         <button type="submit" class="btn btn-primary float-right">Creer</button>
                     </form>
-
             </fieldset>
-            </div>
-
-            <div id="infoRessource">
-                <fieldset>
-                    <legend>Les informations des ressources</legend>
-                    <table border="1">
-                        <thead>
-                        <tr>
-                            <td>numero</td>
-                            <td>type</td>
-                            <td>taille</td>
-                            <td>prix</td>
-                            <td>detail</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for item in res %}
-                        <tr>
-                            <td>{{item.numero}}</td>
-                            <td>{{item.type}}</td>
-                            <td>{{item.taille}}</td>
-                            <td>{{item.prix}}</td>
-                            <td><a href="/consulterRes/?id={{item.id}}" class="text-success"> Consulter</a></td>
-                        </tr>
-                        {% endfor %}
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><a id="ModeCreation" class="text-success">Ajouter</a></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </fieldset>
-            </div>
-
         </div>
-        <div id="zoneDemande" style="display: none">
+
+        <div id="infoRessource">
             <fieldset>
+                <legend>Les informations des ressources</legend>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Numéro</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Taille</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Détail</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in res %}
+                    <tr>
+                        <th scope="row">{{item.numero}}</th>
+                        <td>{{item.type}}</td>
+                        <td>{{item.taille}}</td>
+                        <td>{{item.prix}}</td>
+                        <td><a href="/consulterRes/?id={{item.id}}" class="text-success"> Consulter</a></td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><a id="ModeCreation" class="text-success">Ajouter</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+
+    </div>
+    <div id="zoneDemande" style="display: none">
+        <fieldset>
             <legend>Les informations des demandes</legend>
-            <table border="1">
+            <table class="table table-striped">
                 <thead>
                 <tr>
-                    <td>id</td>
-                    <td>checkin Date</td>
-                    <td>checkout Date</td>
-                    <td>demande Date</td>
-                    <td>client</td>
-                    <td>status</td>
+                    <th scope="col">ID</th>
+                    <th scope="col">Checkin Date</th>
+                    <th scope="col">Checkout Date</th>
+                    <th scope="col">Demande Date</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Status</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for item in demandes %}
                 <tr>
-                    <td>{{item.id}}</td>
+                    <th scope="row">{{item.id}}</th>
                     <td>{{item.checkin}}</td>
                     <td>{{item.checkout}}</td>
                     <td>{{item.demandeTime}}</td>
@@ -160,24 +159,24 @@
                 </tbody>
             </table>
         </fieldset>
-        </div>
-        <div id="infoClient" style="display: none">
+    </div>
+    <div id="infoClient" style="display: none">
         <fieldset>
-        <legend>Les informations des clients</legend>
-            <table border="1">
+            <legend>Les informations des clients</legend>
+            <table class="table table-striped">
                 <thead>
                 <tr>
-                    <td>login</td>
-                    <td>nom</td>
-                    <td>prenom</td>
-                    <td>adresse</td>
-                    <td>tel</td>
+                    <th scope="col">Login</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Adresse</th>
+                    <th scope="col">Tél</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for item in users %}
                 <tr>
-                    <td>{{item.login}}</td>
+                    <th scope="row">{{item.login}}</th>
                     <td>{{item.nom}}</td>
                     <td>{{item.prenom}}</td>
                     <td>{{item.adresse}}</td>
@@ -187,8 +186,7 @@
                 </tbody>
             </table>
         </fieldset>
-        </div>
-
     </div>
+</div>
 </body>
 </html>
