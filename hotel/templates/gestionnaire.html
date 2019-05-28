@@ -21,13 +21,13 @@
             <div>
                 <ul class="nav navbar-nav">
                     <li role="presentation">
-                        <a id="gotoRes">Ressources</a>
+                        <a href="/gestionnaire/">Ressources</a>
                     </li>
                     <li role="presentation">
-                        <a id="gotoUsers">Clients</a>
+                        <a href="/gestionnaire/listClients/">Clients</a>
                     </li>
                     <li role="presentation">
-                        <a id="gotoDemendes">Demandes</a>
+                        <a href="/gestionnaire/listDemandes/">Demandes</a>
                     </li>
                     <li><a href="/logout/">Déconnexion</a></li>
                 </ul>
@@ -41,7 +41,7 @@
         <div id="createRessource" style="display:none">
             <fieldset>
                 <legend>Creer une ressource</legend>
-                    <form action="/createRessource/" method="post">{% csrf_token %}
+                    <form action="/gestionnaire/createRessource/" method="post">{% csrf_token %}
                         <div class="form-group">
                             <label for="id_numero">Numero: </label>
                             <input type="text" name="numero" id="id_numero"class="form-control" placeholder="numero de ressource" required/>
@@ -115,7 +115,7 @@
                         <td>{{item.type}}</td>
                         <td>{{item.taille}}</td>
                         <td>{{item.prix}}</td>
-                        <td><a href="/consulterRes/?id={{item.id}}" class="text-success"> Consulter</a></td>
+                        <td><a href="/gestionnaire/consulterRes/?id={{item.id}}" class="text-success"> Consulter</a></td>
                     </tr>
                     {% endfor %}
                     <tr>
@@ -131,62 +131,8 @@
         </div>
 
     </div>
-    <div id="zoneDemande" style="display: none">
-        <fieldset>
-            <legend>Les informations des demandes</legend>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Create Date</th>
-                    <th scope="col">Client</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Details</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for item in demandes %}
-                <tr>
-                    <th scope="row">{{item.id}}</th>
-                    <td>{{item.createTime}}</td>
-                    <td>{{item.client.login}}</td>
-                    <td>{{item.status}}</td>
-                    <td><a href="/consulterDemande/?id={{item.id}}" class="text-success">Consulter</a></td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </fieldset>
-    </div>
-    <div id="infoClient" style="display: none">
-        <fieldset>
-            <legend>Les informations des clients</legend>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">Login</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Prénom</th>
-                    <th scope="col">Adresse</th>
-                    <th scope="col">Tél</th>
-                    <th scope="col">Details</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for item in users %}
-                <tr>
-                    <th scope="row">{{item.login}}</th>
-                    <td>{{item.nom}}</td>
-                    <td>{{item.prenom}}</td>
-                    <td>{{item.adresse}}</td>
-                    <td>{{item.tel}}</td>
-                    <td><a href="/consulterClient/?id={{item.id}}" class="text-success"> Consulter</a></td>
-                </tr> {% endfor %}
 
-                </tbody>
-            </table>
-        </fieldset>
-    </div>
+
 </div>
 </body>
 </html>

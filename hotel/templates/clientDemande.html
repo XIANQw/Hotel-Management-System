@@ -21,7 +21,7 @@
                 <div>
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="/gestionnaire/" class="text-success">retour</a>
+                            <a href="/gestionnaire/listClients/" class="text-success">retour</a>
                         </li>
                     </ul>
                 </div>
@@ -31,30 +31,33 @@
             <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
         {% endif %}
 
-        <table border = 1>
-            <thead>
-            <tr>
-            <td>demandeTime</td>
-            <td>checkin</td>
-            <td>checkout</td>
-            <td>nbPerson</td>
-            <td>status</td>
-
-            </tr>
-            </thead>
-            <tbody>
-            {% for item in demandes %}
-             <tr>
-            <td>{{item.demandeTime}}</td>
-            <td>{{item.checkin}}</td>
-            <td>{{item.checkout}}</td>
-            <td>{{item.nbPerson}}</td>
-            <td>{{item.status}}</td>
-             </tr>
-            {% endfor %}
-            </tbody>
-
-        </table>
+        {% if demandes %}
+        <div id="zoneDemande">
+            <fieldset>
+                <legend>Les informations des demandes</legend>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Create Date</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in demandes %}
+                    <tr>
+                        <th scope="row">{{item.numero}}</th>
+                        <td>{{item.createTime}}</td>
+                        <td>{{item.status}}</td>
+                        <td><a href="/gestionnaire/consulterDemande/?id={{item.id}}&cd=1" class="text-success">Consulter</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+        {% endif %}
     </div>
 </body>
 </html>

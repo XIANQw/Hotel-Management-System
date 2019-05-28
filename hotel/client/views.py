@@ -5,35 +5,51 @@ from django.core.exceptions import ObjectDoesNotExist
 import datetime
 # Create your views here.
 
-def checkSession(request):
-    if not request.session.get("username", None):
-        info = "Reconnectez-vous s'il vous plait"
-        return render(request,"index.html",{'info':info, 'infoType':'warning'})
 
 def mainPage(request):
-    checkSession(request)
+    if not request.session.get("username", None):
+        info = "Reconnectez-vous s'il vous plait"
+        return render(request, "index.html", {'info': info, 'infoType': 'warning'})
+
     login = request.session.get('username')
     info = "Bienvenue notre VIP " + login
+
+    return render(request,'mainPage.html',{'info':info,'infoType':'success'})
+
+def gotoListDemandes(request):
+    if not request.session.get("username", None):
+        info = "Reconnectez-vous s'il vous plait"
+        return render(request, "index.html", {'info': info, 'infoType': 'warning'})
+
+    login = request.session.get('username')
     me = Client.objects.get(login=login)
     demandes = Demande.objects.filter(client=me)
-    return render(request,'mainPage.html',{'info':info,'infoType':'success','demandes':demandes})
-
+    return render(request,'listDemandes.html',{'demandes':demandes})
 
 def consulterProfile(request):
-    checkSession(request)
+    if not request.session.get("username", None):
+        info = "Reconnectez-vous s'il vous plait"
+        return render(request, "index.html", {'info': info, 'infoType': 'warning'})
+
     user = Client.objects.get(login=request.session.get('username'))
     return render(request,'profile.html',{'user':user})
 
 
 def gotoModifyAccount(request):
-    checkSession(request)
+    if not request.session.get("username", None):
+        info = "Reconnectez-vous s'il vous plait"
+        return render(request, "index.html", {'info': info, 'infoType': 'warning'})
+
     login = request.session.get("username")
     user = Client.objects.get(login=login)
     return render(request,'modifyAccount.html',{'user':user})
 
 
 def modifyCompte(request):
-    checkSession(request)
+    if not request.session.get("username", None):
+        info = "Reconnectez-vous s'il vous plait"
+        return render(request, "index.html", {'info': info, 'infoType': 'warning'})
+
     if request.method == "POST":
         login = request.session.get("username")
         pwd = request.POST.get("pwd")
@@ -58,7 +74,10 @@ def modifyCompte(request):
     return render(request, 'mainPage.html', {'res': res, 'info': info,'infoType':infoType})
 
 def createDemande(request):
-    checkSession(request)
+    if not request.session.get("username", None):
+        info = "Reconnectez-vous s'il vous plait"
+        return render(request, "index.html", {'info': info, 'infoType': 'warning'})
+
     if request.method == "POST":
         nbPlan = int(request.POST.get("nbPlan"))
         forms = []
@@ -105,16 +124,20 @@ def createDemande(request):
 
 
 def consulterDemande(request):
-    checkSession(request)
+    if not request.session.get("username", None):
+        info = "Reconnectez-vous s'il vous plait"
+        return render(request, "index.html", {'info': info, 'infoType': 'warning'})
+
     if request.method == "GET":
         id = request.GET['id']
+        cd = request.GET['cd']
+        print(cd, type(cd))
         demande = Demande.objects.get(id=id)
+        idc = demande.client.id
         demandePlans = DemandePlan.objects.filter(demande=demande)
         plans = []
         for i in demandePlans:
             plans.append(i.plan)
         if plans:
-            print(plans)
-            return render(request,'demande.html',{'plans':plans})
-    else:
-        return redirect('/mainPage/')
+            return render(request,'demande.html',{'plans':plans,'cd':cd,'idc':idc})
+    return redirect('/mainPage/')
