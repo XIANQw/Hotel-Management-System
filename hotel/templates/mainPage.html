@@ -38,10 +38,10 @@
             {% endif %}
             <div id="createDemande">
                 <legend>Trouvez les meilleures offres d'hébergement</legend>
-                <form id="formDemande"  action="/createDemande/" method = "post">{% csrf_token %}
+                <form action="/createDemande/" method = "post">{% csrf_token %}
                     <div class="form-group">
                         <label>Vous avez plusieurs plans ?</label>
-                        <input id="nbPlan" name="nbPlan" type="number" class="form-control" required placeholder="nombre des plans"/>
+                        <input id="nbPlan" type="number" name="nbPlan" class="form-control" required="required" placeholder="Nombre des plans"/>
                     </div>
                     <button id="subNbPlan" type="submit" class="btn btn-primary float-right">Ajouter</button>
 
@@ -50,15 +50,37 @@
                             <h3>Plan1</h3>
                             <div class="form-group">
                                 <label>Check in date</label>
-                                <input type="date" name="checkin1" class="form-control" required placeholder="checkin date"/>
+                                <input name="checkin1" type="date" class="form-control" required placeholder="checkin date"/>
                             </div>
                             <div class="form-group">
                                 <label>Check out date</label>
-                                <input type="date" name="checkout1" class="form-control" required placeholder="checkout date"/>
+                                <input name="checkout1" type="date" class="form-control" required placeholder="checkout date"/>
                             </div>
                             <div class="form-group">
                                 <label>Nombre des personnes</label>
-                                <input type="number" name="nb1" class="form-control" required placeholder="nombre de clients"/>
+                                <input name="nb1" type="number" class="form-control" required placeholder="nombre de clients"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Type: </label>
+                                <input name="type1" id="id_chambre1" value="Chambre" type="radio" checked>Chambre
+                                <input name="type1" id="id_SDC1" value="SalleDeConference" type="radio" />Salle de conference
+                            </div>
+                            <div id="optionCh1">
+                                <div class="form-group">
+                                    <label>Niveau: </label>
+                                    <select name="niveau1" id="id_niveau" class="form-control" placeholder="type de ressource" required>
+                                        <option value="Standard">Standard</option>
+                                        <option value="Premium">Premium</option>
+                                        <option value="President">President</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Fumeurs: </label>
+                                    <select name="fumeur1" id="id_fumeur" class="form-control" placeholder="type de ressource" required>
+                                        <option value="Fumeur">Oui</option>
+                                        <option value="Non Fumeur">Non</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -68,27 +90,26 @@
             <div id="infoDemande" style="display: none">
                 <legend>Vos demandes</legend>
                 <p>Vous voulez louer une autre ressource? cliquez <a id="gotoCreateDemande" class="text-success">ici</a> </p>
-                {% if demandes %}
-                <table border="1">
+                <table class="table table-striped">
                     <thead>
                     <tr>
-                        <td>Number</td>
-                        <td>Status</td>
-                        <td>Details</td>
+                        <th scope="col">ID</th>
+                        <th scope="col">Create Demande</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Details</th>
                     </tr>
                     </thead>
                     <tbody>
-
                     {% for item in demandes %}
                     <tr>
-                        <td>{{item.numero}}</td>
+                        <th scope="row">{{item.id}}</th>
+                        <td>{{item.createTime}}</td>
                         <td>{{item.status}}</td>
-                        <td><a href="/consulterDemande/?id={{item.id}}" class="text-success"> Consulter</a></td>
+                        <td><a href="/consulterDemande/?id={{item.id}}" class="text-success">Consulter</a></td>
                     </tr>
                     {% endfor %}
                     </tbody>
                 </table>
-                {% endif %}
             </div>
         </fieldset>
     </div>

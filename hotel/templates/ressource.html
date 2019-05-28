@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/popper.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
@@ -24,27 +24,25 @@
             <div>
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="/consulterRes/modifyRessource/?id={{res.id}}" class="text-success">modifier</a>
+                        <a class="text-success" href="/consulterRes/modifyRessource/?id={{res.id}}">modifier</a>
                     </li>
                     <li>
-                        <a href="/consulterRes/deleteRessource/?id={{res.id}}" class="text-success">supprimer</a>
+                        <a class="text-success" href="/consulterRes/deleteRessource/?id={{res.id}}">supprimer</a>
                     </li>
                     <li>
-                        <a href="/gestionnaire/" class="text-success">retour</a>
+                        <a class="text-success" href="/gestionnaire/">retour</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
     {% if info %}
-    <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
+    <div class="alert alert-{{infoType}}" id="alert">{{info}}</div>
     {% endif %}
-
     <div class="col">
         <ul class="list-group">
             <li class="list-group-item text-muted">Ressource</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Numero</strong></span>
-                {{res.numero}}
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Numero</strong></span> {{res.numero}}
             </li>
             <li class="list-group-item text-right"><span class="pull-left"><strong>Type</strong></span>
                 {{res.type}}

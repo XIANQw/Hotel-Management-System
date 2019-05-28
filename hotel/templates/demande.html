@@ -27,7 +27,11 @@
                             <a href="" class="text-success">supprimer</a>
                         </li>
                         <li>
+                            {% if request.session.username == 'root' %}
+                            <a href="/gestionnaire/" class="text-success">retour</a>
+                            {% else %}
                             <a href="/mainPage/" class="text-success">retour</a>
+                            {% endif %}
                         </li>
                     </ul>
                 </div>
@@ -36,24 +40,25 @@
         {% if info %}
             <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
         {% endif %}
-        <table border="1">
+        <table class="table table-striped">
             <thead>
             <tr>
-                <td>Plan</td>
-                <td>Date de checkin</td>
-                <td>Date de checkout</td>
-                <td>Nomber des personnes</td>
-                <td>Temps de creation</td>
-                <td>status</td>
+                <th scope="col">Plan</th>
+                <th scope="col">Date de checkin</th>
+                <th scope="col">Date de checkout</th>
+                <th scope="col">Nomber des personnes</th>
+                <th scope="col">Temps de creation</th>
+                <th scope="col">Status</th>
             </tr>
             </thead>
             <tbody>
             {% for item in plans %}
             <tr>
-                <td>{{item.numero}}</td>
+                <th scope="row">{{item.numero}}</th>
                 <td>{{item.checkin}}</td>
                 <td>{{item.checkout}}</td>
                 <td>{{item.nbPerson}}</td>
+                <td>{{item.typeRessource}}</td>
                 <td>{{item.createTime}}</td>
                 <td>{{item.status}}</td>
             </tr>

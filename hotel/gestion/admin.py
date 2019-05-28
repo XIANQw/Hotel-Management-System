@@ -5,7 +5,7 @@ from gestion.models import *
 # Register your models here.
 
 class ressourceAdmin(admin.ModelAdmin):
-    list_display = ('numero', 'prix', 'type', 'taille')  # list
+    list_display = ('numero', 'prix', 'type')  # list
 
 class planAdmin(admin.ModelAdmin):
     list_display = ('id', 'checkin', 'checkout','nbPerson', 'owner','status')  # list
