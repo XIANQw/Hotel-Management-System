@@ -9,11 +9,11 @@
     <script src="/static/js/popper.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src='/static/js/page.js' ></script>
-    <title>Demande {{demande.id}}</title>
+    <title>Demande {{demande.numero}}</title>
 </head>
 <body>
     <div class="container">
-        <nav class="navbar navbar-default" role="navigation">
+        <nav class="navbar navbar-inverse" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand">Information de demande {{demande.id}} </a>
@@ -28,11 +28,11 @@
                         </li>
                         <li>
                             {% if request.session.username == 'root' and cd == '0' %}
-                            <a href="/gestionnaire/listDemandes/" class="text-success">retour</a>
+                            <a href="/gestionnaire/listDemandes/?flag=1" class="text-success">retour</a>
                             {% elif request.session.username == 'root' and cd == '1' %}
-                            <a href="/gestionnaire/consulterClient/?id={{idc}}" class="text-success">retour</a>
+                            <a href="/gestionnaire/consulterClient/?id={{idc}}&flag=1" class="text-success">retour</a>
                             {% else %}
-                            <a href="/mainPage/listDemandes/" class="text-success">retour</a>
+                            <a href="/mainPage/myDemandes/?id={{request.session.id}}&flag=1" class="text-success">retour</a>
                             {% endif %}
                         </li>
                     </ul>

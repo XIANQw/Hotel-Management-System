@@ -6,7 +6,7 @@ from gestion.models import  *
 
 def gestionnaire(request):
     if request.session.get("username") != "root":
-        infoType='warning'
+        infoType = 'warning'
         info = "Reconnectez s'il vous plait"
         return render(request,"index.html",{'info':info,'infoType':infoType})
 
@@ -22,9 +22,19 @@ def gotoListClients(request):
     users = Client.objects.all()
     return render(request,'listClients.html',{'users':users})
 
-def gotoListDemandes(request):
-    demandes = Demande.objects.all()
-    return render(request,'listDemandes.html',{'demandes':demandes})
+def listDemandes(request):
+    if request.session.get("username") != "root":
+        infoType = 'warning'
+        info = "Reconnectez s'il vous plait"
+        return render(request, "index.html", {'info': info, 'infoType': infoType})
+    flag = request.GET['flag']
+    if flag == '1':
+        demandes = Demande.objects.all()
+    elif flag == '2':
+        demandes = Demande.objects.filter(status='attendu')
+    else:
+        demandes = Demande.objects.filter(status='accepte')
+    return render(request,'listDemandes.html',{'demandes':demandes,'flag':flag})
 
 
 def createRessource(request):
@@ -136,12 +146,12 @@ def consulterRes(request):
         id = request.GET['id']
         res = Ressource.objects.get(id=id)
         concer_meu = Concerne_Meuble.objects.filter(ressource = res)
-        toutMeu = Meuble.objects.all()
+        meubles = Meuble.objects.all()
         meu = []
         for i in concer_meu:
             meu.append(i.meuble)
         if res:
-            return render(request,'ressource.html',{'res':res,'meu':meu,'toutMeu':toutMeu})
+            return render(request,'ressource.html',{'res':res,'meu':meu,'meubles':meubles})
         return render(request,'ressource.html',{'res':res})
     info = "error"
     return render(request,'gestionnaire.html',{'info':info,'infoType':'danger'})
@@ -158,17 +168,16 @@ def creerMeuble(request):
         nomMeuble = request.POST.get("nomMeuble")
         status = request.POST.get("status")
         resId = request.POST.get("resId")
-        meu = Meuble.objects.filter(nom_Meuble=nomMeuble)
         res = Ressource.objects.get(id=resId)
+        meu = Meuble.objects.create(nom_Meuble=nomMeuble, status=status)
+        meubles = Meuble.objects.all()
         if meu:
-            info = "Ce meuble est deja existe"
-        else:
             info = "Nouveau meuble est bien crée"
             infoType = 'success'
-            Meuble.objects.create(nom_Meuble=nomMeuble, status=status)
-    meubles = Meuble.objects.all()
     return render(request, 'ressource.html', {'res':res,'meubles': meubles, 'info': info, 'infoType': infoType})
 
+def ajouterMeuble(request):
+    return 0
 
 def consulterClient(request):
     if request.session.get("username") != "root":
@@ -178,13 +187,19 @@ def consulterClient(request):
 
     if request.method == "GET":
         id = request.GET['id']
+        flag = request.GET['flag']
         client = Client.objects.get(id=id)
-        demandes = Demande.objects.filter(client=client)
+        if flag == '1':
+            demandes = Demande.objects.filter(client=client)
+        elif flag == '2':
+            demandes = Demande.objects.filter(client=client,status='attendu')
+        else:
+            demandes = Demande.objects.filter(client=client,status='accepte')
         if demandes:
-            return render(request, 'clientDemande.html', {'demandes': demandes,'user':client})
+            return render(request, 'clientDemande.html', {'demandes': demandes,'user':client,'flag':flag})
         else:
             info = "Ce client n'a aucune de demande"
-            return render(request,'clientDemande.html',{'info':info})
+            return render(request,'clientDemande.html',{'info':info,'user':client,'flag':flag})
     info = "error"
     infoType = 'danger'
     return render(request, 'gestionnaire.html', {'info': info,'infoType': infoType})

@@ -14,7 +14,7 @@
 <body>
 <div class="container">
     <div id="modifyRessource">
-        <form action="/modifyRes/" method="post">{% csrf_token %}
+        <form action="/gestionnaire/modifyRes/" method="post">{% csrf_token %}
             <input type="text" name="id" value="{{res.id}}" style="display: none" />
             <div class="form-group">
                 <label for="id_modify_numero">Numero: </label>

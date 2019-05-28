@@ -15,14 +15,14 @@
     <div class="container">
 
         <fieldset>
-            <nav class="navbar navbar-default" role="navigation">
-            <div class="container-fluid">
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="container-fluid">
                 <div class="navbar-header"><a class="navbar-brand">{{request.session.username}} </a></div>
                 <div>
                     <ul class="nav navbar-nav">
                         <li><a href="/mainPage/">Home</a></li>
                         <li><a href="/mainPage/consulterProfile/" class="text-success">votre profile</a></li>
-                        <li><a href="/mainPage/listDemandes/" class="text-success">vos demandes</a></li>
+                        <li><a href="/mainPage/myDemandes/?id={{request.session.id}}&flag=1" class="text-success">vos demandes</a></li>
                         <li><a href="/logout/" class="text-success">deconnexion</a></li>
                     </ul>
                 </div>
