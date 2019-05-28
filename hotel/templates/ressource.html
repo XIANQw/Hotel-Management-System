@@ -15,105 +15,132 @@
     <title>{{res.id}}</title>
 </head>
 <body>
-<div class="container">
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand">Information de {{res.type}} {{res.id}} </a>
+    <div class="container">
+        <div class = 'row'>
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand">Information de {{res.type}} {{res.id}} </a>
+                </div>
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a class="text-success" href="/consulterRes/modifyRessource/?id={{res.id}}">modifier</a>
+                        </li>
+                        <li>
+                            <a class="text-success" href="/consulterRes/deleteRessource/?id={{res.id}}">supprimer</a>
+                        </li>
+                        <li>
+                            <a class="text-success" href="/gestionnaire/">retour</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div>
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a class="text-success" href="/consulterRes/modifyRessource/?id={{res.id}}">modifier</a>
-                    </li>
-                    <li>
-                        <a class="text-success" href="/consulterRes/deleteRessource/?id={{res.id}}">supprimer</a>
-                    </li>
-                    <li>
-                        <a class="text-success" href="/gestionnaire/">retour</a>
-                    </li>
-                </ul>
-            </div>
+        </nav>
         </div>
-    </nav>
-    {% if info %}
-    <div class="alert alert-{{infoType}}" id="alert">{{info}}</div>
-    {% endif %}
-    <div class="col">
-        <ul class="list-group">
-            <li class="list-group-item text-muted">Ressource</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Numero</strong></span> {{res.numero}}
-            </li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Type</strong></span>
-                {{res.type}}
-            </li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Prix</strong></span>
-                {{res.prix}}
-            </li>
-        </ul>
-    </div>
 
-    <div id='ressourceInfo'>
-        <table class="table">
-                <thead>
-                <tr>
-                    <li class="list-group-item text-muted">Info de Meuble</li>
-                    <th scope="col">Nom Meuble</th>
-                    <th scope="col">Status</th>
+        {% if info %}
+        <div class="alert alert-{{infoType}}" id="alert">{{info}}</div>
+        {% endif %}
 
-                </tr>
-                </thead>
-                <tbody>
-                {% for item in meu %}
-                <tr>
-                    <th scope="row">{{item.nom_Meuble}}</th>
-                    <td>{{item.status}}</td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-    </div>
-    <div id='meubleInfo'>
-        <table class="table">
-            <thead>
-            <tr>
-                <li class="list-group-item text-muted">Liste Meuble disponible</li>
-                <th scope="col">Nom Meuble</th>
-                <th scope="col">Status</th>
-                <th scope="col">Operation</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for item in toutMeu %}
-            <tr>
-                <th scope="row">{{item.nom_Meuble}}</th>
-                <td>{{item.status}}</td>
-                <td><input id="hrefAjouteMeu" type="button" value="Ajouter dans {{res.type}}"/></td>
-            </tr>
-            {% endfor %}
-            <tr>
-                <td></td>
-                <td></td>
-                <td><input id="hrefCreerMeu" type="button" value="Creer nouveau meuble"/></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div id="creerMeubleForm">
-        <form id="formCreerMeu" action="/consulterRes/creerMeuble/" method="post">{% csrf_token %}
-            <div class="title">
-            <li class="list-group-item text-muted">Creer Nouv Meuble</li>
-                <a onclick="layer.style.display=none"></a>
+            <div class="row">
+                <div class="span9">
+                    <ul class="list-group">
+                        <li class="list-group-item text-muted">Ressource</li>
+                        <li class="list-group-item text-right"><span class="pull-left"><strong>Numero</strong></span> {{res.numero}}
+                        </li>
+                        <li class="list-group-item text-right"><span class="pull-left"><strong>Type</strong></span>
+                            {{res.type}}
+                        </li>
+                        <li class="list-group-item text-right"><span class="pull-left"><strong>Prix</strong></span>
+                            {{res.prix}}
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <br>
-            <p><label>Nom du Meuble: </label><input id="nomMeuble" type="input" name="nomMeuble"/></p>
-            <p><label>Status:</label><input id="status" value="disponible" type="input" name="status"/>
-            <input type="hidden" name="resId" value={{res.id}}>
-            <p><input type="submit" value=" Creer "/></p>
-        </form>
-    </div>
 
-</div>
+            <div class = 'row'>
+
+                <div class="col-sm-6">
+                    <div id='ressourceInfo'>
+                    <table class="table-responsive">
+                            <thead>
+                            <tr>
+                                <li>Info de Meuble</li>
+                                <th>Nom Meuble</th>
+                                <th>Status</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in meu %}
+                            <tr>
+                                <th>{{item.nom_Meuble}}</th>
+                                <td>{{item.status}}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <div id='meubleInfo'>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <li>Liste Meuble disponible</li>
+                                    <th>Nom Meuble</th>
+                                    <th>Status</th>
+                                    <th>Operation</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in toutMeu %}
+                                <tr>
+                                    <th>{{item.nom_Meuble}}</th>
+                                    <td>{{item.status}}</td>
+                                    <td><input id="hrefAjouteMeu" type="button" value="Ajouter dans {{res.type}}"/></td>
+                                </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td><input id="hrefCreerMeu" type="button" value="Creer nouveau meuble"/></td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div id="creerMeubleForm">
+                <form id="formCreerMeu" class="form-horizontal" action="/consulterRes/creerMeuble/" method="post">{% csrf_token %}
+                    <div class="title">
+                        <p class="list-group-item text-muted">Creer Nouv Meuble</p><a onclick="layer.style.display=none"></a>
+                    </div>
+
+                   <div class="form-group">
+                       <label>Nom du Meuble: </label>
+                        <div class="col-sm-10">
+                            <input id="nomMeuble" type="input" name="nomMeuble"/>
+                        </div>
+                   </div>
+
+                   <div class="form-group">
+                       <label>Status:</label><input id="status" value="disponible" type="input" name="status"/>
+                        <div class="col-sm-10">
+                            <input type="hidden" name="resId" value={{res.id}}>
+                        </div>
+                   </div>
+                    <input type="submit" value=" Creer "/>
+                </form>
+            </div>
+    </div>
 </body>
 </html>

@@ -5,7 +5,7 @@ from gestion.models import  *
 
 def verifier(request):
     if request.session.get("username") != "root":
-        infoType='warning'
+        infoType = 'warning'
         info = "Reconnectez s'il vous plait"
         return render(request,"index.html",{'info':info,'infoType':infoType})
 
@@ -106,18 +106,14 @@ def consulterRes(request):
     if request.method == "GET":
         id = request.GET['id']
         res = Ressource.objects.get(id=id)
-<<<<<<< HEAD
         concer_meu = Concerne_Meuble.objects.filter(ressource = res)
         toutMeu = Meuble.objects.all()
         meu = []
         for i in concer_meu:
             meu.append(i.meuble)
         if res:
-            return render(request,'ressource.html',{'res':res,'meu':meu,'toutMeu':toutMeu})
-=======
 
-        return render(request,'ressource.html',{'res':res})
->>>>>>> 0fe9200d8025ac0f8939d66ed424aff9fffa092f
+            return render(request,'ressource.html',{'res':res,'meu':meu,'toutMeu':toutMeu})
     info = "error"
     return render(request,'gestionnaire.html',{'info':info,'infoType':'danger'})
 

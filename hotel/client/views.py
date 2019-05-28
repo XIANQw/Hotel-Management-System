@@ -116,4 +116,5 @@ def consulterDemande(request):
         if plans:
             print(plans)
             return render(request,'demande.html',{'plans':plans})
-    return redirect('/mainPage/')
+    else:
+        return redirect('/mainPage/')
