@@ -16,7 +16,15 @@ class demandeAdmin(admin.ModelAdmin):
 class demandePlanAdmin(admin.ModelAdmin):
     list_display = ('id','demande','plan')
 
+class MeubleAdmin(admin.ModelAdmin):
+    list_display = ('id', 'nom_Meuble','status')  # list
+
+class Concerne_MeubleAdmin(admin.ModelAdmin):
+    list_display = ('id', 'ressource', 'meuble')  # list
+
 admin.site.register(Ressource,ressourceAdmin)
-admin.site.register(Plan,planAdmin)
 admin.site.register(Demande,demandeAdmin)
+admin.site.register(Meuble,MeubleAdmin)
+admin.site.register(Concerne_Meuble,Concerne_MeubleAdmin)
+admin.site.register(Plan,planAdmin)
 admin.site.register(DemandePlan,demandePlanAdmin)

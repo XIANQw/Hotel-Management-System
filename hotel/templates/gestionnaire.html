@@ -169,6 +169,7 @@
                     <th scope="col">Prénom</th>
                     <th scope="col">Adresse</th>
                     <th scope="col">Tél</th>
+                    <th scope="col">Details</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -179,8 +180,9 @@
                     <td>{{item.prenom}}</td>
                     <td>{{item.adresse}}</td>
                     <td>{{item.tel}}</td>
-                </tr>
-                {% endfor %}
+                    <td><a href="/consulterClient/?id={{item.id}}" class="text-success"> Consulter</a></td>
+                </tr> {% endfor %}
+
                 </tbody>
             </table>
         </fieldset>

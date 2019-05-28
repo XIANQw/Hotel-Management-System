@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="/static/js/jquery.min.js" ></script>
+    <script src="/static/js/popper.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src='/static/js/page.js' ></script>
+    <title>{{res.id}}</title>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand">Information de {{user.nom}} </a>
+                </div>
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="/gestionnaire/" class="text-success">retour</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        {% if info %}
+            <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
+        {% endif %}
+
+        <table border = 1>
+            <thead>
+            <tr>
+            <td>demandeTime</td>
+            <td>checkin</td>
+            <td>checkout</td>
+            <td>nbPerson</td>
+            <td>status</td>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in demandes %}
+             <tr>
+            <td>{{item.demandeTime}}</td>
+            <td>{{item.checkin}}</td>
+            <td>{{item.checkout}}</td>
+            <td>{{item.nbPerson}}</td>
+            <td>{{item.status}}</td>
+             </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</body>
+</html>

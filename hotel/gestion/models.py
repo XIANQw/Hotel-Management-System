@@ -1,5 +1,8 @@
 from login.models import *
 # Create your models here.
+class Meuble(models.Model):
+    nom_Meuble =  models.CharField(max_length=32, default="default")
+    status = models.CharField(max_length=20, default="bon")
 
 
 class Ressource(models.Model):
@@ -8,6 +11,10 @@ class Ressource(models.Model):
     type = models.CharField(max_length=150,default="Standard-Chambre Simple-Non Fumeurs")
     def __unicode__(self):
         return self.numero
+
+class Concerne_Meuble(models.Model):
+    ressource = models.ForeignKey(Ressource, default = None, on_delete=models.CASCADE)
+    meuble = models.ForeignKey(Meuble, default = None, on_delete=models.CASCADE)
 
 
 
