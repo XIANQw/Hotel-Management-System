@@ -27,7 +27,11 @@
                             <a href="" class="text-success">supprimer</a>
                         </li>
                         <li>
+                            {% if request.session.username == 'root' %}
+                            <a href="/gestionnaire/" class="text-success">retour</a>
+                            {% else %}
                             <a href="/mainPage/" class="text-success">retour</a>
+                            {% endif %}
                         </li>
                     </ul>
                 </div>

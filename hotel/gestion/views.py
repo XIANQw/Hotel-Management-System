@@ -26,17 +26,22 @@ def createRessource(request):
         numero = request.POST.get("numero")
         prix = request.POST.get("prix")
         type = request.POST.get("type")
-        niveau = request.POST.get("niveau")
-        fumeur = request.POST.get("fumeur")
-        users = Client.objects.all()
         res = Ressource.objects.filter(numero=numero)
         if res:
             info = "Cette ressource est deja existe"
         else:
             info = "Nouvelle ressource est bien cree"
             infoType = 'success'
-            Ressource.objects.create(numero=numero, prix=prix,type="{}-{}-{}".format(niveau,type,fumeur))
+            if type == "Chambre":
+                taille = request.POST.get('taille')
+                niveau = request.POST.get('niveau')
+                fumeur = request.POST.get('fumeur')
+                Ressource.objects.create(numero=numero, prix=prix,type="{}-{} {}-{}".format(niveau,type,taille,fumeur))
+            else:
+                taille = request.POST.get('tailleSDC')
+                Ressource.objects.create(numero=numero,prix=prix,type="{} {}".format(taille,type))
     res = Ressource.objects.all()
+    users = Client.objects.all()
     return render(request, 'gestionnaire.html', {'res': res,'user':users,'info': info,'infoType':infoType})
 
 def gotoModifyRes(request):
@@ -51,27 +56,32 @@ def gotoModifyRes(request):
 
 def modifyRessource(request):
     verifier(request)
-    info = "error"
     if request.method == "POST":
         id = request.POST.get("id")
         numero = request.POST.get("numero")
         prix = request.POST.get("prix")
         type = request.POST.get("type")
-        taille = request.POST.get("taille")
         res = Ressource.objects.get(id=id)
         tmp = Ressource.objects.filter(numero=numero)
         if tmp and tmp[0].id != res.id:
             info = "Il a deja existe une ressource "+ numero
-            return render(request,"ressource.html",{'res':res,'info':info})
+            infoType = "danger"
+            return render(request,"ressource.html",{'res':res,'info':info,'infoType':infoType})
         info = "Bien modifie"
+        infoType = "success"
         res.numero = numero
-        res.prix=prix
-        res.type=type
-        res.taille=taille
+        res.prix = prix
+        if type == "Chambre":
+            taille = request.POST.get('taille')
+            niveau = request.POST.get('niveau')
+            fumeur = request.POST.get('fumeur')
+            res.type = "{}-{} {}-{}".format(niveau,type,taille,fumeur)
+
+        else:
+            taille = request.POST.get('tailleSDC')
+            res.type = "{} {}".format(taille,type)
         res.save()
-    else:
-        info = "Cette ressource n'existe pas"
-    return render(request,"ressource.html",{'res':res,'info':info})
+    return render(request,"ressource.html",{'res':res,'info':info,'infoType':infoType})
 
 
 def deleteRessource(request):

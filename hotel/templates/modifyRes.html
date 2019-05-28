@@ -9,7 +9,7 @@
     <script src="/static/js/popper.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src='/static/js/page.js' ></script>
-    <title>modify {{res.id}}}</title>
+    <title>modify ressource{{res.id}}</title>
 </head>
 <body>
 <div class="container">
@@ -26,11 +26,41 @@
             </div>
             <div class="form-group">
                 <label>Type: </label>
-                <input type="text" name="type" value="{{res.type}}" class="form-control" placeholder="type de ressource"required="required"/>
+                <input name="type" id="id_chambre1" value="Chambre" type="radio" checked>Chambre
+                <input name="type" id="id_SDC1" value="SalleDeConference" type="radio" />Salle de conference
             </div>
-            <div class="form-group">
-                <label>Taille: </label>
-                <input type="number" name="taille" value="{{res.taille}}" class="form-control" placeholder="taille" required="required"/>
+            <div id="optionCh1">
+                <div class="form-group">
+                    <label for="id_taille">Taille: </label>
+                    <select name="taille" id="id_taille" value="{{type}}" class="form-control" placeholder="type de ressource" required>
+                       <option value="Simple">Chambre Simple</option>
+                        <option value="Double">Chambre Double</option>
+                        <option value="Famille">Chambre Famille</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Niveau: </label>
+                    <select name="niveau" id="id_niveau" value="{{niveau}}" class="form-control" placeholder="type de ressource" required>
+                        <option value="Standard">Standard</option>
+                        <option value="Premium">Premium</option>
+                        <option value="President">President</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Fumeurs: </label>
+                    <select name="fumeur" id="id_fumeur" value="{{fumeur}}" class="form-control" placeholder="type de ressource" required>
+                        <option value="Fumeur">Oui</option>
+                        <option value="Non Fumeur">Non</option>
+                    </select>
+                </div>
+            </div>
+            <div id="optionSDC1" class="form-group" style="display: none">
+                <label for="id_tailleSDC">Taille: </label>
+                <select name="tailleSDC" id="id_tailleSDC" class="form-control" placeholder="type de ressource" required>
+                    <option value="Moyenne">Moyenne (10 personnes)</option>
+                    <option value="Grande">Grande (20 personnes)</option>
+                    <option value="Petite">Petite (5 personnes)</option>
+                </select>
             </div>
             <a type="button" href="/consulterRes/?id={{res.id}}" class="btn btn-primary">Annuler</a>
             <button type="submit" class="btn btn-primary float-right">Modifier</button>
