@@ -75,7 +75,6 @@ function gotoCreateDemande() {
 function gotoInfoDemande(){
     $('#infoDemande').css('display', 'block');
     $('#createDemande').css('display', 'none');
-
 }
 
 function addNbPlanForm(){

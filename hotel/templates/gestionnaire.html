@@ -138,22 +138,20 @@
                 <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Checkin Date</th>
-                    <th scope="col">Checkout Date</th>
-                    <th scope="col">Demande Date</th>
+                    <th scope="col">Create Date</th>
                     <th scope="col">Client</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Details</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for item in demandes %}
                 <tr>
                     <th scope="row">{{item.id}}</th>
-                    <td>{{item.checkin}}</td>
-                    <td>{{item.checkout}}</td>
-                    <td>{{item.demandeTime}}</td>
-                    <td>{{item.client}}</td>
+                    <td>{{item.createTime}}</td>
+                    <td>{{item.client.login}}</td>
                     <td>{{item.status}}</td>
+                    <td><a href="/consulterDemande/?id={{item.id}}" class="text-success">Consulter</a></td>
                 </tr>
                 {% endfor %}
                 </tbody>

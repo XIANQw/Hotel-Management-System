@@ -43,8 +43,9 @@ def login(request):
             if ro.pwd == pwd:
                 info = "Bienvenue, gestionnaire"
                 infoType = "success"
+                demandes = Demande.objects.all()
                 request.session["username"] = login
-                return render(request,'gestionnaire.html',{'info':info, 'users':users,'res':res,'infoType':infoType})
+                return render(request,'gestionnaire.html',{'info':info, 'users':users,'res':res,'demandes':demandes,'infoType':infoType})
             else:
                 info = "votre mot de pass n'est pas correct"
                 return render(request, 'index.html', {'info': info,'infoType':infoType})

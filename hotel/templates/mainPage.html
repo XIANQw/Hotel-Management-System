@@ -40,8 +40,8 @@
                 <legend>Trouvez les meilleures offres d'hébergement</legend>
                 <form action="/createDemande/" method = "post">{% csrf_token %}
                     <div class="form-group">
-                        <label>Check in date</label>
-                        <input type="date" name="checkin" class="form-control" required="required" placeholder="checkin date"/>
+                        <label>Vous avez plusieurs plans ?</label>
+                        <input id="nbPlan" type="number" name="nbPlan" class="form-control" required="required" placeholder="Nombre des plans"/>
                     </div>
                     <button id="subNbPlan" type="submit" class="btn btn-primary float-right">Ajouter</button>
 
@@ -84,7 +84,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit">cherchez</button>
+                    <button type="submit" class="btn btn-primary float-right">cherchez</button>
                 </form>
             </div>
             <div id="infoDemande" style="display: none">
@@ -94,22 +94,18 @@
                     <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Personnes</th>
-                        <th scope="col">Date de Demande</th>
-                        <th scope="col">Date de Checkin</th>
-                        <th scope="col">Date de Checkout</th>
+                        <th scope="col">Create Demande</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Details</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for item in demandes %}
                     <tr>
                         <th scope="row">{{item.id}}</th>
-                        <td>{{item.nbPerson}}</td>
-                        <td>{{item.demandeTime}}</td>
-                        <td>{{item.checkin}}</td>
-                        <td>{{item.checkout}}</td>
+                        <td>{{item.createTime}}</td>
                         <td>{{item.status}}</td>
+                        <td><a href="/consulterDemande/?id={{item.id}}" class="text-success">Consulter</a></td>
                     </tr>
                     {% endfor %}
                     </tbody>
