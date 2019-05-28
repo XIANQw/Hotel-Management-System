@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
 # Create your views here.
 from gestion.models import  *
@@ -9,7 +9,6 @@ def gestionnaire(request):
         infoType='warning'
         info = "Reconnectez s'il vous plait"
         return render(request,"index.html",{'info':info,'infoType':infoType})
-
 
     res = Ressource.objects.all()
     return render(request,'gestionnaire.html',{'res':res})
@@ -159,7 +158,6 @@ def creerMeuble(request):
         nomMeuble = request.POST.get("nomMeuble")
         status = request.POST.get("status")
         resId = request.POST.get("resId")
-        Meubles = Meuble.objects.all()
         meu = Meuble.objects.filter(nom_Meuble=nomMeuble)
         res = Ressource.objects.get(id=resId)
         if meu:
@@ -168,8 +166,8 @@ def creerMeuble(request):
             info = "Nouveau meuble est bien crée"
             infoType = 'success'
             Meuble.objects.create(nom_Meuble=nomMeuble, status=status)
-    toutMeu = Meuble.objects.all()
-    return render(request, 'ressource.html', {'res':res,'toutMeu': toutMeu, 'info': info, 'infoType': infoType})
+    meubles = Meuble.objects.all()
+    return render(request, 'ressource.html', {'res':res,'meubles': meubles, 'info': info, 'infoType': infoType})
 
 
 def consulterClient(request):
