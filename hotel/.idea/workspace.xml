@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4cec61cf-8303-424b-9798-00b09e845ff9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/demande.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gestion/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/gestion/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gestion/migrations/0001_initial.py" beforeDir="false" />
@@ -35,49 +36,121 @@
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/hotel/urls.py">
+            <entry file="file://$PROJECT_DIR$/gestion/models.py">
               <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
                 <state relative-caret-position="330">
                   <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
                   <folding>
                     <element signature="e#629#661#0" expanded="true" />
+                  </folding>
+=======
+                <state relative-caret-position="341">
+                  <caret line="22" column="43" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
+            <entry file="file://$PROJECT_DIR$/templates/ressource.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="158">
+                  <caret line="30" column="29" lean-forward="true" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
+=======
+            <entry file="file://$PROJECT_DIR$/templates/gestionnaire.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="176">
+                  <caret line="87" column="107" lean-forward="true" selection-start-line="87" selection-start-column="32" selection-end-line="87" selection-end-column="107" />
+                  <folding>
+                    <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                  </folding>
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
+            <entry file="file://$PROJECT_DIR$/templates/clientDemande.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="780">
+                  <caret line="52" column="13" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
+=======
+            <entry file="file://$PROJECT_DIR$/hotel/urls.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="413">
+                  <caret line="38" column="47" selection-start-line="38" selection-start-column="47" selection-end-line="38" selection-end-column="47" />
+                  <folding>
+                    <element signature="e#629#661#0" expanded="true" />
+                  </folding>
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/gestion/views.py">
+              <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+                <state relative-caret-position="225">
+                  <caret line="15" column="45" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
+=======
+                <state relative-caret-position="1800">
+                  <caret line="100" column="77" selection-start-line="100" selection-start-column="77" selection-end-line="100" selection-end-column="77" />
+                  <folding>
+                    <element signature="e#0#45#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/templates/ressource.html">
+            <entry file="file://$PROJECT_DIR$/gestion/admin.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="158">
-                  <caret line="30" column="29" lean-forward="true" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
+                <state relative-caret-position="378">
+                  <caret line="21" column="48" selection-start-line="21" selection-start-column="48" selection-end-line="21" selection-end-column="48" />
+                  <folding>
+                    <element signature="e#0#32#0" expanded="true" />
+                  </folding>
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/templates/clientDemande.html">
+            <entry file="file://$PROJECT_DIR$/makefile">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="780">
-                  <caret line="52" column="13" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
+<<<<<<< HEAD
+                <state relative-caret-position="210">
+                  <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+=======
+                <state relative-caret-position="18">
+                  <caret line="1" column="46" selection-start-line="1" selection-start-column="46" selection-end-line="1" selection-end-column="46" />
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/login/models.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="225">
-                  <caret line="15" column="45" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
-                </state>
-              </provider>
-            </entry>
-          </file>
+<<<<<<< HEAD
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+=======
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/static/js/page.js">
               <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
                 <state relative-caret-position="210">
-                  <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+                  <caret line="14" column="21" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="21" />
+=======
+                <state relative-caret-position="147">
+                  <caret line="67" column="42" lean-forward="true" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
                 </state>
               </provider>
             </entry>
@@ -87,27 +160,29 @@
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/gestion/models.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
-                  <caret line="14" column="21" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="21" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
             <entry file="file://$PROJECT_DIR$/gestion/views.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="248">
                   <caret line="102" lean-forward="true" selection-start-line="102" selection-end-line="102" />
                   <folding>
                     <element signature="e#0#45#0" expanded="true" />
+=======
+            <entry file="file://$PROJECT_DIR$/templates/mainPage.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="309">
+                  <caret line="83" column="41" selection-start-line="83" selection-start-column="41" selection-end-line="83" selection-end-column="41" />
+                  <folding>
+                    <element signature="n#nav#0;n#fieldset#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                    <element signature="n#div#1;n#fieldset#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="true">
+<<<<<<< HEAD
             <entry file="file://$PROJECT_DIR$/templates/gestionnaire.html">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="30">
@@ -117,6 +192,14 @@
                     <element signature="n#style#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                     <element signature="n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
                     <element signature="n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" />
+=======
+            <entry file="file://$PROJECT_DIR$/client/views.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="183">
+                  <caret line="81" column="82" selection-start-line="81" selection-start-column="82" selection-end-line="81" selection-end-column="82" />
+                  <folding>
+                    <element signature="e#0#35#0" expanded="true" />
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
                   </folding>
                 </state>
               </provider>
@@ -134,8 +217,13 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/login/views.py">
               <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
                 <state relative-caret-position="256">
                   <caret line="60" column="13" lean-forward="true" selection-start-line="60" selection-start-column="13" selection-end-line="60" selection-end-column="13" />
+=======
+                <state relative-caret-position="233">
+                  <caret line="62" column="25" selection-start-line="62" selection-start-column="25" selection-end-line="62" selection-end-column="25" />
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
                   <folding>
                     <element signature="e#0#45#0" expanded="true" />
                   </folding>
@@ -144,6 +232,7 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
             <entry file="file://$PROJECT_DIR$/gestion/admin.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="285">
@@ -179,6 +268,12 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="15">
                   <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+=======
+            <entry file="file://$PROJECT_DIR$/templates/demande.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="54">
+                  <caret line="37" column="19" lean-forward="true" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
                 </state>
               </provider>
             </entry>
@@ -211,15 +306,32 @@
         <option value="$PROJECT_DIR$/venv/lib/python3.6/site-packages/django/db/backends/mysql/base.py" />
         <option value="$PROJECT_DIR$/venv/lib/python3.6/site-packages/django/db/backends/mysql/operations.py" />
         <option value="$PROJECT_DIR$/static/js/login.js" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/makefile" />
+=======
+        <option value="$PROJECT_DIR$/hotel/settings.py" />
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
         <option value="$PROJECT_DIR$/templates/modifyRes.html" />
         <option value="$PROJECT_DIR$/templates/profile.html" />
         <option value="$PROJECT_DIR$/templates/modifyAccount.html" />
         <option value="$PROJECT_DIR$/login/admin.py" />
         <option value="$PROJECT_DIR$/templates/index.html" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/static/js/page.js" />
         <option value="$PROJECT_DIR$/client/admin.py" />
         <option value="$PROJECT_DIR$/login/views.py" />
+=======
+        <option value="$PROJECT_DIR$/templates/gestionnaire.html" />
+        <option value="$PROJECT_DIR$/client/admin.py" />
+        <option value="$PROJECT_DIR$/login/views.py" />
+        <option value="$PROJECT_DIR$/makefile" />
+        <option value="$PROJECT_DIR$/static/js/page.js" />
+        <option value="$PROJECT_DIR$/gestion/views.py" />
+        <option value="$PROJECT_DIR$/hotel/urls.py" />
+        <option value="$PROJECT_DIR$/templates/demande.html" />
+        <option value="$PROJECT_DIR$/gestion/admin.py" />
+        <option value="$PROJECT_DIR$/gestion/models.py" />
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
         <option value="$PROJECT_DIR$/templates/mainPage.html" />
         <option value="$PROJECT_DIR$/client/views.py" />
         <option value="$PROJECT_DIR$/hotel/settings.py" />
@@ -253,11 +365,6 @@
             <path>
               <item name="hotel" type="b2602c69:ProjectViewProjectNode" />
               <item name="hotel" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hotel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hotel" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="hotel" type="b2602c69:ProjectViewProjectNode" />
@@ -332,7 +439,19 @@
       <workItem from="1557857912738" duration="10010000" />
       <workItem from="1557872053190" duration="929000" />
       <workItem from="1558811806339" duration="11562000" />
+      <workItem from="1558830116412" duration="6574000" />
+      <workItem from="1558889988736" duration="4864000" />
+      <workItem from="1558894968695" duration="6003000" />
+      <workItem from="1558901272779" duration="8894000" />
     </task>
+    <task id="LOCAL-00001" summary="function gestionnaire can display demande">
+      <created>1558840434393</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1558840434393</updated>
+    </task>
+<<<<<<< HEAD
     <task id="LOCAL-00001" summary="zixi consulter demandes">
       <created>1558818726332</created>
       <option name="number" value="00001" />
@@ -340,68 +459,78 @@
       <option name="project" value="LOCAL" />
       <updated>1558818726332</updated>
     </task>
+=======
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73010000" />
+    <option name="totallyTimeSpent" value="99345000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="49" y="23" width="1598" height="840" extended-state="0" />
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.14584655" />
+=======
+    <frame x="0" y="28" width="1920" height="1052" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="1" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="2" weight="0.16702355" />
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.2647059" />
       <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.29411766" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.328877" />
+=======
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3296582" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.3296582" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49892932" visible="true" weight="0.33737597" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5005353" side_tool="true" weight="0.33296582" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49892932" weight="0.3296582" />
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="12" />
+      <window_info anchor="bottom" id="Database Changes" order="12" sideWeight="0.49946466" weight="0.3296582" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" weight="0.32976446" />
       <window_info anchor="right" id="SciView" order="4" />
     </layout>
-    <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15631692" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.31973538" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
-      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="12" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" weight="0.32976446" />
-      <window_info anchor="right" id="SciView" order="4" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
+<<<<<<< HEAD
     <MESSAGE value="zixi" />
     <MESSAGE value="zixi consulter demandes" />
     <option name="LAST_COMMIT_MESSAGE" value="zixi consulter demandes" />
+=======
+    <MESSAGE value="function gestionnaire can display demande" />
+    <option name="LAST_COMMIT_MESSAGE" value="function gestionnaire can display demande" />
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/d7dfb207-702f-469c-842a-4eb5467bae2f/console.sql" />
@@ -455,9 +584,12 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/makefile">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+=======
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
     <entry file="file://$PROJECT_DIR$/login/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -475,20 +607,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/page.js">
+    <entry file="file://$PROJECT_DIR$/templates/modifyAccount.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="210">
           <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+=======
+        <state relative-caret-position="379">
+          <caret line="58" column="19" lean-forward="true" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/admin.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="45">
+=======
+        <state relative-caret-position="54">
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
           <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/client/apps.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -509,11 +651,18 @@
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/templates/profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="23" column="63" selection-start-line="23" selection-start-column="63" selection-end-line="23" selection-end-column="63" />
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/profile.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="227">
           <caret line="23" column="63" selection-start-line="23" selection-start-column="63" selection-end-line="23" selection-end-column="63" />
         </state>
@@ -523,12 +672,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="451">
           <caret line="80" column="32" selection-start-line="80" selection-start-column="32" selection-end-line="80" selection-end-column="32" />
+=======
+        <state relative-caret-position="360">
+          <caret line="32" column="23" lean-forward="true" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/page.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="67" column="42" lean-forward="true" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/modifyRes.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="-49">
+=======
+        <state relative-caret-position="18">
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
           <caret line="6" column="107" selection-start-line="6" selection-start-column="107" selection-end-line="6" selection-end-column="107" />
           <folding>
             <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -536,14 +700,22 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+=======
+    <entry file="file://$PROJECT_DIR$/templates/ressource.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="29" lean-forward="true" selection-end-line="47" selection-end-column="7" />
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/login/models.py">
+<<<<<<< HEAD
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="45" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
@@ -575,13 +747,67 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+=======
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="46" selection-start-line="1" selection-start-column="46" selection-end-line="1" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hotel/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="413">
+          <caret line="38" column="47" selection-start-line="38" selection-start-column="47" selection-end-line="38" selection-end-column="47" />
+          <folding>
+            <element signature="e#629#661#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/gestionnaire.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="87" column="107" lean-forward="true" selection-start-line="87" selection-start-column="32" selection-end-line="87" selection-end-column="107" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="62" column="25" selection-start-line="62" selection-start-column="25" selection-end-line="62" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestion/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="21" column="48" selection-start-line="21" selection-start-column="48" selection-end-line="21" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gestion/views.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="248">
           <caret line="102" lean-forward="true" selection-start-line="102" selection-end-line="102" />
+=======
+        <state relative-caret-position="1800">
+          <caret line="100" column="77" selection-start-line="100" selection-start-column="77" selection-end-line="100" selection-end-column="77" />
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
@@ -590,6 +816,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gestion/models.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="210">
           <caret line="14" column="21" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="21" />
         </state>
@@ -599,12 +826,25 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
           <caret line="60" column="13" lean-forward="true" selection-start-line="60" selection-start-column="13" selection-end-line="60" selection-end-column="13" />
+=======
+        <state relative-caret-position="341">
+          <caret line="22" column="43" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/mainPage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="83" column="41" selection-start-line="83" selection-start-column="41" selection-end-line="83" selection-end-column="41" />
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
           <folding>
-            <element signature="e#0#45#0" expanded="true" />
+            <element signature="n#nav#0;n#fieldset#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#1;n#fieldset#0;n#div#0;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/gestion/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -634,6 +874,21 @@
             <element signature="n#style#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" />
+=======
+    <entry file="file://$PROJECT_DIR$/templates/demande.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="37" column="19" lean-forward="true" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="81" column="82" selection-start-line="81" selection-start-column="82" selection-end-line="81" selection-end-column="82" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+>>>>>>> cbcfae6c21c901cb900b44f3f41ea985ee1d2625
           </folding>
         </state>
       </provider>

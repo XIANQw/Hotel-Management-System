@@ -30,6 +30,7 @@ urlpatterns = [
     path('consulterRes/modifyRessource/',gotoModifyRes),
     path('modifyRes/',modifyRessource),
     path('consulterRes/deleteRessource/',deleteRessource),
+    path('consulterRes/creerMeuble/',creerMeuble),
     path('mainPage/',mainPage),
     path('consulterProfile/',consulterProfile),
     path('logout/',logout),
@@ -37,4 +38,5 @@ urlpatterns = [
     path('modifyCompte/',modifyCompte),
     path('createDemande/',createDemande),
     path('consulterClient/',consulterClient),
+    path('consulterDemande/',consulterDemande),
 ]

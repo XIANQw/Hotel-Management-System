@@ -5,44 +5,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="/static/js/jquery.min.js" ></script>
+    <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/popper.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
-    <script src='/static/js/page.js' ></script>
+    <script src='/static/js/page.js'></script>
+    <script src='/static/js/ressource.js'></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/ressource.css">
+    .
     <title>{{res.id}}</title>
 </head>
 <body>
-    <div class="container">
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand">Information de ressource {{res.id}} </a>
-                </div>
-                <div>
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a href="/consulterRes/modifyRessource/?id={{res.id}}" class="text-success">modifier</a>
-                        </li>
-                        <li>
-                            <a href="/consulterRes/deleteRessource/?id={{res.id}}" class="text-success">supprimer</a>
-                        </li>
-                        <li>
-                            <a href="/gestionnaire/" class="text-success">retour</a>
-                        </li>
-                    </ul>
-                </div>
+<div class="container">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">Information de {{res.type}} {{res.id}} </a>
             </div>
-        </nav>
-        {% if info %}
-            <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
-        {% endif %}
+            <div>
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/consulterRes/modifyRessource/?id={{res.id}}" class="text-success">modifier</a>
+                    </li>
+                    <li>
+                        <a href="/consulterRes/deleteRessource/?id={{res.id}}" class="text-success">supprimer</a>
+                    </li>
+                    <li>
+                        <a href="/gestionnaire/" class="text-success">retour</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% if info %}
+    <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
+    {% endif %}
 
-        <ul>
-            <li>Numero: {{res.numero}}</li>
-            <li>Type: {{res.type}}</li>
-            <li>Taille: {{res.taille}}</li>
-            <li>Prix: {{res.prix}}</li>
+    <div class="col">
+        <ul class="list-group">
+            <li class="list-group-item text-muted">Ressource</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Numero</strong></span>
+                {{res.numero}}
+            </li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Type</strong></span>
+                {{res.type}}
+            </li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Prix</strong></span>
+                {{res.prix}}
+            </li>
         </ul>
     </div>
+
+    <div id='ressourceInfo'>
+        <table class="table">
+                <thead>
+                <tr>
+                    <li class="list-group-item text-muted">Info de Meuble</li>
+                    <th scope="col">Nom Meuble</th>
+                    <th scope="col">Status</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in meu %}
+                <tr>
+                    <th scope="row">{{item.nom_Meuble}}</th>
+                    <td>{{item.status}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+    </div>
+    <div id='meubleInfo'>
+        <table class="table">
+            <thead>
+            <tr>
+                <li class="list-group-item text-muted">Liste Meuble disponible</li>
+                <th scope="col">Nom Meuble</th>
+                <th scope="col">Status</th>
+                <th scope="col">Operation</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in toutMeu %}
+            <tr>
+                <th scope="row">{{item.nom_Meuble}}</th>
+                <td>{{item.status}}</td>
+                <td><input id="hrefAjouteMeu" type="button" value="Ajouter dans {{res.type}}"/></td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td><input id="hrefCreerMeu" type="button" value="Creer nouveau meuble"/></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="creerMeubleForm">
+        <form id="formCreerMeu" action="/consulterRes/creerMeuble/" method="post">{% csrf_token %}
+            <div class="title">
+            <li class="list-group-item text-muted">Creer Nouv Meuble</li>
+                <a onclick="layer.style.display=none"></a>
+            </div>
+            <br>
+            <p><label>Nom du Meuble: </label><input id="nomMeuble" type="input" name="nomMeuble"/></p>
+            <p><label>Status:</label><input id="status" value="disponible" type="input" name="status"/>
+            <input type="hidden" name="resId" value={{res.id}}>
+            <p><input type="submit" value=" Creer "/></p>
+        </form>
+    </div>
+
+</div>
 </body>
 </html>

@@ -95,10 +95,35 @@ def consulterRes(request):
     if request.method == "GET":
         id = request.GET['id']
         res = Ressource.objects.get(id=id)
+        concer_meu = Concerne_Meuble.objects.filter(ressource = res)
+        toutMeu = Meuble.objects.all()
+        meu = []
+        for i in concer_meu:
+            meu.append(i.meuble)
         if res:
-            return render(request,'ressource.html',{'res':res})
+            return render(request,'ressource.html',{'res':res,'meu':meu,'toutMeu':toutMeu})
     info = "error"
-    return render(request,'gestionnaire.html',{'info':info})
+    return render(request,'gestionnaire.html',{'info':info,'infoType':'danger'})
+
+def creerMeuble(request):
+    info = "error"
+    infoType = 'danger'
+    verifier(request)
+    if request.method == "POST":
+        nomMeuble = request.POST.get("nomMeuble")
+        status = request.POST.get("status")
+        resId = request.POST.get("resId")
+        Meubles = Meuble.objects.all()
+        meu = Meuble.objects.filter(nom_Meuble=nomMeuble)
+        res = Ressource.objects.get(id=resId)
+        if meu:
+            info = "Ce meuble est deja existe"
+        else:
+            info = "Nouveau meuble est bien crée"
+            infoType = 'success'
+            Meuble.objects.create(nom_Meuble=nomMeuble, status=status)
+    toutMeu = Meuble.objects.all()
+    return render(request, 'ressource.html', {'res':res,'toutMeu': toutMeu, 'info': info, 'infoType': infoType})
 
 
 def consulterClient(request):
