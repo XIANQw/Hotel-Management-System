@@ -35,6 +35,7 @@ urlpatterns = [
     path('gestionnaire/modifyRes/',gestion.views.modifyRessource),
     path('gestionnaire/consulterRes/deleteRessource/',gestion.views.deleteRessource),
     path('gestionnaire/consulterRes/creerMeuble/',gestion.views.creerMeuble),
+    path('gestionnaire//consulterRes/ajouterMeu/', gestion.views.ajouterMeuble),
     path('gestionnaire/consulterClient/', gestion.views.consulterClient),
     path('gestionnaire/listDemandes/', gestion.views.gotoListDemandes),
     path('gestionnaire/listClients/',gestion.views.gotoListClients),

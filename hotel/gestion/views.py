@@ -158,17 +158,18 @@ def creerMeuble(request):
         nomMeuble = request.POST.get("nomMeuble")
         status = request.POST.get("status")
         resId = request.POST.get("resId")
-        meu = Meuble.objects.filter(nom_Meuble=nomMeuble)
         res = Ressource.objects.get(id=resId)
+        meu = Meuble.objects.create(nom_Meuble=nomMeuble, status=status)
+        meubles = Meuble.objects.all()
         if meu:
-            info = "Ce meuble est deja existe"
-        else:
             info = "Nouveau meuble est bien crée"
             infoType = 'success'
-            Meuble.objects.create(nom_Meuble=nomMeuble, status=status)
-    meubles = Meuble.objects.all()
+
+
     return render(request, 'ressource.html', {'res':res,'meubles': meubles, 'info': info, 'infoType': infoType})
 
+def ajouterMeuble(request):
+    if request.session.get("username") != "root":
 
 def consulterClient(request):
     if request.session.get("username") != "root":
