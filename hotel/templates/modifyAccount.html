@@ -31,7 +31,7 @@
             <legend>Espace de client</legend>
             <div id="modifyCompte">
                 <h6>Modifiez votre profil</h6>
-                <form action="/modifyCompte/" method = "post">{% csrf_token %}
+                <form action="/mainPage/modifyCompte/" method = "post">{% csrf_token %}
                     <div class="form-group">
                         <label>Nom: </label>
                         <input type="text" name="nom" value="{{user.nom}}" class="form-control" placeholder="nom" required="required" />
@@ -52,7 +52,7 @@
                         <label>Telephone</label>
                         <input type="text" name="tel" value="{{user.tel}}" class="form-control" placeholder="telphone" />
                     </div>
-                    <a type="button" href="/consulterProfile/" class="btn btn-primary">Annuler</a>
+                    <a type="button" href="/mainPage/consulterProfile/" class="btn btn-primary">Annuler</a>
                     <button type="submit" class="btn btn-primary float-right">Enregister</button>
                 </form>
             </div>

@@ -9,6 +9,9 @@
     <script src="/static/js/popper.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src='/static/js/page.js'></script>
+    <script src='/static/js/ressource.js'></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/ressource.css">
+    .
     <title>{{res.id}}</title>
 </head>
 <body>
@@ -16,15 +19,15 @@
     <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand">Information de ressource {{res.id}} </a>
+                <a class="navbar-brand">Information de {{res.type}} {{res.id}} </a>
             </div>
             <div>
                 <ul class="nav navbar-nav">
                     <li>
-                        <a class="text-success" href="/consulterRes/modifyRessource/?id={{res.id}}">modifier</a>
+                        <a class="text-success" href="/gestionnaire/consulterRes/modifyRessource/?id={{res.id}}">modifier</a>
                     </li>
                     <li>
-                        <a class="text-success" href="/consulterRes/deleteRessource/?id={{res.id}}">supprimer</a>
+                        <a class="text-success" href="/gestionnaire/consulterRes/deleteRessource/?id={{res.id}}">supprimer</a>
                     </li>
                     <li>
                         <a class="text-success" href="/gestionnaire/">retour</a>
@@ -44,9 +47,73 @@
             <li class="list-group-item text-right"><span class="pull-left"><strong>Type</strong></span>
                 {{res.type}}
             </li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Prix</strong></span>{{res.prix}}</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Prix</strong></span>
+                {{res.prix}}
+            </li>
         </ul>
     </div>
+
+    <div id='ressourceInfo'>
+        <table class="table">
+                <thead>
+                <tr>
+                    <li class="list-group-item text-muted">Info de Meuble</li>
+                    <th scope="col">Nom Meuble</th>
+                    <th scope="col">Status</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in meu %}
+                <tr>
+                    <th scope="row">{{item.nom_Meuble}}</th>
+                    <td>{{item.status}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+    </div>
+    <div id='meubleInfo'>
+        <table class="table">
+            <thead>
+            <tr>
+                <li class="list-group-item text-muted">Liste Meuble disponible</li>
+                <th scope="col">Nom Meuble</th>
+                <th scope="col">Status</th>
+                <th scope="col">Operation</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in toutMeu %}
+            <tr>
+                <th scope="row">{{item.nom_Meuble}}</th>
+                <td>{{item.status}}</td>
+                <td><input id="hrefAjouteMeu" type="button" value="Ajouter dans {{res.type}}"/></td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td><input id="hrefCreerMeu" type="button" value="Creer nouveau meuble"/></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="creerMeubleForm">
+        <form id="formCreerMeu" action="/consulterRes/creerMeuble/" method="post">{% csrf_token %}
+            <div class="title">
+            <li class="list-group-item text-muted">Creer Nouv Meuble</li>
+                <a onclick="layer.style.display=none"></a>
+            </div>
+            <br>
+            <p><label>Nom du Meuble: </label><input id="nomMeuble" type="input" name="nomMeuble"/></p>
+            <p><label>Status:</label><input id="status" value="disponible" type="input" name="status"/>
+            <input type="hidden" name="resId" value={{res.id}}>
+            <p><input type="submit" value=" Creer "/></p>
+        </form>
+    </div>
+
 </div>
 </body>
 </html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/popper.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src='/static/js/page.js'></script>
+    <title>listClients</title>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand">Gestionnaire</a>
+                </div>
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li role="presentation">
+                            <a href="/gestionnaire/">Ressources</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="/gestionnaire/listClients">Clients</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="/gestionnaire/listDemandes">Demandes</a>
+                        </li>
+                        <li><a href="/logout/">Déconnexion</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        {% if info %}
+        <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
+        {% endif %}
+        <div id="infoClient">
+        <fieldset>
+            <legend>Les informations des clients</legend>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Login</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Adresse</th>
+                    <th scope="col">Tél</th>
+                    <th scope="col">Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in users %}
+                <tr>
+                    <th scope="row">{{item.login}}</th>
+                    <td>{{item.nom}}</td>
+                    <td>{{item.prenom}}</td>
+                    <td>{{item.adresse}}</td>
+                    <td>{{item.tel}}</td>
+                    <td><a href="/gestionnaire/consulterClient/?id={{item.id}}" class="text-success"> Consulter</a></td>
+                </tr> {% endfor %}
+
+                </tbody>
+            </table>
+        </fieldset>
+        </div>
+    </div>
+</body>
+</html>

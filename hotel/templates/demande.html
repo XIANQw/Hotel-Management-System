@@ -27,7 +27,13 @@
                             <a href="" class="text-success">supprimer</a>
                         </li>
                         <li>
-                            <a href="/mainPage/" class="text-success">retour</a>
+                            {% if request.session.username == 'root' and cd == '0' %}
+                            <a href="/gestionnaire/listDemandes/" class="text-success">retour</a>
+                            {% elif request.session.username == 'root' and cd == '1' %}
+                            <a href="/gestionnaire/consulterClient/?id={{idc}}" class="text-success">retour</a>
+                            {% else %}
+                            <a href="/mainPage/listDemandes/" class="text-success">retour</a>
+                            {% endif %}
                         </li>
                     </ul>
                 </div>
