@@ -32,7 +32,7 @@
                             {% elif request.session.username == 'root' and cd == '1' %}
                             <a href="/gestionnaire/consulterClient/?id={{idc}}&flag=1" class="text-success">retour</a>
                             {% else %}
-                            <a href="/mainPage/listDemandes/?flag=1" class="text-success">retour</a>
+                            <a href="/mainPage/myDemandes/?id={{request.session.id}}&flag=1" class="text-success">retour</a>
                             {% endif %}
                         </li>
                     </ul>

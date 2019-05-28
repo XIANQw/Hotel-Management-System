@@ -174,9 +174,10 @@ def creerMeuble(request):
         if meu:
             info = "Nouveau meuble est bien crée"
             infoType = 'success'
-        return render(request, 'ressource.html', {'res':res,'meubles': meubles, 'info': info, 'infoType': infoType})
+    return render(request, 'ressource.html', {'res':res,'meubles': meubles, 'info': info, 'infoType': infoType})
 
-
+def ajouterMeuble(request):
+    return 0
 
 def consulterClient(request):
     if request.session.get("username") != "root":
