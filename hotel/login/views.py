@@ -36,16 +36,14 @@ def login(request):
         infoType = "danger"
         login = request.POST.get("login")
         pwd = request.POST.get("pwd")
-        res = Ressource.objects.all()
-        users = Client.objects.all()
         if login == "root":
             ro = Gestionnaire.objects.get(login="root")
             if ro.pwd == pwd:
                 info = "Bienvenue, gestionnaire"
                 infoType = "success"
-                demandes = Demande.objects.all()
+                res = Ressource.objects.all()
                 request.session["username"] = login
-                return render(request,'gestionnaire.html',{'info':info, 'users':users,'res':res,'demandes':demandes,'infoType':infoType})
+                return render(request,'gestionnaire.html',{'info':info,'res':res,'infoType':infoType})
             else:
                 info = "votre mot de pass n'est pas correct"
                 return render(request, 'index.html', {'info': info,'infoType':infoType})
@@ -54,19 +52,16 @@ def login(request):
             if user[0].pwd != pwd:
                 info = "votre mot de pass n'est pas correct"
             else:
-                demandes = Demande.objects.filter(client=user[0])
                 info = "Bienvenue notre VIP " + user[0].nom
                 infoType = "success"
                 request.session["username"] = login
-                return render(request, 'mainPage.html', {'info': info,'infoType':infoType,'demandes':demandes})
+                return render(request, 'mainPage.html', {'info': info,'infoType':infoType})
         else:
             info = "This profile do not exist"
     return render(request,'index.html',{'info':info,'infoType':infoType})
 
 
 def logout(request):
-    if not request.session.get("username",None):
-        return redirect("/index/")
     request.session.flush()
     return redirect("/index/")
 

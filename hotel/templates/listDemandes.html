@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/popper.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src='/static/js/page.js'></script>
+    <title>listDemandes</title>
+</head>
+<body>
+    <div class="container">
+        {% if request.session.username == 'root' %}
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand">Gestionnaire</a>
+                </div>
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li role="presentation">
+                            <a href="/gestionnaire/">Ressources</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="/gestionnaire/listClients">Clients</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="/gestionnaire/listDemandes">Demandes</a>
+                        </li>
+                        <li><a href="/logout/">Déconnexion</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        {% else %}
+            <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand">{{request.session.username}} </a>
+                </div>
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li>
+                        <a href="/mainPage/consulterProfile/" class="text-success">votre profile</a>
+                        </li>
+                        <li>
+                        <a href="/mainPage/listDemandes/" class="text-success">vos demandes</a>
+                        </li>
+                        <li><a href="/logout/" class="text-success">deconnexion</a></li>
+                    </ul>
+                </div>
+            </div>
+            </nav>
+        {% endif %}
+
+    {% if info %}
+    <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
+    {% endif %}
+
+        {% if demandes %}
+        <div id="zoneDemande">
+            <fieldset>
+                <legend>Les informations des demandes</legend>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Create Date</th>
+                        <th scope="col">Client</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in demandes %}
+                    <tr>
+                        <th scope="row">{{item.id}}</th>
+                        <td>{{item.createTime}}</td>
+                        <td>{{item.client.login}}</td>
+                        <td>{{item.status}}</td>
+                        <td><a href="/gestionnaire/consulterDemande/?id={{item.id}}&cd=0" class="text-success">Consulter</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -17,17 +17,12 @@
         <fieldset>
             <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand">{{request.session.username}} </a>
-                </div>
+                <div class="navbar-header"><a class="navbar-brand">{{request.session.username}} </a></div>
                 <div>
                     <ul class="nav navbar-nav">
-                        <li>
-                        <a href="/consulterProfile/" class="text-success">votre profile</a>
-                        </li>
-                        <li>
-                        <a id="gotoInfoDemande" class="text-success">vos demandes</a>
-                        </li>
+                        <li><a href="/mainPage/">Home</a></li>
+                        <li><a href="/mainPage/consulterProfile/" class="text-success">votre profile</a></li>
+                        <li><a href="/mainPage/listDemandes/" class="text-success">vos demandes</a></li>
                         <li><a href="/logout/" class="text-success">deconnexion</a></li>
                     </ul>
                 </div>
@@ -36,9 +31,10 @@
             {% if info %}
             <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
             {% endif %}
+
             <div id="createDemande">
                 <legend>Trouvez les meilleures offres d'hébergement</legend>
-                <form action="/createDemande/" method = "post">{% csrf_token %}
+                <form action="/mainPage/createDemande/" method = "post">{% csrf_token %}
                     <div class="form-group">
                         <label>Vous avez plusieurs plans ?</label>
                         <input id="nbPlan" type="number" name="nbPlan" class="form-control" required="required" placeholder="Nombre des plans"/>
@@ -86,30 +82,6 @@
                     </div>
                     <button type="submit" class="btn btn-primary float-right">cherchez</button>
                 </form>
-            </div>
-            <div id="infoDemande" style="display: none">
-                <legend>Vos demandes</legend>
-                <p>Vous voulez louer une autre ressource? cliquez <a id="gotoCreateDemande" class="text-success">ici</a> </p>
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Create Demande</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Details</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for item in demandes %}
-                    <tr>
-                        <th scope="row">{{item.id}}</th>
-                        <td>{{item.createTime}}</td>
-                        <td>{{item.status}}</td>
-                        <td><a href="/consulterDemande/?id={{item.id}}" class="text-success">Consulter</a></td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
             </div>
         </fieldset>
     </div>

@@ -6,3 +6,10 @@ makemi:
 
 mi:
 	python3 manage.py migrate
+
+
+clean:
+	find client/ -name "*.pyc" |xargs rm -f
+	find gestion/ -name "*.pyc" |xargs rm -f
+	find login/ -name "*.pyc" |xargs rm -f
+	find hotel/ -name "*.pyc" |xargs rm -f
