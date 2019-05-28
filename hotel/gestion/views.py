@@ -146,12 +146,12 @@ def consulterRes(request):
         id = request.GET['id']
         res = Ressource.objects.get(id=id)
         concer_meu = Concerne_Meuble.objects.filter(ressource = res)
-        toutMeu = Meuble.objects.all()
+        meubles = Meuble.objects.all()
         meu = []
         for i in concer_meu:
             meu.append(i.meuble)
         if res:
-            return render(request,'ressource.html',{'res':res,'meu':meu,'toutMeu':toutMeu})
+            return render(request,'ressource.html',{'res':res,'meu':meu,'meubles':meubles})
         return render(request,'ressource.html',{'res':res})
     info = "error"
     return render(request,'gestionnaire.html',{'info':info,'infoType':'danger'})
@@ -174,12 +174,9 @@ def creerMeuble(request):
         if meu:
             info = "Nouveau meuble est bien crée"
             infoType = 'success'
+        return render(request, 'ressource.html', {'res':res,'meubles': meubles, 'info': info, 'infoType': infoType})
 
 
-    return render(request, 'ressource.html', {'res':res,'meubles': meubles, 'info': info, 'infoType': infoType})
-
-def ajouterMeuble(request):
-    if request.session.get("username") != "root":
 
 def consulterClient(request):
     if request.session.get("username") != "root":
