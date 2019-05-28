@@ -36,6 +36,7 @@
                 </div>
             </nav>
         </div>
+
         {% if info %}
         <div class="alert alert-{{infoType}}" id="alert">{{info}}</div>
         {% endif %}
@@ -89,8 +90,8 @@
                         <tr>
                             <th>{{item.nom_Meuble}}</th>
                             <td>{{item.status}}</td>
-                            <td><a href="/gestionnaire/consulterRes/ajouterMeu/?id={{item.id}}"  value="Ajouter dans {{res.type}} {{res.id}}"/>
-                            <input id="hrefSupMeu" type="button" value="Ajouter dans {{res.type}}"/></td>
+                            <td><input id="hrefAjouteMeu" type="button" value="Ajouter dans {{res.type}}"/>
+                            <input id="hrefAjouteMeu" type="button" value="Ajouter dans {{res.type}}"/></td>
                         </tr>
                         {% endfor %}
                         <tr>
@@ -102,6 +103,7 @@
                     </table>
     </div>
 </div>
+
         <div class="row-fluid" >
             <div id="creerMeubleForm" class="col-md-8 col-md-offset-4" >
                 <form id="formCreerMeu" class="form-inline" action="/gestionnaire/consulterRes/creerMeuble/" method="post">{% csrf_token %}
@@ -109,7 +111,7 @@
                     <div class="title">
                         <p>Creer Nouv Meuble</p><a onclick="layer.style.display=none"></a>
                     </div>
-
+                    <div class="form-row">
                        <div class="form-group" >
                            <label>Nom du Meuble: </label>
                            <input class="form-control" type="input" name="nomMeuble" placeholder="Nom du Meuble"/>
@@ -118,7 +120,7 @@
                            <label>Status:</label>
                            <input class="form-control" id="status" value="disponible" type="input" name="status"/>
                        </div>
-
+                   </div>
                     <input type="hidden" name="resId" value={{res.id}}>
 
                          <button type="submit" class="btn btn-primary" >Creer</button>
