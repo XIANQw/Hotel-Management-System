@@ -217,6 +217,35 @@ def removeMeuble(request):
             infoType = 'success'
         return redirect('/gestionnaire/redirectToSuccessfulAdd/?resId=' + resId)
 
+def modifMeuble(request):
+    if request.session.get("username") != "root":
+        infoType = 'warning'
+        info = "Reconnectez s'il vous plait"
+        return render(request, "index.html", {'info': info, 'infoType': infoType})
+
+    if request.method == "POST":
+        resId = request.POST['resId']
+        meuId = request.POST['meuId']
+        nomMeu = request.POST['meuNom']
+        meuble = Meuble.objects.get(id=meuId)
+        if meuble:
+            meuble.nom_Meuble = nomMeu
+            meuble.save()
+    return redirect('/gestionnaire/redirectToSuccessfulAdd/?resId=' + resId)
+
+def deleteMeuble(request):
+    if request.session.get("username") != "root":
+        infoType = 'warning'
+        info = "Reconnectez s'il vous plait"
+        return render(request, "index.html", {'info': info, 'infoType': infoType})
+
+    if request.method == "GET":
+        resId = request.GET['resId']
+        meuId = request.GET['meuId']
+        meuble = Meuble.objects.get(id=meuId)
+        meuble.delete();
+
+        return redirect('/gestionnaire/redirectToSuccessfulAdd/?resId=' + resId)
 
 def redirectToSuccessfulAdd(request):
     info = "Nouveau meuble est bien ajouté"

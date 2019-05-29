@@ -82,18 +82,23 @@
                         <thead class="thead-dark">
                         <tr>
                             <li>Liste Meuble disponible</li>
+                            <th>#</th>
                             <th>Nom Meuble</th>
                             <th>Status</th>
+                            <th></th>
                             <th>Operation</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for item in meubles %}
                         <tr>
+                            <td>{{item.id}}</td>
                             <td>{{item.nom_Meuble}}</td>
                             <td>{{item.status}}</td>
                             <td><a href="/gestionnaire/consulterRes/ajouterMeu/?resId={{res.id}}&meuId={{item.id}}">Ajouter dans {{res.type}} {{res.id}}</a></td>
                             <td><a class="modify" href="javascript:;">Modifier</a></td>
+                            <td><a href="/gestionnaire/consulterRes/deleteMeu/?resId={{res.id}}&meuId={{item.id}}">Delete</a></td>
                         </tr>
                         {% endfor %}
                         <tr>
@@ -127,6 +132,15 @@
                 </form>
             </div>
         </div>
+    </div>
+    <div class="row-fluid" >
+
+                    <form id="formModifMeu" class="form-inline" action="/gestionnaire/consulterRes/modifMeuble/" method="post" onsubmit="checkModif()">{% csrf_token %}
+                        <input type = 'hidden' id = "modifMeuNom" type="hidden" name="meuNom">
+                        <input type = 'hidden' id = "modifMeuId" type="hidden" name="meuId">
+                        <input type="hidden" name="resId" value={{res.id}}>
+                    </form>
+
     </div>
 </body>
 </html>
