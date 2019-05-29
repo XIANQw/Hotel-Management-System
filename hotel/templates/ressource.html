@@ -87,7 +87,7 @@
                             <th>Status</th>
                             <th></th>
                             <th>Operation</th>
-                            <th></th>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -104,8 +104,10 @@
                         <tr>
                             <td></td>
                             <td></td>
-
-                            <td><input id="hrefCreerMeu" type="button" value="Creer nouveau meuble"/></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><input id="hrefCreerMeu" type="button" class="btn btn-primary" value="Creer nouveau meuble"/></td>
                         </tr>
                         </tbody>
                     </table>
@@ -134,13 +136,11 @@
         </div>
     </div>
     <div class="row-fluid" >
-
                     <form id="formModifMeu" class="form-inline" action="/gestionnaire/consulterRes/modifMeuble/" method="post" onsubmit="checkModif()">{% csrf_token %}
                         <input type = 'hidden' id = "modifMeuNom" type="hidden" name="meuNom">
                         <input type = 'hidden' id = "modifMeuId" type="hidden" name="meuId">
                         <input type="hidden" name="resId" value={{res.id}}>
                     </form>
-
     </div>
 </body>
 </html>
