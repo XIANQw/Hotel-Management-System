@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
 # Create your views here.
 from gestion.models import  *
@@ -135,6 +135,13 @@ def deleteRessource(request):
     res = Ressource.objects.all()
     return render(request, 'gestionnaire.html', {'res':res,'infoType': infoType, 'info': info})
 
+def consulInfoRes(request,ressource):
+    concer_meu = Concerne_Meuble.objects.filter(ressource=ressource)
+    meu = []
+    for i in concer_meu:
+        meu.append(i.meuble)
+    return meu
+
 
 def consulterRes(request):
     if request.session.get("username") != "root":
@@ -145,13 +152,10 @@ def consulterRes(request):
     if request.method == "GET":
         id = request.GET['id']
         res = Ressource.objects.get(id=id)
-        concer_meu = Concerne_Meuble.objects.filter(ressource = res)
-        meubles = Meuble.objects.all()
-        meu = []
-        for i in concer_meu:
-            meu.append(i.meuble)
+        resMeu = consulInfoRes(request,res)
+        meubles = Meuble.objects.filter(status="disponible")
         if res:
-            return render(request,'ressource.html',{'res':res,'meu':meu,'meubles':meubles})
+            return render(request,'ressource.html',{'res':res,'resMeu':resMeu,'meubles':meubles})
         return render(request,'ressource.html',{'res':res})
     info = "error"
     return render(request,'gestionnaire.html',{'info':info,'infoType':'danger'})
@@ -166,18 +170,64 @@ def creerMeuble(request):
 
     if request.method == "POST":
         nomMeuble = request.POST.get("nomMeuble")
-        status = request.POST.get("status")
         resId = request.POST.get("resId")
         res = Ressource.objects.get(id=resId)
-        meu = Meuble.objects.create(nom_Meuble=nomMeuble, status=status)
-        meubles = Meuble.objects.all()
+        meu = Meuble.objects.create(nom_Meuble=nomMeuble, status="disponible")
+        resMeu = consulInfoRes(request,res)
+        meubles = Meuble.objects.filter(status="disponible")
         if meu:
             info = "Nouveau meuble est bien crée"
             infoType = 'success'
-    return render(request, 'ressource.html', {'res':res,'meubles': meubles, 'info': info, 'infoType': infoType})
+    return redirect('/gestionnaire/redirectToSuccessfulAdd/?resId='+resId)
 
 def ajouterMeuble(request):
-    return 0
+    if request.session.get("username") != "root":
+        infoType = 'warning'
+        info = "Reconnectez s'il vous plait"
+        return render(request, "index.html", {'info': info, 'infoType': infoType})
+
+
+    if request.method == "GET":
+        resId = request.GET['resId']
+        meuId = request.GET['meuId']
+        res = Ressource.objects.get(id=resId)
+        meuble = Meuble.objects.get(id=meuId)
+        meuble.status = 'occupé'
+        meuble.save()
+        Concerne_Meuble.objects.create(ressource=res, meuble=meuble)
+    return redirect('/gestionnaire/redirectToSuccessfulAdd/?resId='+resId)
+
+
+def removeMeuble(request):
+    if request.session.get("username") != "root":
+        infoType = 'warning'
+        info = "Reconnectez s'il vous plait"
+        return render(request, "index.html", {'info': info, 'infoType': infoType})
+
+    if request.method == "GET":
+        resId = request.GET['resId']
+        meuId = request.GET['meuId']
+        res = Ressource.objects.get(id=resId)
+        meuble = Meuble.objects.get(id=meuId)
+        meuble.status = 'disponible'
+        meuble.save()
+        ConcerMeuble = Concerne_Meuble.objects.get(ressource=res, meuble=meuble)
+        if ConcerMeuble.delete():
+            info = "ce meuble est bien remove"
+            infoType = 'success'
+        return redirect('/gestionnaire/redirectToSuccessfulAdd/?resId=' + resId)
+
+
+def redirectToSuccessfulAdd(request):
+    info = "Nouveau meuble est bien ajouté"
+    infoType = "success"
+    if request.method == "GET":
+        resId = request.GET['resId']
+        res = Ressource.objects.get(id=resId)
+        resMeu = consulInfoRes(request, res)
+        meubles = Meuble.objects.filter(status="disponible")
+    return render(request,'ressource.html',{'res': res, 'resMeu': resMeu, 'meubles': meubles, 'info': info, 'infoType': infoType})
+
 
 def consulterClient(request):
     if request.session.get("username") != "root":
