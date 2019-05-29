@@ -55,6 +55,7 @@ def login(request):
                 info = "Bienvenue notre VIP " + user[0].nom
                 infoType = "success"
                 request.session["username"] = login
+                request.session["id"] = user[0].id
                 return render(request, 'mainPage.html', {'info': info,'infoType':infoType})
         else:
             info = "This profile do not exist"

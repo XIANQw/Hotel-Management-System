@@ -9,19 +9,22 @@
     <script src="/static/js/popper.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src='/static/js/page.js' ></script>
-    <title>{{res.id}}</title>
+    <title>{{user.login}}</title>
 </head>
 <body>
     <div class="container">
-        <nav class="navbar navbar-default" role="navigation">
+        <nav class="navbar navbar-inverse" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand">Information de {{user.nom}} </a>
                 </div>
                 <div>
                     <ul class="nav navbar-nav">
-                        <li>
-                            <a href="/gestionnaire/listClients/" class="text-success">retour</a>
+                        <li>{% if request.session.username == "root" %}
+                            <a href="/gestionnaire/listClients/?flag=1" class="text-success">retour</a>
+                            {% else %}
+                            <a href="/mainPage/" class="text-success">retour</a>
+                            {% endif %}
                         </li>
                     </ul>
                 </div>
@@ -31,10 +34,21 @@
             <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
         {% endif %}
 
-        {% if demandes %}
         <div id="zoneDemande">
             <fieldset>
                 <legend>Les informations des demandes</legend>
+                <ul class="breadcrumb">
+                    {% if request.session.username == "root" %}
+                    {% if flag == "1" %}<li class="active">Tout</li>{% else %}<li><a href="/gestionnaire/consulterClient/?id={{user.id}}&flag=1">Tout</a></li>{% endif%}
+                    {% if flag == "2" %}<li class="active">Attendu</li>{% else %}<li><a href="/gestionnaire/consulterClient/?id={{user.id}}&flag=2">Attendu</a></li>{% endif%}
+                    {% if flag == "3" %}<li class="active">Accepte</li>{% else %}<li><a href="/gestionnaire/consulterClient/?id={{user.id}}&flag=3">Accepte</a></li>{% endif%}
+                    {% else %}
+                    {% if flag == "1" %}<li class="active">Tout</li>{% else %}<li><a href="/mainPage/myDemandes/?id={{user.id}}&flag=1">Tout</a></li>{% endif%}
+                    {% if flag == "2" %}<li class="active">Attendu</li>{% else %}<li><a href="/mainPage/myDemandes/?id={{user.id}}&flag=2">Attendu</a></li>{% endif%}
+                    {% if flag == "3" %}<li class="active">Accepte</li>{% else %}<li><a href="/mainPage/myDemandes/?id={{user.id}}&flag=3">Accepte</a></li>{% endif%}
+                    {% endif %}
+                </ul>
+                {% if demandes %}
                 <table class="table table-striped">
                     <thead>
                     <tr>
@@ -55,9 +69,9 @@
                     {% endfor %}
                     </tbody>
                 </table>
+                {% endif %}
             </fieldset>
         </div>
-        {% endif %}
     </div>
 </body>
 </html>

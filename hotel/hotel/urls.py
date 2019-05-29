@@ -27,7 +27,7 @@ urlpatterns = [
     path('login/', login.views.login),
     path('signUp/', login.views.signUp),
     path('logout/', login.views.logout),
-
+    # ------------------gestionnaire------------------------------------------------
     path('gestionnaire/', gestion.views.gestionnaire),
     path('gestionnaire/createRessource/', gestion.views.createRessource),
     path('gestionnaire/consulterRes/', gestion.views.consulterRes),
@@ -36,15 +36,15 @@ urlpatterns = [
     path('gestionnaire/consulterRes/deleteRessource/',gestion.views.deleteRessource),
     path('gestionnaire/consulterRes/creerMeuble/',gestion.views.creerMeuble),
     path('gestionnaire/consulterClient/', gestion.views.consulterClient),
-    path('gestionnaire/listDemandes/', gestion.views.gotoListDemandes),
+    path('gestionnaire/listDemandes/', gestion.views.listDemandes),
     path('gestionnaire/listClients/',gestion.views.gotoListClients),
     path('gestionnaire/consulterDemande/', client.views.consulterDemande),
-
+    # --------------------------client----------------------------------------------
     path('mainPage/',client.views.mainPage),
     path('mainPage/consulterProfile/', client.views.consulterProfile),
     path('mainPage/gotoModifyAccount/',client.views.gotoModifyAccount),
     path('mainPage/modifyCompte/',client.views.modifyCompte),
     path('mainPage/createDemande/',client.views.createDemande),
     path('mainPage/consulterDemande/',client.views.consulterDemande),
-    path('mainPage/listDemandes/',client.views.gotoListDemandes),
+    path('mainPage/myDemandes/',client.views.myDemandes),
 ]

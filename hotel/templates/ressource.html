@@ -11,12 +11,11 @@
     <script src='/static/js/page.js'></script>
     <script src='/static/js/ressource.js'></script>
     <link rel="stylesheet" type="text/css" href="/static/css/ressource.css">
-    .
     <title>{{res.id}}</title>
 </head>
 <body>
 <div class="container">
-    <nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-inverse" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand">Information de {{res.type}} {{res.id}} </a>
@@ -94,14 +93,14 @@
             <tr>
                 <td></td>
                 <td></td>
-                <td><input id="hrefCreerMeu" type="button" value="Creer nouveau meuble"/></td>
+                <td><button id="hrefCreerMeu" type="submit" class="btn btn-primary float-right">Creer</button></td>
             </tr>
             </tbody>
         </table>
     </div>
 
     <div id="creerMeubleForm">
-        <form id="formCreerMeu" action="/consulterRes/creerMeuble/" method="post">{% csrf_token %}
+        <form id="formCreerMeu" action="/gestionnaire/consulterRes/creerMeuble/" method="post">{% csrf_token %}
             <div class="title">
             <li class="list-group-item text-muted">Creer Nouv Meuble</li>
                 <a onclick="layer.style.display=none"></a>
@@ -109,8 +108,8 @@
             <br>
             <p><label>Nom du Meuble: </label><input id="nomMeuble" type="input" name="nomMeuble"/></p>
             <p><label>Status:</label><input id="status" value="disponible" type="input" name="status"/>
-            <input type="hidden" name="resId" value={{res.id}}>
-            <p><input type="submit" value=" Creer "/></p>
+                <input type="hidden" name="resId" value={{res.id}}>
+                <button type="submit" class="btn btn-primary float-right">Creer</button>
         </form>
     </div>
 

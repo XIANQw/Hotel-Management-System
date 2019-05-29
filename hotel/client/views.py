@@ -16,15 +16,6 @@ def mainPage(request):
 
     return render(request,'mainPage.html',{'info':info,'infoType':'success'})
 
-def gotoListDemandes(request):
-    if not request.session.get("username", None):
-        info = "Reconnectez-vous s'il vous plait"
-        return render(request, "index.html", {'info': info, 'infoType': 'warning'})
-
-    login = request.session.get('username')
-    me = Client.objects.get(login=login)
-    demandes = Demande.objects.filter(client=me)
-    return render(request,'listDemandes.html',{'demandes':demandes})
 
 def consulterProfile(request):
     if not request.session.get("username", None):
@@ -33,6 +24,30 @@ def consulterProfile(request):
 
     user = Client.objects.get(login=request.session.get('username'))
     return render(request,'profile.html',{'user':user})
+
+def myDemandes(request):
+    if not request.session.get("username", None) or request.session.get('id') != int(request.GET['id']):
+        info = "Reconnectez-vous s'il vous plait"
+        return render(request, "index.html", {'info': info, 'infoType': 'warning'})
+    if request.method == "GET":
+        id = request.GET['id']
+        flag = request.GET['flag']
+        client = Client.objects.get(id=id)
+        if flag == '1':
+            demandes = Demande.objects.filter(client=client)
+        elif flag == '2':
+            demandes = Demande.objects.filter(client=client,status='attendu')
+        else:
+            demandes = Demande.objects.filter(client=client,status='accepte')
+        if demandes:
+            return render(request, 'clientDemande.html', {'demandes': demandes,'user':client,'flag':flag})
+        else:
+            info = "Ce client n'a aucune de demande"
+            return render(request,'clientDemande.html',{'info':info,'user':client,'flag':flag})
+    info = "error"
+    infoType = 'danger'
+    return render(request, 'gestionnaire.html', {'info': info,'infoType': infoType})
+
 
 
 def gotoModifyAccount(request):
