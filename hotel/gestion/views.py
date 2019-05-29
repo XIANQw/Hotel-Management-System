@@ -179,7 +179,7 @@ def creerMeuble(request):
     return render(request, 'ressource.html', {'res':res,'meubles': meubles, 'info': info, 'infoType': infoType})
 
 def ajouterMeuble(request):
-    if request.session.get("username") != "root":
+    return 0
 
 def consulterClient(request):
     if request.session.get("username") != "root":
