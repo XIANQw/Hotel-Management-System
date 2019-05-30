@@ -1,89 +1,97 @@
+<!--mainPage.html-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<!--    <link href="/static/css/bootstrap.min.css" rel="stylesheet">-->
-    <script src="/static/js/jquery.min.js" ></script>
+    <!--    <link href="/static/css/bootstrap.min.css" rel="stylesheet">-->
+    <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/popper.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
-    <script src='/static/js/page.js' ></script>
+    <script src='/static/js/page.js'></script>
     <title>Votre espace</title>
 </head>
 <body>
-    <div class="container">
+<div class="container">
 
-        <fieldset>
-            <nav class="navbar navbar-inverse" role="navigation">
-                <div class="container-fluid">
+    <fieldset>
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="container-fluid">
                 <div class="navbar-header"><a class="navbar-brand">{{request.session.username}} </a></div>
                 <div>
                     <ul class="nav navbar-nav">
                         <li><a href="/mainPage/">Home</a></li>
                         <li><a href="/mainPage/consulterProfile/" class="text-success">votre profile</a></li>
-                        <li><a href="/mainPage/myDemandes/?id={{request.session.id}}&flag=1" class="text-success">vos demandes</a></li>
+                        <li><a href="/mainPage/myDemandes/?id={{request.session.id}}&flag=1" class="text-success">vos
+                            demandes</a></li>
                         <li><a href="/logout/" class="text-success">deconnexion</a></li>
                     </ul>
                 </div>
+            </div>
+        </nav>
+        {% if info %}
+        <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
+        {% endif %}
+
+        <div id="createDemande">
+            <legend>Trouvez les meilleures offres d'hébergement</legend>
+            <form action="/mainPage/createDemande/" method="post">{% csrf_token %}
+                <div class="form-group">
+                    <label>Vous avez plusieurs plans ?</label>
+                    <input id="nbPlan" type="number" name="nbPlan" class="form-control" required="required"
+                           placeholder="Nombre des plans"/>
                 </div>
-            </nav>
-            {% if info %}
-            <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
-            {% endif %}
+                <button id="subNbPlan" type="submit" class="btn btn-primary float-right">Ajouter</button>
 
-            <div id="createDemande">
-                <legend>Trouvez les meilleures offres d'hébergement</legend>
-                <form action="/mainPage/createDemande/" method = "post">{% csrf_token %}
-                    <div class="form-group">
-                        <label>Vous avez plusieurs plans ?</label>
-                        <input id="nbPlan" type="number" name="nbPlan" class="form-control" required="required" placeholder="Nombre des plans"/>
-                    </div>
-                    <button id="subNbPlan" type="submit" class="btn btn-primary float-right">Ajouter</button>
-
-                    <div id="inputDemande">
-                        <div id="plan1">
-                            <h3>Plan1</h3>
+                <div id="inputDemande">
+                    <div id="plan1">
+                        <h3>Plan1</h3>
+                        <div class="form-group">
+                            <label>Check in date</label>
+                            <input name="checkin1" type="date" class="form-control" required
+                                   placeholder="checkin date"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Check out date</label>
+                            <input name="checkout1" type="date" class="form-control" required
+                                   placeholder="checkout date"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Nombre des personnes</label>
+                            <input name="nb1" type="number" class="form-control" required
+                                   placeholder="nombre de clients"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Type: </label>
+                            <input name="type1" id="id_chambre1" value="Chambre" type="radio" checked>Chambre
+                            <input name="type1" id="id_SDC1" value="SalleDeConference" type="radio"/>Salle de conference
+                        </div>
+                        <div id="optionCh1">
                             <div class="form-group">
-                                <label>Check in date</label>
-                                <input name="checkin1" type="date" class="form-control" required placeholder="checkin date"/>
+                                <label>Niveau: </label>
+                                <select name="niveau1" id="id_niveau" class="form-control"
+                                        placeholder="type de ressource" required>
+                                    <option value="Standard">Standard</option>
+                                    <option value="Premium">Premium</option>
+                                    <option value="President">President</option>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label>Check out date</label>
-                                <input name="checkout1" type="date" class="form-control" required placeholder="checkout date"/>
-                            </div>
-                            <div class="form-group">
-                                <label>Nombre des personnes</label>
-                                <input name="nb1" type="number" class="form-control" required placeholder="nombre de clients"/>
-                            </div>
-                            <div class="form-group">
-                                <label>Type: </label>
-                                <input name="type1" id="id_chambre1" value="Chambre" type="radio" checked>Chambre
-                                <input name="type1" id="id_SDC1" value="SalleDeConference" type="radio" />Salle de conference
-                            </div>
-                            <div id="optionCh1">
-                                <div class="form-group">
-                                    <label>Niveau: </label>
-                                    <select name="niveau1" id="id_niveau" class="form-control" placeholder="type de ressource" required>
-                                        <option value="Standard">Standard</option>
-                                        <option value="Premium">Premium</option>
-                                        <option value="President">President</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Fumeurs: </label>
-                                    <select name="fumeur1" id="id_fumeur" class="form-control" placeholder="type de ressource" required>
-                                        <option value="Fumeur">Oui</option>
-                                        <option value="Non Fumeur">Non</option>
-                                    </select>
-                                </div>
+                                <label>Fumeurs: </label>
+                                <select name="fumeur1" id="id_fumeur" class="form-control"
+                                        placeholder="type de ressource" required>
+                                    <option value="Fumeur">Oui</option>
+                                    <option value="Non Fumeur">Non</option>
+                                </select>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary float-right">cherchez</button>
-                </form>
-            </div>
-        </fieldset>
-    </div>
+                </div>
+                <button type="submit" class="btn btn-primary float-right">cherchez</button>
+            </form>
+        </div>
+    </fieldset>
+</div>
 </body>
 </html>

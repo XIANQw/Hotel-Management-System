@@ -1,3 +1,4 @@
+<!--listDemandes.html-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +14,7 @@
 </head>
 <body>
     <div class="container">
+        <div class = 'row-fluid'>
         {% if request.session.username == 'root' %}
         <nav class="navbar navbar-inverse" role="navigation">
             <div class="container-fluid">
@@ -36,6 +38,8 @@
             </div>
         </nav>
         {% else %}
+        </div>
+        <div class = 'row-fluid'>
             <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -55,12 +59,13 @@
             </div>
             </nav>
         {% endif %}
+        </div>
 
     {% if info %}
     <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
     {% endif %}
 
-
+        <div class = 'row-fluid'>
         <div id="zoneDemande">
             <fieldset>
                 <legend>Les informations des demandes</legend>
@@ -97,6 +102,7 @@
                 </table>
                 {% endif %}
             </fieldset>
+        </div>
         </div>
     </div>
 </body>

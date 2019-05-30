@@ -1,3 +1,4 @@
+<!--modifyAccount.html-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,58 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="/static/js/jquery.min.js" ></script>
+    <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/popper.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
-    <script src='/static/js/page.js' ></script>
+    <script src='/static/js/page.js'></script>
 </head>
 <body>
-    <div class="container">
-        <nav class="navbar navbar-inverse" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand">{{request.session.username}}</a>
-                </div>
-                <div>
-                    <ul class="nav navbar-nav">
-                        <li><a href="/logout/" class="text-success">deconnexion</a></li>
-                    </ul>
-                </div>
+<div class="container">
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">{{request.session.username}}</a>
             </div>
-        </nav>
-        {% if info %}
-            <div id="alert" class="alert alert-warning">{{info}}</div>
-        {% endif %}
-        <fieldset>
-            <legend>Espace de client</legend>
-            <div id="modifyCompte">
-                <h6>Modifiez votre profil</h6>
-                <form action="/mainPage/modifyCompte/" method = "post">{% csrf_token %}
-                    <div class="form-group">
-                        <label>Nom: </label>
-                        <input type="text" name="nom" value="{{user.nom}}" class="form-control" placeholder="nom" required="required" />
-                    </div>
-                    <div class="form-group">
-                        <label>Prenom: </label>
-                        <input type="text" name="prenom" value="{{user.prenom}}" class="form-control" placeholder="prenom" required="required" />
-                    </div>
-                    <div class="form-group">
-                        <label>Mot de passe</label>
-                        <input type="password" name="pwd" value="{{user.pwd}}" class="form-control" placeholder="password" required="required" />
-                    </div>
-                    <div class="form-group">
-                        <label>Adresse</label>
-                        <input type="text" name="adresse" value="{{user.adresse}}" class="form-control" placeholder="adresse" />
-                    </div>
-                    <div class="form-group">
-                        <label>Telephone</label>
-                        <input type="text" name="tel" value="{{user.tel}}" class="form-control" placeholder="telphone" />
-                    </div>
-                    <a type="button" href="/mainPage/consulterProfile/" class="btn btn-primary">Annuler</a>
-                    <button type="submit" class="btn btn-primary float-right">Enregister</button>
-                </form>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/logout/" class="text-success">deconnexion</a></li>
+                </ul>
             </div>
-        </fieldset>
-    </div>
+        </div>
+    </nav>
+    {% if info %}
+    <div id="alert" class="alert alert-warning">{{info}}</div>
+    {% endif %}
+    <fieldset>
+        <legend>Espace de client</legend>
+        <div id="modifyCompte">
+            <h6>Modifiez votre profil</h6>
+            <form action="/mainPage/modifyCompte/" method="post">{% csrf_token %}
+                <div class="form-group">
+                    <label>Nom: </label>
+                    <input type="text" name="nom" value="{{user.nom}}" class="form-control" placeholder="nom"
+                           required="required"/>
+                </div>
+                <div class="form-group">
+                    <label>Prenom: </label>
+                    <input type="text" name="prenom" value="{{user.prenom}}" class="form-control" placeholder="prenom"
+                           required="required"/>
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <input type="password" name="pwd" value="{{user.pwd}}" class="form-control" placeholder="password"
+                           required="required"/>
+                </div>
+                <div class="form-group">
+                    <label>Adresse</label>
+                    <input type="text" name="adresse" value="{{user.adresse}}" class="form-control"
+                           placeholder="adresse"/>
+                </div>
+                <div class="form-group">
+                    <label>Telephone</label>
+                    <input type="text" name="tel" value="{{user.tel}}" class="form-control" placeholder="telphone"/>
+                </div>
+                <a type="button" href="/mainPage/consulterProfile/" class="btn btn-primary">Annuler</a>
+                <button type="submit" class="btn btn-primary float-right">Enregister</button>
+            </form>
+        </div>
+    </fieldset>
+</div>
 </body>
 </html>

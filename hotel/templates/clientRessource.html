@@ -1,0 +1,61 @@
+<!--clientRessource-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/popper.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src='/static/js/page.js'></script>
+    <script src='/static/js/ressource.js'></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/ressource.css">
+    <title>Plan {{plan.id}}</title>
+</head>
+<body>
+<div class="container">
+    <div class='row-fluid'>
+        <div id="infoRessource">
+            <fieldset>
+                <legend>Les informations des ressources</legend>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Numéro</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Détail</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in res %}
+                    <tr>
+                        <th scope="row">{{item.numero}}</th>
+                        <td>{{item.type}}</td>
+                        <td>{{item.prix}}</td>
+                        <td>
+                        {% if request.session.username == 'root' and cd == '-1' %}
+                        <a href="/gestionnaire/consulterRes/?resId={{item.id}}&flag=1&cd=-1&planId={{plan.id}}" class="text-success">
+                            Voir les ressources</a>
+                        {% elif request.session.username == 'root'%}
+                        <a href="/gestionnaire/consulterRes/?resId={{item.id}}&id={{idc}}&flag=1&cd={{cd}}&planId={{plan.id}}"
+                           class="text-success">Voir les ressources</a>
+                        {% else %}
+                        <a href="/mainPage/consulterRes/?resId={{item.id}}&flag=1&id={{request.session.id}}&planId={{plan.id}}"
+                           class="text-success">Voir les ressources</a>
+                        {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -1,3 +1,4 @@
+<!--gestionnaire.html-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,57 +42,62 @@
         <div id="createRessource" style="display:none">
             <fieldset>
                 <legend>Creer une ressource</legend>
-                    <form action="/gestionnaire/createRessource/" method="post">{% csrf_token %}
+                <form action="/gestionnaire/createRessource/" method="post">{% csrf_token %}
+                    <div class="form-group">
+                        <label for="id_numero">Numero: </label>
+                        <input type="text" name="numero" id="id_numero" class="form-control"
+                               placeholder="numero de ressource" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_prix">Prix: </label>
+                        <input type="number" name="prix" id="id_prix" class="form-control" placeholder="prix" required/>
+                    </div>
+                    <div class="form-group">
+                        <label>Type: </label>
+                        <input name="type" id="id_chambre1" value="Chambre" type="radio" checked>Chambre
+                        <input name="type" id="id_SDC1" value="SalleDeConference" type="radio"/>Salle de conference
+                    </div>
+                    <div id="optionCh1">
                         <div class="form-group">
-                            <label for="id_numero">Numero: </label>
-                            <input type="text" name="numero" id="id_numero"class="form-control" placeholder="numero de ressource" required/>
-                        </div>
-                        <div class="form-group">
-                            <label for="id_prix">Prix: </label>
-                            <input type="number" name="prix" id="id_prix" class="form-control" placeholder="prix" required/>
-                        </div>
-                        <div class="form-group">
-                            <label>Type: </label>
-                            <input name="type" id="id_chambre1" value="Chambre" type="radio" checked>Chambre
-                            <input name="type" id="id_SDC1" value="SalleDeConference" type="radio" />Salle de conference
-                        </div>
-                        <div id="optionCh1">
-                            <div class="form-group">
-                                <label for="id_taille">Taille: </label>
-                                <select name="taille" id="id_taille" class="form-control" placeholder="type de ressource" required>
-                                    <option value="Simple">Chambre Simple</option>
-                                    <option value="Double">Chambre Double</option>
-                                    <option value="Famille">Chambre Famille</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Niveau: </label>
-                                <select name="niveau" id="id_niveau" class="form-control" placeholder="type de ressource" required>
-                                    <option value="Standard">Standard</option>
-                                    <option value="Premium">Premium</option>
-                                    <option value="President">President</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Fumeurs: </label>
-                                <select name="fumeur" id="id_fumeur" class="form-control" placeholder="type de ressource" required>
-                                    <option value="Fumeur">Oui</option>
-                                    <option value="Non Fumeur">Non</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div id="optionSDC1" class="form-group" style="display: none">
-                                <label for="id_tailleSDC">Taille: </label>
-                            <select name="tailleSDC" id="id_tailleSDC" class="form-control" placeholder="type de ressource" required>
-                                <option value="Moyenne">Moyenne (10 personnes)</option>
-                                <option value="Grande">Grande (20 personnes)</option>
-                                <option value="Petite">Petite (5 personnes)</option>
+                            <label for="id_taille">Taille: </label>
+                            <select name="taille" id="id_taille" class="form-control" placeholder="type de ressource"
+                                    required>
+                                <option value="Simple">Chambre Simple</option>
+                                <option value="Double">Chambre Double</option>
+                                <option value="Famille">Chambre Famille</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label>Niveau: </label>
+                            <select name="niveau" id="id_niveau" class="form-control" placeholder="type de ressource"
+                                    required>
+                                <option value="Standard">Standard</option>
+                                <option value="Premium">Premium</option>
+                                <option value="President">President</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Fumeurs: </label>
+                            <select name="fumeur" id="id_fumeur" class="form-control" placeholder="type de ressource"
+                                    required>
+                                <option value="Fumeur">Oui</option>
+                                <option value="Non Fumeur">Non</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="optionSDC1" class="form-group" style="display: none">
+                        <label for="id_tailleSDC">Taille: </label>
+                        <select name="tailleSDC" id="id_tailleSDC" class="form-control" placeholder="type de ressource"
+                                required>
+                            <option value="Moyenne">Moyenne (10 personnes)</option>
+                            <option value="Grande">Grande (20 personnes)</option>
+                            <option value="Petite">Petite (5 personnes)</option>
+                        </select>
+                    </div>
 
-                        <button id="quitCreation" class="btn btn-primary">Annuler</button>
-                        <button type="submit" class="btn btn-primary float-right">Creer</button>
-                    </form>
+                    <button id="quitCreation" class="btn btn-primary">Annuler</button>
+                    <button type="submit" class="btn btn-primary float-right">Creer</button>
+                </form>
             </fieldset>
         </div>
 
@@ -115,7 +121,8 @@
                         <td>{{item.type}}</td>
                         <td>{{item.taille}}</td>
                         <td>{{item.prix}}</td>
-                        <td><a href="/gestionnaire/consulterRes/?id={{item.id}}" class="text-success"> Consulter</a></td>
+                        <td><a href="/gestionnaire/consulterRes/?resId={{item.id}}" class="text-success"> Consulter</a>
+                        </td>
                     </tr>
                     {% endfor %}
                     <tr>

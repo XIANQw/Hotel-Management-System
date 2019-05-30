@@ -1,3 +1,4 @@
+<!--ressource.html-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,133 +15,157 @@
     <title>{{res.id}}</title>
 </head>
 <body>
-    <div class="container">
-        <div class = 'row-fluid'>
-            <nav class="navbar navbar-inverse" role="navigation">
+<div class="container">
+    <div class='row-fluid'>
+        <nav class="navbar navbar-inverse" role="navigation">
 
-                <div class="navbar-header">
-                    <a class="navbar-brand">Information de {{res.type}} {{res.id}} </a>
-                </div>
-                <div>
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a class="text-success" href="/gestionnaire/consulterRes/modifyRessource/?id={{res.id}}">modifier</a>
-                        </li>
-                        <li>
-                            <a class="text-success" href="/gestionnaire/consulterRes/deleteRessource/?id={{res.id}}">supprimer</a>
-                        </li>
-                        <li>
-                            <a class="text-success" href="/gestionnaire/">retour</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
+            <div class="navbar-header">
+                <a class="navbar-brand">Information de {{res.type}} {{res.id}} </a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a class="text-success" href="/gestionnaire/consulterRes/modifyRessource/?id={{res.id}}">modifier</a>
+                    </li>
+                    <li>
+                        <a class="text-success" href="/gestionnaire/consulterRes/deleteRessource/?id={{res.id}}">supprimer</a>
+                    </li>
+                    <li>
+                        <!--cd == -2 in case of no id-->
+                        {% if request.session.username == 'root' and cd == '-1' %}
+                        <a class="text-success" href="/gestionnaire/consulterRes/consultPlanRessource/?planId={{plan.id}}">retour</a>
+                        {% elif cd == '-2' %}
+                        <a class="text-success" href="/gestionnaire/">retour</a>
+                        {% else %}
+                        <a href="/mainPage/consulterRes/consultPlanRessource/?planId={{plan.id}}&id={{request.session.id}}&flag=1">retour</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 
-        {% if info %}
-        <div class="alert alert-{{infoType}}" id="alert">{{info}}</div>
-        {% endif %}
-        <div class = 'row-fluid'>
-    <div class="col-md-4 ">
-    <div id ='ressourceInfo' >
-                    <ul class="list-group">
-                        <li class="list-group-item text-muted">Ressource</li>
-                        <li class="list-group-item text-right"><span class="pull-left"><strong>Numero</strong></span> {{res.numero}}
-                        </li>
-                        <li class="list-group-item text-right"><span class="pull-left"><strong>Type</strong></span>
-                            {{res.type}}
-                        </li>
-                        <li class="list-group-item text-right"><span class="pull-left"><strong>Prix</strong></span>
-                            {{res.prix}}
-                        </li>
-                    </ul>
-                </div>
-    <div id='meubleDansRes' >
+    {% if info %}
+    <div class="alert alert-{{infoType}}" id="alert">{{info}}</div>
+    {% endif %}
+    <div class='row-fluid'>
+        <div class="col-md-4 ">
+            <div id='ressourceInfo'>
+                <ul class="list-group">
+                    <li class="list-group-item text-muted">Ressource</li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong>Numero</strong></span>
+                        {{res.numero}}
+                    </li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong>Type</strong></span>
+                        {{res.type}}
+                    </li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong>Prix</strong></span>
+                        {{res.prix}}
+                    </li>
+                </ul>
+            </div>
+            <div id='meubleDansRes'>
                 <table class="table table-striped">
-                        <thead class="thead-light">
-                            <tr>
-                                <li>Info de Meuble</li>
-                                <th>Nom Meuble</th>
-                                <th>Status</th>
+                    <thead class="thead-light">
+                    <tr>
+                        <li>Info de Meuble</li>
+                        <th>Nom Meuble</th>
+                        {% if not id %}
+                        <th>Status</th>
+                        {%  endif %}
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for item in resMeu %}
-                        <tr>
-                            <th>{{item.nom_Meuble}}</th>
-                            <td>{{item.status}}</td>
-                            <td><a class="text-success" href="/gestionnaire/consulterRes/removeMeu/?resId={{res.id}}&meuId={{item.id}}">Remove</a></td>
-                        </tr>
-                        {% endfor %}
-                        </tbody>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in resMeu %}
+                    <tr>
+                        <th>{{item.nom_Meuble}}</th>
+                        {% if not id %}
+                        <td>{{item.status}}</td>
+                        <td><a class="text-success"
+                               href="/gestionnaire/consulterRes/removeMeu/?resId={{res.id}}&meuId={{item.id}}">Remove</a>
+                        </td>
+                        {%  endif %}
+                    </tr>
+                    {% endfor %}
+                    </tbody>
                 </table>
-    </div>
-    </div>
-    <div id ='toutRessource'class="col-md-8">
-                <table class="table table-striped">
-                        <thead class="thead-dark">
-                        <tr>
-                            <li>Liste Meuble disponible</li>
-                            <th>#</th>
-                            <th>Nom Meuble</th>
-                            <th>Status</th>
-                            <th></th>
-                            <th>Operation</th>
-
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for item in meubles %}
-                        <tr>
-                            <td>{{item.id}}</td>
-                            <td>{{item.nom_Meuble}}</td>
-                            <td>{{item.status}}</td>
-                            <td><a href="/gestionnaire/consulterRes/ajouterMeu/?resId={{res.id}}&meuId={{item.id}}">Ajouter dans {{res.type}} {{res.id}}</a></td>
-                            <td><a class="modify" href="javascript:;">Modifier</a></td>
-                            <td><a href="/gestionnaire/consulterRes/deleteMeu/?resId={{res.id}}&meuId={{item.id}}">Delete</a></td>
-                        </tr>
-                        {% endfor %}
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><input id="hrefCreerMeu" type="button" class="btn btn-primary" value="Creer nouveau meuble"/></td>
-                        </tr>
-                        </tbody>
-                    </table>
-    </div>
-</div>
-
-        <div class="row-fluid" >
-            <div id="creerMeubleForm" class="col-md-8 col-md-offset-4" >
-                <form id="formCreerMeu" class="form-inline" action="/gestionnaire/consulterRes/creerMeuble/" method="post" onsubmit="check()">{% csrf_token %}
-
-                    <div class="title">
-                        <p>Creer Nouv Meuble</p><a onclick="layer.style.display=none"></a>
-                    </div>
-
-                       <div class="form-group" >
-                           <label>Nom du Meuble: </label>
-                           <input class="form-control" type="input" id ="nomMeuble" name="nomMeuble" placeholder="Nom du Meuble"/>
-                       </div>
-
-                    <input type="hidden" name="resId" value={{res.id}}>
-
-                         <button type="submit" class="btn btn-primary" >Creer</button>
-
-                </form>
             </div>
         </div>
+        {% if request.session.username == 'root'%}
+        <div id='toutRessource' class="col-md-8">
+
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <li>Liste Meuble disponible</li>
+                    <th>#</th>
+                    <th>Nom Meuble</th>
+                    <th>Status</th>
+                    <th></th>
+                    <th>Operation</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in meubles %}
+                <tr>
+                    <td>{{item.id}}</td>
+                    <td>{{item.nom_Meuble}}</td>
+                    <td>{{item.status}}</td>
+                    <td><a href="/gestionnaire/consulterRes/ajouterMeu/?resId={{res.id}}&meuId={{item.id}}">Ajouter dans
+                        {{res.type}} {{res.id}}</a></td>
+                    <td><a class="modify" href="javascript:;">Modifier</a></td>
+                    <td><a href="/gestionnaire/consulterRes/deleteMeu/?resId={{res.id}}&meuId={{item.id}}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><input id="hrefCreerMeu" type="button" class="btn btn-primary" value="Creer nouveau meuble"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+        {% endif %}
     </div>
-    <div class="row-fluid" >
-                    <form id="formModifMeu" class="form-inline" action="/gestionnaire/consulterRes/modifMeuble/" method="post" onsubmit="checkModif()">{% csrf_token %}
-                        <input type = 'hidden' id = "modifMeuNom" type="hidden" name="meuNom">
-                        <input type = 'hidden' id = "modifMeuId" type="hidden" name="meuId">
-                        <input type="hidden" name="resId" value={{res.id}}>
-                    </form>
+
+    <div class="row-fluid">
+        <div id="creerMeubleForm" class="col-md-8 col-md-offset-4">
+            <form id="formCreerMeu" class="form-inline" action="/gestionnaire/consulterRes/creerMeuble/" method="post"
+                  onsubmit="check()">{% csrf_token %}
+
+                <div class="title">
+                    <p>Creer Nouv Meuble</p><a onclick="layer.style.display=none"></a>
+                </div>
+
+                <div class="form-group">
+                    <label>Nom du Meuble: </label>
+                    <input class="form-control" type="input" id="nomMeuble" name="nomMeuble"
+                           placeholder="Nom du Meuble"/>
+                </div>
+
+                <input type="hidden" name="resId" value={{res.id}}>
+
+                <button type="submit" class="btn btn-primary">Creer</button>
+
+            </form>
+        </div>
     </div>
+</div>
+<div class="row-fluid">
+    <form id="formModifMeu" class="form-inline" action="/gestionnaire/consulterRes/modifMeuble/" method="post"
+          onsubmit="checkModif()">{% csrf_token %}
+        <input type='hidden' id="modifMeuNom" type="hidden" name="meuNom">
+        <input type='hidden' id="modifMeuId" type="hidden" name="meuId">
+        <input type="hidden" name="resId" value={{res.id}}>
+    </form>
+</div>
 </body>
 </html>
