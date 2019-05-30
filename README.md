@@ -1,9 +1,7 @@
 # ProjetGLA
 Informatique L3 - Universite Paris-Sud
+
 ---
-<p>
-[![GitHub issues](https://img.shields.io/github/issues/XIANQw/ProjetGLA.svg)](https://github.com/XIANQw/ProjetGLA/issues)
-</p>
 
 ## Authors
 - XIAN Qiwei
