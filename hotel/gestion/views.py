@@ -196,8 +196,13 @@ def creerMeuble(request):
     if request.method == "POST":
         nomMeuble = request.POST.get("nomMeuble")
         resId = request.POST.get("resId")
-        Meuble.objects.create(nom_Meuble=nomMeuble, status="disponible")
-
+        res = Ressource.objects.get(id=resId)
+        meu = Meuble.objects.create(nom_Meuble=nomMeuble, status="disponible")
+        resMeu = consulInfoRes(request, res)
+        meubles = Meuble.objects.filter(status="disponible")
+        if meu:
+            info = "Nouveau meuble est bien crée"
+            infoType = 'success'
     return redirect('/gestionnaire/redirectToSuccessfulAdd/?resId=' + resId)
 
 
@@ -333,7 +338,7 @@ def hasConflictRes(request, plan, res):
     """
     resPlan = PlanRessource.objects.filter(ressource=res)
     for i in resPlan:
-        period1 = [i.checkin, i.checkout]
+        period1 = [i.plan.checkin, i.plan.checkout]
         period2 = [plan.checkin, plan.checkout]
         if hasConflictDate(request, period1, period2):
             return True
@@ -402,12 +407,8 @@ def chercherRes(request, plan):
     nbD = len(resDisponibleD)
     nbS = len(resDisponibleS)
     nbF = len(resDisponibleF)
-    print('resDisponibleD:', resDisponibleD)
-    print('resDisponibleS:', resDisponibleS)
-    print('resDisponibleF:', resDisponibleF)
-
     def tmp(nbPerson, D, S, F, result):
-        print('nbPerson:', nbPerson, 'D:', D, 'S:', S, 'F:', F, 'result:', result)
+        # print('nbPerson:', nbPerson, 'D:', D, 'S:', S, 'F:', F, 'result:', result)
         if nbPerson <= 0:
             return result
         if nbD > D:
@@ -424,16 +425,25 @@ def chercherRes(request, plan):
             return tmp(nbPerson, D, S + 1, F, result)
         else:
             return []
-
     print('nbPerson:', nbPerson)
     return tmp(nbPerson, 0, 0, 0, [])
 
 
 def accepterDemande(request):
+    """
+    Accepter une demande
+    """
     if request.session.get("username") != "root":
         infoType = 'warning'
         info = "Reconnectez s'il vous plait"
         return render(request, "index.html", {'info': info, 'infoType': infoType})
+
+    def calculValueOfPlan(plan):
+        interval = plan.checkout - plan.checkin
+        days = interval.days
+        niveau = plan.typeRessource.split("-")[0]
+        lib = {'President': 3, 'Premium': 2, 'Standard': 1}
+        return lib[niveau] * days * plan.nbPerson
 
     if request.method == "GET":
         id = request.GET['id']
@@ -442,26 +452,87 @@ def accepterDemande(request):
         infoType = "warning"
         if demande.status == "attendu":
             demandePlans = DemandePlan.objects.filter(demande=demande)
-            planId = demandePlans[0].plan.id
-            plan = Plan.objects.get(id=planId)
-            res = chercherRes(request, plan)
-            print('res:', res)
-            for i in res:
-                info = "Felicitation !"
-                infoType = "success"
-                PlanRessource.objects.create(plan=plan, ressource=i)
-                plan.status = "accepte"
-                plan.save()
-                demande.status = "accepte"
-                demande.save()
+            plans = []
+            for i in demandePlans:
+                plans.append(i.plan)
+            plans.sort(key=calculValueOfPlan,reverse=True)
+            for plan in plans:
+                print(plan.numero)
+                if plan.typeRessource == "SalleDeConferrence":
+                    res = chercheSDC(request,plan)
+                else:
+                    res = chercherRes(request, plan)
+                if res:
+                    for i in res:
+                        info = "Felicitation !"
+                        infoType = "success"
+                        PlanRessource.objects.create(plan=plan, ressource=i)
+                        plan.status = "accepte"
+                        plan.save()
+                        demande.status = "accepte"
+                        demande.save()
+                    demandes = Demande.objects.all()
+                    return render(request, 'listDemandes.html',
+                                  {'info': info, 'infoType': infoType, 'demandes': demandes, 'flag': '1'})
+            info = "Il n'y a aucune ressource disponible"
+            infoType = "danger"
         else:
             info = "Cette demande est deja acceptee"
             infoType = 'danger'
         demandes = Demande.objects.all()
         return render(request, 'listDemandes.html',
                       {'info': info, 'infoType': infoType, 'demandes': demandes, 'flag': '1'})
-
     return redirect('/gestionnaire/listDemandes/?flag=1')
+
+
+
+# def acceptAllDemande(request):
+#     if request.session.get("username") != "root":
+#         infoType = 'warning'
+#         info = "Reconnectez s'il vous plait"
+#         return render(request, "index.html", {'info': info, 'infoType': infoType})
+#
+#     def calculValueOfPlan(plan):
+#         interval = plan.checkout - plan.checkin
+#         days = interval.days
+#         niveau = plan.typeRessource.split("-")[0]
+#         lib = {'President': 3, 'Premium': 2, 'Standard': 1}
+#         return lib[niveau] * days * plan.nbPerson
+#
+#     plansAttendus = []
+#     demandesAttendus = Demande.objects.filter(status='attendu')
+#     res = []
+#     for iDemande in demandesAttendus:
+#         iPlans = DemandePlan.objects.filter(demande=iDemande)
+#         iPlans.sort(key=calculValueOfPlan,reverse=True)
+#         plansAttendus.append(iPlans)
+#     maxi = [[0,0]]
+#
+#
+#     def hasConflictsEntrePlans(request,plans,plan):
+#         for i in plans:
+#             period1 = [i.checkin,i.checkout]
+#             period2 = [plan.checkin,plan.checkout]
+#
+#
+#
+#
+#     def nextPlan(plans,i,j):
+#         if i<len(plans)-1 and hasConflictRes():
+#                 return [i+1,0]
+#
+#
+#
+#     def rever(maxi,plans,i,j):
+#         if i == 0 and j == len(plans[0]):
+#             next = rever(maxi,plans,i+1,0)
+#             if not next:
+#                 return maxi
+#             else:
+#
+#
+#
+#
 
 
 def consultPlanRessource(request):
@@ -504,4 +575,3 @@ def consulterDemRes(request):
         for i in planRes:
             plans.append(i.plan)
         return render(request, 'ressourcePlan.html', {'res':ressource, 'plans': plans})
-
