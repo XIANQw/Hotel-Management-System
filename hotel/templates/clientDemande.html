@@ -1,3 +1,4 @@
+<!--clientDemande.html-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,73 +6,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="/static/js/jquery.min.js" ></script>
+    <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/popper.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
-    <script src='/static/js/page.js' ></script>
+    <script src='/static/js/page.js'></script>
     <title>{{user.login}}</title>
 </head>
 <body>
-    <div class="container">
-        <nav class="navbar navbar-inverse" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand">Information de {{user.nom}} </a>
-                </div>
-                <div>
-                    <ul class="nav navbar-nav">
-                        <li>{% if request.session.username == "root" %}
-                            <a href="/gestionnaire/listClients/?flag=1" class="text-success">retour</a>
-                            {% else %}
-                            <a href="/mainPage/" class="text-success">retour</a>
-                            {% endif %}
-                        </li>
-                    </ul>
-                </div>
+<div class="container">
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">Information de {{user.nom}} </a>
             </div>
-        </nav>
-        {% if info %}
-            <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
-        {% endif %}
-
-        <div id="zoneDemande">
-            <fieldset>
-                <legend>Les informations des demandes</legend>
-                <ul class="breadcrumb">
-                    {% if request.session.username == "root" %}
-                    {% if flag == "1" %}<li class="active">Tout</li>{% else %}<li><a href="/gestionnaire/consulterClient/?id={{user.id}}&flag=1">Tout</a></li>{% endif%}
-                    {% if flag == "2" %}<li class="active">Attendu</li>{% else %}<li><a href="/gestionnaire/consulterClient/?id={{user.id}}&flag=2">Attendu</a></li>{% endif%}
-                    {% if flag == "3" %}<li class="active">Accepte</li>{% else %}<li><a href="/gestionnaire/consulterClient/?id={{user.id}}&flag=3">Accepte</a></li>{% endif%}
-                    {% else %}
-                    {% if flag == "1" %}<li class="active">Tout</li>{% else %}<li><a href="/mainPage/myDemandes/?id={{user.id}}&flag=1">Tout</a></li>{% endif%}
-                    {% if flag == "2" %}<li class="active">Attendu</li>{% else %}<li><a href="/mainPage/myDemandes/?id={{user.id}}&flag=2">Attendu</a></li>{% endif%}
-                    {% if flag == "3" %}<li class="active">Accepte</li>{% else %}<li><a href="/mainPage/myDemandes/?id={{user.id}}&flag=3">Accepte</a></li>{% endif%}
-                    {% endif %}
+            <div>
+                <ul class="nav navbar-nav">
+                    <li>{% if request.session.username == "root" %}
+                        <a href="/gestionnaire/listClients/?flag=1" class="text-success">retour</a>
+                        {% else %}
+                        <a href="/mainPage/" class="text-success">retour</a>
+                        {% endif %}
+                    </li>
                 </ul>
-                {% if demandes %}
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Create Date</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Details</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for item in demandes %}
-                    <tr>
-                        <th scope="row">{{item.numero}}</th>
-                        <td>{{item.createTime}}</td>
-                        <td>{{item.status}}</td>
-                        <td><a href="/gestionnaire/consulterDemande/?id={{item.id}}&cd={{user.id}}" class="text-success">Consulter</a></td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                {% endif %}
-            </fieldset>
+            </div>
         </div>
+    </nav>
+    {% if info %}
+    <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
+    {% endif %}
+
+    <div id="zoneDemande">
+        <fieldset>
+            <legend>Les informations des demandes</legend>
+            <ul class="breadcrumb">
+                {% if request.session.username == "root" %}
+                {% if flag == "1" %}
+                <li class="active">Tout</li>
+                {% else %}
+                <li><a href="/gestionnaire/consulterClient/?id={{user.id}}&flag=1">Tout</a></li>
+                {% endif%}
+                {% if flag == "2" %}
+                <li class="active">Attendu</li>
+                {% else %}
+                <li><a href="/gestionnaire/consulterClient/?id={{user.id}}&flag=2">Attendu</a></li>
+                {% endif%}
+                {% if flag == "3" %}
+                <li class="active">Accepte</li>
+                {% else %}
+                <li><a href="/gestionnaire/consulterClient/?id={{user.id}}&flag=3">Accepte</a></li>
+                {% endif%}
+                {% else %}
+                {% if flag == "1" %}
+                <li class="active">Tout</li>
+                {% else %}
+                <li><a href="/mainPage/myDemandes/?id={{user.id}}&flag=1">Tout</a></li>
+                {% endif%}
+                {% if flag == "2" %}
+                <li class="active">Attendu</li>
+                {% else %}
+                <li><a href="/mainPage/myDemandes/?id={{user.id}}&flag=2">Attendu</a></li>
+                {% endif%}
+                {% if flag == "3" %}
+                <li class="active">Accepte</li>
+                {% else %}
+                <li><a href="/mainPage/myDemandes/?id={{user.id}}&flag=3">Accepte</a></li>
+                {% endif%}
+                {% endif %}
+            </ul>
+            {% if demandes %}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Create Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in demandes %}
+                <tr>
+                    <th scope="row">{{item.numero}}</th>
+                    <td>{{item.createTime}}</td>
+                    <td>{{item.status}}</td>
+                    {% if request.session.username == "root" %}
+                    <td><a href="/gestionnaire/consulterDemande/?id={{item.id}}&cd={{user.id}}" class="text-success">Consulter</a>
+                    </td>
+                    {% else %}
+                    <td><a href="/mainPage/consulterDemande/?id={{item.id}}&cd={{user.id}}" class="text-success">Consulter</a>
+                    </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </fieldset>
     </div>
+</div>
 </body>
 </html>

@@ -7,8 +7,9 @@ import datetime
 
 
 def mainPage(request):
-    if not request.session.get("username", None):
+    if not request.session.get("username", None) or request.session.get("username")=='root':
         info = "Reconnectez-vous s'il vous plait"
+        request.session.flush()
         return render(request, "index.html", {'info': info, 'infoType': 'warning'})
 
     login = request.session.get('username')

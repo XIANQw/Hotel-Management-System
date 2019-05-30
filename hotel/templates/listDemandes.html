@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!--    listDemandes.html-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -69,7 +70,7 @@
                     {% if flag == "2" %}<li class="active">Attendu</li>{% else %}<li><a href="/gestionnaire/listDemandes/?flag=2">Attendu</a></li>{% endif%}
                     {% if flag == "3" %}<li class="active">Accepte</li>{% else %}<li><a href="/gestionnaire/listDemandes/?flag=3">Accepte</a></li>{% endif%}
                 </ul>
-                <div><a href="/gestionnaire/accepterDemandes/" class="btn btn-primary">Accepter les demandes</a></div>
+
                 {% if demandes %}
                 <table class="table table-striped">
                     <thead>

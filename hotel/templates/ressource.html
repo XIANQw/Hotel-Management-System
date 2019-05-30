@@ -1,3 +1,4 @@
+<!--ressource.html-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,9 +97,9 @@
                             <td>{{item.id}}</td>
                             <td>{{item.nom_Meuble}}</td>
                             <td>{{item.status}}</td>
-                            <td><a href="/gestionnaire/consulterRes/ajouterMeu/?resId={{res.id}}&meuId={{item.id}}">Ajouter dans {{res.type}} {{res.id}}</a></td>
-                            <td><a class="modify" href="javascript:;">Modifier</a></td>
-                            <td><a href="/gestionnaire/consulterRes/deleteMeu/?resId={{res.id}}&meuId={{item.id}}">Delete</a></td>
+                            <td><a class="text-success" href="/gestionnaire/consulterRes/ajouterMeu/?resId={{res.id}}&meuId={{item.id}}">Ajouter dans {{res.type}} {{res.id}}</a></td>
+                            <td><a class="modify text-success" href="javascript:;">Modifier</a></td>
+                            <td><a class="text-success" href="/gestionnaire/consulterRes/deleteMeu/?resId={{res.id}}&meuId={{item.id}}">Delete</a></td>
                         </tr>
                         {% endfor %}
                         <tr>
