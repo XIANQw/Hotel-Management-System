@@ -499,9 +499,9 @@ def consulterDemRes(request):
     if request.method == "GET":
         resId = request.GET['resId']
         ressource = Ressource.objects.get(id=resId)
-        planRessource = planRessource.objects.filtre(ressource=ressource)
+        planRes = PlanRessource.objects.filter(ressource=ressource)
         plans = []
-        for i in planRessource:
+        for i in planRes:
             plans.append(i.plan)
-        return render(request, 'clientRessource.html', {'id': id, 'flag': flag, 'res': res, 'cd': cd, 'plan': plan})
+        return render(request, 'ressourcePlan.html', {'res':ressource, 'plans': plans})
 
