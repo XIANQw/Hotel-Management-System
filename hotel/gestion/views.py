@@ -126,12 +126,18 @@ def deleteRessource(request):
     if request.method == "GET":
         id = request.GET['id']
         res = Ressource.objects.get(id=id)
-        if res:
-            info="Cette ressource est bien supprimee"
-            infoType = 'success'
-            res.delete()
+        meu = consulInfoRes(request,res)
+        meubles = Meuble.objects.filter(status='disponible')
+        if meu:
+            info = "Tu dois supprimer touts les meubles de ce ressource"
+            return render(request, 'ressource.html', {'res': res, 'resMeu': meu, 'meubles': meubles,'info': info, 'infoType': infoType})
         else:
-            info = "Cette ressource n'existe pas"
+            if res:
+                info="Cette ressource est bien supprimee"
+                infoType = 'success'
+                res.delete()
+            else:
+                info = "Cette ressource n'existe pas"
     res = Ressource.objects.all()
     return render(request, 'gestionnaire.html', {'res':res,'infoType': infoType, 'info': info})
 
@@ -161,8 +167,7 @@ def consulterRes(request):
     return render(request,'gestionnaire.html',{'info':info,'infoType':'danger'})
 
 def creerMeuble(request):
-    info = "error"
-    infoType = 'danger'
+
     if request.session.get("username") != "root":
         infoType = 'warning'
         info = "Reconnectez s'il vous plait"
@@ -171,13 +176,8 @@ def creerMeuble(request):
     if request.method == "POST":
         nomMeuble = request.POST.get("nomMeuble")
         resId = request.POST.get("resId")
-        res = Ressource.objects.get(id=resId)
-        meu = Meuble.objects.create(nom_Meuble=nomMeuble, status="disponible")
-        resMeu = consulInfoRes(request,res)
-        meubles = Meuble.objects.filter(status="disponible")
-        if meu:
-            info = "Nouveau meuble est bien crée"
-            infoType = 'success'
+        Meuble.objects.create(nom_Meuble=nomMeuble, status="disponible")
+
     return redirect('/gestionnaire/redirectToSuccessfulAdd/?resId='+resId)
 
 def ajouterMeuble(request):
