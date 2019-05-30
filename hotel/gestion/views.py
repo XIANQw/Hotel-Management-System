@@ -81,6 +81,7 @@ def gotoModifyRes(request):
         id = request.GET['id']
         res = Ressource.objects.get(id=id)
         return render(request, 'modifyRes.html', {'res': res})
+
     info = "error"
     return render(request, 'gestionnaire.html', {'info': info, 'infoType': 'danger'})
 
@@ -98,10 +99,13 @@ def modifyRessource(request):
         type = request.POST.get("type")
         res = Ressource.objects.get(id=id)
         tmp = Ressource.objects.filter(numero=numero)
+        cd = '-2'
+        flag = '1'
+        id = '-1'
         if tmp and tmp[0].id != res.id:
             info = "Il a deja existe une ressource " + numero
             infoType = "danger"
-            return render(request, "ressource.html", {'res': res, 'info': info, 'infoType': infoType})
+            return render(request, "ressource.html", {'res': res, 'info': info, 'infoType': infoType,'cd':cd,'flag':flag,'id':id})
         info = "Bien modifie"
         infoType = "success"
         res.numero = numero
@@ -116,7 +120,7 @@ def modifyRessource(request):
             taille = request.POST.get('tailleSDC')
             res.type = "{} {}".format(taille, type)
         res.save()
-    return render(request, "ressource.html", {'res': res, 'info': info, 'infoType': infoType})
+    return render(request, "ressource.html", {'res': res, 'info': info, 'infoType': infoType, 'cd':cd,'flag':flag,'id':id})
 
 
 def deleteRessource(request):
@@ -128,14 +132,17 @@ def deleteRessource(request):
     info = "error"
     infoType = 'danger'
     if request.method == "GET":
-        id = request.GET['id']
-        res = Ressource.objects.get(id=id)
+        resId = request.GET['resId']
+        res = Ressource.objects.get(id=resId)
         meu = consulInfoRes(request, res)
         meubles = Meuble.objects.filter(status='disponible')
+        cd = '-2'
+        flag = '1'
+        id = '-1'
         if meu:
             info = "Tu dois supprimer touts les meubles de ce ressource"
             return render(request, 'ressource.html',
-                          {'res': res, 'resMeu': meu, 'meubles': meubles, 'info': info, 'infoType': infoType})
+                          {'res': res, 'resMeu': meu, 'meubles': meubles, 'info': info, 'infoType': infoType,'cd':cd,'flag':flag,'id':id})
         else:
             if res:
                 info = "Cette ressource est bien supprimee"
@@ -276,15 +283,27 @@ def deleteMeuble(request):
 
 
 def redirectToSuccessfulAdd(request):
-    info = "Nouveau meuble est bien ajouté"
+    info = "Opération éxécuté avec succees"
     infoType = "success"
     if request.method == "GET":
+        try:
+            id = request.GET['id']
+        except MultiValueDictKeyError:
+            id = '-1'
+        try:
+            cd = request.GET['cd']
+        except MultiValueDictKeyError:
+            cd = '-2'
+        try:
+            flag = request.GET['flag']
+        except MultiValueDictKeyError:
+            flag = '1'
         resId = request.GET['resId']
         res = Ressource.objects.get(id=resId)
         resMeu = consulInfoRes(request, res)
         meubles = Meuble.objects.filter(status="disponible")
     return render(request, 'ressource.html',
-                  {'res': res, 'resMeu': resMeu, 'meubles': meubles, 'info': info, 'infoType': infoType})
+                  {'res': res, 'resMeu': resMeu, 'meubles': meubles, 'info': info, 'infoType': infoType, 'cd':cd, 'flag':flag, 'id':id})
 
 
 def consulterClient(request):
