@@ -24,12 +24,18 @@
                             <a href="" class="text-success">modifier</a>
                         </li>
                         <li>
-                            <a href="" class="text-success">supprimer</a>
+                            {% if request.session.username == 'root' and cd == '-1' %}
+                                <a href="/deleteDemande/?id={{demande.id}}&cd=-1" class="text-success">supprimer</a>
+                            {% elif request.session.username == 'root'%}
+                                <a href="/deleteDemande/?id={{demande.id}}&cd={{idc}}" class="text-success">supprimer</a>
+                            {% else %}
+                                <a href="/deleteDemande/?id={{demande.id}}&cd={{idc}}" class="text-success">supprimer</a>
+                            {% endif %}
                         </li>
                         <li>
-                            {% if request.session.username == 'root' and cd == '0' %}
+                            {% if request.session.username == 'root' and cd == '-1' %}
                             <a href="/gestionnaire/listDemandes/?flag=1" class="text-success">retour</a>
-                            {% elif request.session.username == 'root' and cd == '1' %}
+                            {% elif request.session.username == 'root' %}
                             <a href="/gestionnaire/consulterClient/?id={{idc}}&flag=1" class="text-success">retour</a>
                             {% else %}
                             <a href="/mainPage/myDemandes/?id={{request.session.id}}&flag=1" class="text-success">retour</a>
@@ -49,6 +55,7 @@
                 <th scope="col">Date de checkin</th>
                 <th scope="col">Date de checkout</th>
                 <th scope="col">Nomber des personnes</th>
+                <th scope="col">Type de ressource</th>
                 <th scope="col">Temps de creation</th>
                 <th scope="col">Status</th>
             </tr>

@@ -282,3 +282,157 @@ def consulterClient(request):
     info = "error"
     infoType = 'danger'
     return render(request, 'gestionnaire.html', {'info': info,'infoType': infoType})
+
+
+def hasConflictDate(request,period1,period2):
+    """
+    Verifier si deux period ont le conflit
+    :param request: request
+    :param period1: list of datetime.date
+    :param period2: list of datetime.date
+    :return: Bool
+    """
+    if period1[0]<period2[0]:
+        return period1[1] > period2[0]
+    else:
+        return period1[0] < period2[1]
+
+
+def hasConflictRes(request,plan,res):
+    """
+    Verifier si cette ressource est disponible pour ce plan
+
+    :param request: request
+    :param plan: Plan Object
+    :param res: Ressource Object
+    :return: Bool
+    """
+    resPlan = PlanRessource.objects.filter(ressource=res)
+    for i in resPlan:
+        period1 = [i.checkin,i.checkout]
+        period2 = [plan.checkin,plan.checkout]
+        if hasConflictDate(request,period1,period2):
+            return True
+    return False
+
+
+def chercheChambre(request,plan,size):
+    """
+    Chercher les ressource de size disponible pour ce plan
+
+    :param request: request
+    :param plan: Plan Object
+    :param size: 'Simple','Double','Famille'
+    :return: list de Ressource
+    """
+    types = plan.typeRessource.split("-")
+    niveau = types[0]
+    type = types[1]
+    fumeur = types[2]
+    type = "{}-{} {}-{}".format(niveau, type, size, fumeur)
+    res = Ressource.objects.filter(type=type)
+    resdisponible = []
+    for i in res:
+        if not hasConflictRes(request,plan,i):
+            resdisponible.append(i)
+    return resdisponible
+
+
+def chercheSDC(request,plan):
+    """
+    chercher les SDC disponible pour ce plan
+
+    :param request: request
+    :param plan: Plan object
+    :return: list de SDC disponible, list of Ressource
+    """
+    resDisponible = []
+    if plan.nbPerson < 10:
+        type = "Petite " + plan.typeRessource
+    elif 10 <= plan.nbPerson < 20:
+        type = "Moyenne " + plan.typeRessource
+    elif 20 <= plan.nbPerson <= 30:
+        type = "Grangde " + plan.typeRessource
+    else:
+        return None
+    res = Ressource.objects.filter(type=type)
+    for i in res:
+        if not hasConflictRes(request, plan, i):
+            resDisponible.append(i)
+            return resDisponible
+    return None
+
+
+def chercherRes(request,plan):
+    """
+    Cherchez les ressources disponibles pour ce plan
+
+    :param request:
+    :param plan:
+    :return:
+    """
+    resDisponibleD = chercheChambre(request,plan, 'Double')
+    resDisponibleS = chercheChambre(request,plan,'Simple')
+    resDisponibleF = chercheChambre(request,plan,'Famille')
+    nbPerson = plan.nbPerson
+    nbD = len(resDisponibleD)
+    nbS = len(resDisponibleS)
+    nbF = len(resDisponibleF)
+    print('resDisponibleD:', resDisponibleD)
+    print('resDisponibleS:', resDisponibleS)
+    print('resDisponibleF:', resDisponibleF)
+    def tmp(nbPerson,D,S,F,result):
+        print('nbPerson:',nbPerson,'D:',D,'S:',S,'F:',F,'result:',result)
+        if nbPerson <= 0:
+            return result
+        if nbD > D:
+            nbPerson -= 2
+            result.append(resDisponibleD[D])
+            return tmp(nbPerson,D+1,S,F,result)
+        elif nbF > F:
+            nbPerson -= 3
+            result.append(resDisponibleF[F])
+            return tmp(nbPerson,D,S,F+1,result)
+        elif nbS > S:
+            nbPerson -= 1
+            result.append(resDisponibleS[S])
+            return tmp(nbPerson,D,S+1,F,result)
+        else:
+            return []
+    print('nbPerson:',nbPerson)
+    return tmp(nbPerson,0,0,0,[])
+
+
+def accepterDemande(request):
+    if request.session.get("username") != "root":
+        infoType = 'warning'
+        info = "Reconnectez s'il vous plait"
+        return render(request, "index.html", {'info': info, 'infoType': infoType})
+
+    if request.method == "GET":
+        id = request.GET['id']
+        demande = Demande.objects.get(id=id)
+        info = "il n y a plus ressource disponible"
+        infoType = "warning"
+        if demande.status == "attendu":
+            demandePlans = DemandePlan.objects.filter(demande=demande)
+            planId = demandePlans[0].plan.id
+            plan = Plan.objects.get(id=planId)
+            res = chercherRes(request, plan)
+            print('res:',res)
+            for i in res:
+                info = "Felicitation !"
+                infoType = "success"
+                PlanRessource.objects.create(plan = plan,ressource=i)
+                plan.status = "accepte"
+                plan.save()
+                demande.status = "accepte"
+                demande.save()
+        else:
+            info = "Cette demande est deja acceptee"
+            infoType = 'danger'
+        demandes = Demande.objects.all()
+        return render(request,'listDemandes.html',{'info':info,'infoType':infoType,'demandes':demandes,'flag':'1'})
+
+    return redirect('/gestionnaire/listDemandes/?flag=1')
+

@@ -37,3 +37,7 @@ class Demande(models.Model):
 class DemandePlan(models.Model):
     demande = models.ForeignKey(Demande,on_delete=models.CASCADE,default=None)
     plan = models.ForeignKey(Plan,on_delete=models.CASCADE,default=None)
+
+class PlanRessource(models.Model):
+    plan = models.ForeignKey(Plan,on_delete=models.CASCADE,default=None)
+    ressource = models.ForeignKey(Ressource,on_delete=models.CASCADE,default=None)
