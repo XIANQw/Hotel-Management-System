@@ -28,7 +28,7 @@
                             <a href="/gestionnaire/listClients">Clients</a>
                         </li>
                         <li role="presentation">
-                            <a href="/gestionnaire/listDemandes">Demandes</a>
+                            <a href="/gestionnaire/listDemandes/?flag=1">Demandes</a>
                         </li>
                         <li><a href="/logout/">Déconnexion</a></li>
                     </ul>
@@ -47,7 +47,7 @@
                         <a href="/mainPage/consulterProfile/" class="text-success">votre profile</a>
                         </li>
                         <li>
-                        <a href="/mainPage/listDemandes/" class="text-success">vos demandes</a>
+                        <a href="/mainPage/listDemandes/?flag=1" class="text-success">vos demandes</a>
                         </li>
                         <li><a href="/logout/" class="text-success">deconnexion</a></li>
                     </ul>
@@ -69,6 +69,7 @@
                     {% if flag == "2" %}<li class="active">Attendu</li>{% else %}<li><a href="/gestionnaire/listDemandes/?flag=2">Attendu</a></li>{% endif%}
                     {% if flag == "3" %}<li class="active">Accepte</li>{% else %}<li><a href="/gestionnaire/listDemandes/?flag=3">Accepte</a></li>{% endif%}
                 </ul>
+                <div><a href="/gestionnaire/accepterDemandes/" class="btn btn-primary">Accepter les demandes</a></div>
                 {% if demandes %}
                 <table class="table table-striped">
                     <thead>
@@ -78,6 +79,7 @@
                         <th scope="col">Client</th>
                         <th scope="col">Status</th>
                         <th scope="col">Details</th>
+                        <th scope="col">Accepter</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -87,7 +89,8 @@
                         <td>{{item.createTime}}</td>
                         <td>{{item.client.login}}</td>
                         <td>{{item.status}}</td>
-                        <td><a href="/gestionnaire/consulterDemande/?id={{item.id}}&cd=0" class="text-success">Consulter</a></td>
+                        <td><a href="/gestionnaire/consulterDemande/?id={{item.id}}&cd=-1" class="text-success">Consulter</a></td>
+                        <td><a href="/gestionnaire/accepterDemande/?id={{item.id}}&flag=1" class="text-success">Accepter</a></td>
                     </tr>
                     {% endfor %}
                     </tbody>

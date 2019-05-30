@@ -146,7 +146,6 @@ def consulterDemande(request):
     if request.method == "GET":
         id = request.GET['id']
         cd = request.GET['cd']
-        print(cd, type(cd))
         demande = Demande.objects.get(id=id)
         idc = demande.client.id
         demandePlans = DemandePlan.objects.filter(demande=demande)
@@ -154,5 +153,40 @@ def consulterDemande(request):
         for i in demandePlans:
             plans.append(i.plan)
         if plans:
-            return render(request,'demande.html',{'plans':plans,'cd':cd,'idc':idc})
+            return render(request,'demande.html',{'plans':plans,'cd':cd,'idc':idc,'demande':demande})
     return redirect('/mainPage/')
+
+
+def deleteDemande(request):
+    if not request.session.get("username", None):
+        info = "Reconnectez-vous s'il vous plait"
+        return render(request, "index.html", {'info': info, 'infoType': 'warning'})
+
+    info = "error"
+    infoType = "danger"
+    if request.method == "GET":
+        id = int(request.GET['id'])
+        cd = request.GET['cd']
+        demandes = Demande.objects.filter(id=id)
+        if demandes:
+            idc = demandes[0].client.id
+            demandes[0].delete()
+            info = "Cette demande est bien supprime"
+            infoType = "success"
+        else:
+            info = "Cette demande n'existe pas"
+
+        if cd == '-1' and request.session.get('username') == 'root':
+            demandes = Demande.objects.all()
+            return render(request, 'listDemandes.html', {'demandes':demandes,'info':info,'infoType':infoType,'flag':'1'})
+        elif cd != '-1' and request.session.get('username') == 'root':
+            return redirect('/gestionnaire/consulterClient/?id={}&flag=1'.format(cd))
+        else:
+            myId = request.session.get('id')
+            me = Client.objects.get(id=myId)
+            demandes = Demande.objects.filter(client=me)
+            if demandes:
+                return render(request, 'clientDemande.html', {'demandes': demandes, 'user': me, 'flag': '1'})
+            else:
+                info = "Ce client n'a aucune de demande"
+                return render(request, 'clientDemande.html', {'info': info, 'user': me, 'flag': '1'})

@@ -40,6 +40,7 @@ urlpatterns = [
     path('gestionnaire/listDemandes/', gestion.views.listDemandes),
     path('gestionnaire/listClients/',gestion.views.gotoListClients),
     path('gestionnaire/consulterDemande/', client.views.consulterDemande),
+    path('gestionnaire/accepterDemande/',gestion.views.accepterDemande),
     # --------------------------client----------------------------------------------
     path('mainPage/',client.views.mainPage),
     path('mainPage/consulterProfile/', client.views.consulterProfile),
@@ -48,4 +49,6 @@ urlpatterns = [
     path('mainPage/createDemande/',client.views.createDemande),
     path('mainPage/consulterDemande/',client.views.consulterDemande),
     path('mainPage/myDemandes/',client.views.myDemandes),
+
+    path('deleteDemande/',client.views.deleteDemande),
 ]

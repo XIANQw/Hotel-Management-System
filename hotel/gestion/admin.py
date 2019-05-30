@@ -22,9 +22,13 @@ class MeubleAdmin(admin.ModelAdmin):
 class Concerne_MeubleAdmin(admin.ModelAdmin):
     list_display = ('id', 'ressource', 'meuble')  # list
 
+class planRessourceAdmin(admin.ModelAdmin):
+    list_display = ('id','plan','ressource')
+
 admin.site.register(Ressource,ressourceAdmin)
 admin.site.register(Demande,demandeAdmin)
 admin.site.register(Meuble,MeubleAdmin)
 admin.site.register(Concerne_Meuble,Concerne_MeubleAdmin)
 admin.site.register(Plan,planAdmin)
 admin.site.register(DemandePlan,demandePlanAdmin)
+admin.site.register(PlanRessource,planRessourceAdmin)
