@@ -465,9 +465,10 @@ def accepterDemande(request):
 
 
 def consultPlanRessource(request):
-    if not request.session.get("username", None):
-        info = "Reconnectez-vous s'il vous plait"
-        return render(request, "index.html", {'info': info, 'infoType': 'warning'})
+    if request.session.get("username") != "root":
+        infoType = 'warning'
+        info = "Reconnectez s'il vous plait"
+        return render(request, "index.html", {'info': info, 'infoType': infoType})
 
     if request.method == "GET":
         try:
@@ -489,3 +490,18 @@ def consultPlanRessource(request):
         for i in planRessource:
             res.append(i.ressource)
     return render(request, 'clientRessource.html', {'id': id, 'flag': flag, 'res': res, 'cd': cd, 'plan': plan})
+
+def consulterDemRes(request):
+    if not request.session.get("username", None):
+        info = "Reconnectez-vous s'il vous plait"
+        return render(request, "index.html", {'info': info, 'infoType': 'warning'})
+
+    if request.method == "GET":
+        resId = request.GET['resId']
+        ressource = Ressource.objects.get(id=resId)
+        planRessource = planRessource.objects.filtre(ressource=ressource)
+        plans = []
+        for i in planRessource:
+            plans.append(i.plan)
+        return render(request, 'clientRessource.html', {'id': id, 'flag': flag, 'res': res, 'cd': cd, 'plan': plan})
+

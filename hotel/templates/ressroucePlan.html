@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Les plans concerné de Ressource {{res.nom}} {{res.id}}</title>
+</head>
+<body>
+
+ <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <li>Liste Plan Concerné</li>
+                    <th>#</th>
+                    <th>checkin</th>
+                    <th>checkout</th>
+                    <th>nbPerson</th>
+                    <th>typeRessource</th>
+                    <th>owner</th>
+                    <th>status</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in meubles %}
+                <tr>
+                    <td>{{item.id}}</td>
+                    <td>{{item.nom_Meuble}}</td>
+                    <td>{{item.status}}</td>
+                    <td><a href="/gestionnaire/consulterRes/ajouterMeu/?resId={{res.id}}&meuId={{item.id}}">Ajouter dans
+                        {{res.type}} {{res.id}}</a></td>
+                    <td><a class="modify" href="javascript:;">Modifier</a></td>
+                    <td><a href="/gestionnaire/consulterRes/deleteMeu/?resId={{res.id}}&meuId={{item.id}}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><input id="hrefCreerMeu" type="button" class="btn btn-primary" value="Creer nouveau meuble"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+</body>
+</html>
