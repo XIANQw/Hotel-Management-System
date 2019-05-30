@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-
+from django.utils.datastructures import MultiValueDictKeyError
 # Create your views here.
 from gestion.models import *
 
@@ -130,12 +130,19 @@ def deleteRessource(request):
     if request.method == "GET":
         id = request.GET['id']
         res = Ressource.objects.get(id=id)
-        if res:
-            info = "Cette ressource est bien supprimee"
-            infoType = 'success'
-            res.delete()
+        meu = consulInfoRes(request, res)
+        meubles = Meuble.objects.filter(status='disponible')
+        if meu:
+            info = "Tu dois supprimer touts les meubles de ce ressource"
+            return render(request, 'ressource.html',
+                          {'res': res, 'resMeu': meu, 'meubles': meubles, 'info': info, 'infoType': infoType})
         else:
-            info = "Cette ressource n'existe pas"
+            if res:
+                info = "Cette ressource est bien supprimee"
+                infoType = 'success'
+                res.delete()
+            else:
+                info = "Cette ressource n'existe pas"
     res = Ressource.objects.all()
     return render(request, 'gestionnaire.html', {'res': res, 'infoType': infoType, 'info': info})
 
@@ -149,26 +156,47 @@ def consulInfoRes(request, ressource):
 
 
 def consulterRes(request):
+
     if request.session.get("username") != "root":
         infoType = 'warning'
         info = "Reconnectez s'il vous plait"
         return render(request, "index.html", {'info': info, 'infoType': infoType})
 
     if request.method == "GET":
+<<<<<<< HEAD
         id = request.GET['id']
         res = Ressource.objects.get(id=id)
         resMeu = consulInfoRes(request, res)
         meubles = Meuble.objects.filter(status="disponible")
         if res:
             return render(request, 'ressource.html', {'res': res, 'resMeu': resMeu, 'meubles': meubles})
+=======
+        try:
+            id = request.GET['id']
+        except MultiValueDictKeyError:
+            id = '-1'
+        try:
+            cd = request.GET['cd']
+        except MultiValueDictKeyError:
+            cd = '-2'
+        try:
+            planId = request.GET['planId']
+            plan = Plan.objects.get(id=planId)
+        except MultiValueDictKeyError:
+            plan = '-1'
+        resId = request.GET['resId']
+        res = Ressource.objects.get(id=resId)
+        resMeu = consulInfoRes(request, res)
+        meubles = Meuble.objects.filter(status="disponible")
+        if res:
+            return render(request, 'ressource.html', {'id': id, 'res': res, 'resMeu': resMeu, 'meubles': meubles, 'plan': plan, 'cd':cd})
+>>>>>>> 55b3f31c8679503da31eda77889eb45312876ce0
         return render(request, 'ressource.html', {'res': res})
     info = "error"
     return render(request, 'gestionnaire.html', {'info': info, 'infoType': 'danger'})
 
 
 def creerMeuble(request):
-    info = "error"
-    infoType = 'danger'
     if request.session.get("username") != "root":
         infoType = 'warning'
         info = "Reconnectez s'il vous plait"
@@ -177,6 +205,7 @@ def creerMeuble(request):
     if request.method == "POST":
         nomMeuble = request.POST.get("nomMeuble")
         resId = request.POST.get("resId")
+<<<<<<< HEAD
         res = Ressource.objects.get(id=resId)
         meu = Meuble.objects.create(nom_Meuble=nomMeuble, status="disponible")
         resMeu = consulInfoRes(request, res)
@@ -184,6 +213,10 @@ def creerMeuble(request):
         if meu:
             info = "Nouveau meuble est bien crée"
             infoType = 'success'
+=======
+        Meuble.objects.create(nom_Meuble=nomMeuble, status="disponible")
+
+>>>>>>> 55b3f31c8679503da31eda77889eb45312876ce0
     return redirect('/gestionnaire/redirectToSuccessfulAdd/?resId=' + resId)
 
 
@@ -319,7 +352,11 @@ def hasConflictRes(request, plan, res):
     """
     resPlan = PlanRessource.objects.filter(ressource=res)
     for i in resPlan:
+<<<<<<< HEAD
         period1 = [i.plan.checkin, i.plan.checkout]
+=======
+        period1 = [i.checkin, i.checkout]
+>>>>>>> 55b3f31c8679503da31eda77889eb45312876ce0
         period2 = [plan.checkin, plan.checkout]
         if hasConflictDate(request, period1, period2):
             return True
@@ -388,8 +425,17 @@ def chercherRes(request, plan):
     nbD = len(resDisponibleD)
     nbS = len(resDisponibleS)
     nbF = len(resDisponibleF)
+<<<<<<< HEAD
     def tmp(nbPerson, D, S, F, result):
         # print('nbPerson:', nbPerson, 'D:', D, 'S:', S, 'F:', F, 'result:', result)
+=======
+    print('resDisponibleD:', resDisponibleD)
+    print('resDisponibleS:', resDisponibleS)
+    print('resDisponibleF:', resDisponibleF)
+
+    def tmp(nbPerson, D, S, F, result):
+        print('nbPerson:', nbPerson, 'D:', D, 'S:', S, 'F:', F, 'result:', result)
+>>>>>>> 55b3f31c8679503da31eda77889eb45312876ce0
         if nbPerson <= 0:
             return result
         if nbD > D:
@@ -406,6 +452,10 @@ def chercherRes(request, plan):
             return tmp(nbPerson, D, S + 1, F, result)
         else:
             return []
+<<<<<<< HEAD
+=======
+
+>>>>>>> 55b3f31c8679503da31eda77889eb45312876ce0
     print('nbPerson:', nbPerson)
     return tmp(nbPerson, 0, 0, 0, [])
 
@@ -433,6 +483,7 @@ def accepterDemande(request):
         infoType = "warning"
         if demande.status == "attendu":
             demandePlans = DemandePlan.objects.filter(demande=demande)
+<<<<<<< HEAD
             plans = []
             for i in demandePlans:
                 plans.append(i.plan)
@@ -457,12 +508,27 @@ def accepterDemande(request):
                                   {'info': info, 'infoType': infoType, 'demandes': demandes, 'flag': '1'})
             info = "Il n'y a aucune ressource disponible"
             infoType = "danger"
+=======
+            planId = demandePlans[0].plan.id
+            plan = Plan.objects.get(id=planId)
+            res = chercherRes(request, plan)
+            print('res:', res)
+            for i in res:
+                info = "Felicitation !"
+                infoType = "success"
+                PlanRessource.objects.create(plan=plan, ressource=i)
+                plan.status = "accepte"
+                plan.save()
+                demande.status = "accepte"
+                demande.save()
+>>>>>>> 55b3f31c8679503da31eda77889eb45312876ce0
         else:
             info = "Cette demande est deja acceptee"
             infoType = 'danger'
         demandes = Demande.objects.all()
         return render(request, 'listDemandes.html',
                       {'info': info, 'infoType': infoType, 'demandes': demandes, 'flag': '1'})
+<<<<<<< HEAD
     return redirect('/gestionnaire/listDemandes/?flag=1')
 
 
@@ -515,3 +581,34 @@ def accepterDemande(request):
 #
 #
 
+=======
+
+    return redirect('/gestionnaire/listDemandes/?flag=1')
+
+
+def consultPlanRessource(request):
+    if not request.session.get("username", None):
+        info = "Reconnectez-vous s'il vous plait"
+        return render(request, "index.html", {'info': info, 'infoType': 'warning'})
+
+    if request.method == "GET":
+        try:
+            id = request.GET['id']
+        except MultiValueDictKeyError:
+            id = '-1'
+        try:
+            cd = request.GET['cd']
+        except MultiValueDictKeyError:
+            cd = '-2'
+        try:
+            flag = request.GET['flag']
+        except MultiValueDictKeyError:
+            flag = '1'
+        planId = request.GET['planId']
+        plan = Plan.objects.get(id=planId)
+        planRessource = PlanRessource.objects.filter(plan=plan)
+        res = []
+        for i in planRessource:
+            res.append(i.ressource)
+    return render(request, 'clientRessource.html', {'id': id, 'flag': flag, 'res': res, 'cd': cd, 'plan': plan})
+>>>>>>> 55b3f31c8679503da31eda77889eb45312876ce0

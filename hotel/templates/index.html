@@ -6,72 +6,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="/static/js/jquery.min.js" ></script>
+    <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/popper.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
-    <script src='/static/js/page.js' ></script>
+    <script src='/static/js/page.js'></script>
     <title>login</title>
 </head>
 <body>
-    <div class="container">
-        <fieldset>
-            <legend>Systeme de Gestion Hoteliere</legend>
-            {% if info %}
-                <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
-            {% endif %}
-            <div id="zoneLogin">
-                <h3>login</h3>
-                <form action="/login/" method="post">{% csrf_token %}
-                    <div class="form-group">
-                        <label for="id_username">username: </label>
-                        <input type="text" name="login" class="form-control" id="id_username" placeholder="login" autofocus required/>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_password">password: </label>
-                        <input type="password" name="pwd" class="form-control" id="id_password" placeholder="password" required />
-                    </div>
-                    <button type="submit" class="btn btn-primary float-right">Identifiez-vous</button>
-                </form>
-                <div id="gotoSignup">
-                    <span>Have not yet username? click </span>
-                    <ins id="ModeSignUp" class="text-success">here</ins>
+<div class="container">
+    <fieldset>
+        <legend>Systeme de Gestion Hoteliere</legend>
+        {% if info %}
+        <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
+        {% endif %}
+        <div id="zoneLogin">
+            <h3>login</h3>
+            <form action="/login/" method="post">{% csrf_token %}
+                <div class="form-group">
+                    <label for="id_username">username: </label>
+                    <input type="text" name="login" class="form-control" id="id_username" placeholder="login" autofocus
+                           required/>
                 </div>
-            </div>
-            <div id="zoneSignUp" style="display:none">
-                <h3>sign up</h3>
-                <form action="/signUp/" method="post">{% csrf_token %}
-                    <div class="form-group">
-                        <label for="id_nom">Nom: </label>
-                        <input type="text" name="nom" class="form-control" id="id_nom" placeholder="nom" required="required" />
-                    </div>
-                    <div class="form-group">
-                        <label for="id_prenom">Prenom: </label>
-                        <input type="text" name="prenom" class="form-control" id="id_prenom" placeholder="prenom" required="required" />
-                    </div>
-                    <div class="form-group">
-                        <label for="id_email">Email: </label>
-                        <input type="text" name="email" class="form-control" id="id_email" placeholder="email" required="required" />
-                    </div>
-                    <div class="form-group">
-                        <label for="id_pwd">Password: </label>
-                        <input type="password" name="pwd" class="form-control" id="id_pwd" placeholder="password" required="required" />
-                    </div>
-                    <div class="form-group">
-                        <label for="id_adresse">Adresse: </label>
-                        <input type="text" name="adresse" class="form-control" id="id_adresse" placeholder="adresse" />
-                    </div>
-                    <div class="form-group">
-                        <label for="id_telephone">Telephone: </label>
-                        <input type="text" name="tel" class="form-control" id="id_telephone" placeholder="telphone" />
-                    </div>
-                    <button type="submit" class="btn btn-primary float-right">creer votre compte</button>
-                </form>
-                <div id="gotoLogin">
-                    <span>Have got an account?</span>
-                    <ins id="ModeLogin" class="text-success">go to login</ins>
+                <div class="form-group">
+                    <label for="id_password">password: </label>
+                    <input type="password" name="pwd" class="form-control" id="id_password" placeholder="password"
+                           required/>
                 </div>
+                <button type="submit" class="btn btn-primary float-right">Identifiez-vous</button>
+            </form>
+            <div id="gotoSignup">
+                <span>Have not yet username? click </span>
+                <ins id="ModeSignUp" class="text-success">here</ins>
             </div>
-        </fieldset>
-    </div>
+        </div>
+        <div id="zoneSignUp" style="display:none">
+            <h3>sign up</h3>
+            <form action="/signUp/" method="post">{% csrf_token %}
+                <div class="form-group">
+                    <label for="id_nom">Nom: </label>
+                    <input type="text" name="nom" class="form-control" id="id_nom" placeholder="nom"
+                           required="required"/>
+                </div>
+                <div class="form-group">
+                    <label for="id_prenom">Prenom: </label>
+                    <input type="text" name="prenom" class="form-control" id="id_prenom" placeholder="prenom"
+                           required="required"/>
+                </div>
+                <div class="form-group">
+                    <label for="id_email">Email: </label>
+                    <input type="text" name="email" class="form-control" id="id_email" placeholder="email"
+                           required="required"/>
+                </div>
+                <div class="form-group">
+                    <label for="id_pwd">Password: </label>
+                    <input type="password" name="pwd" class="form-control" id="id_pwd" placeholder="password"
+                           required="required"/>
+                </div>
+                <div class="form-group">
+                    <label for="id_adresse">Adresse: </label>
+                    <input type="text" name="adresse" class="form-control" id="id_adresse" placeholder="adresse"/>
+                </div>
+                <div class="form-group">
+                    <label for="id_telephone">Telephone: </label>
+                    <input type="text" name="tel" class="form-control" id="id_telephone" placeholder="telphone"/>
+                </div>
+                <button type="submit" class="btn btn-primary float-right">creer votre compte</button>
+            </form>
+            <div id="gotoLogin">
+                <span>Have got an account?</span>
+                <ins id="ModeLogin" class="text-success">go to login</ins>
+            </div>
+        </div>
+    </fieldset>
+</div>
 </body>
 </html>

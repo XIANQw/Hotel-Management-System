@@ -1,3 +1,4 @@
+<!--listClients.html-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,32 +14,32 @@
     <title>listClients</title>
 </head>
 <body>
-    <div class="container">
-        <nav class="navbar navbar-inverse" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand">Gestionnaire</a>
-                </div>
-                <div>
-                    <ul class="nav navbar-nav">
-                        <li role="presentation">
-                            <a href="/gestionnaire/">Ressources</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="/gestionnaire/listClients">Clients</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="/gestionnaire/listDemandes/?flag=1">Demandes</a>
-                        </li>
-                        <li><a href="/logout/">Déconnexion</a></li>
-                    </ul>
-                </div>
+<div class="container">
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">Gestionnaire</a>
             </div>
-        </nav>
-        {% if info %}
-        <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
-        {% endif %}
-        <div id="infoClient">
+            <div>
+                <ul class="nav navbar-nav">
+                    <li role="presentation">
+                        <a href="/gestionnaire/">Ressources</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="/gestionnaire/listClients">Clients</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="/gestionnaire/listDemandes/?flag=1">Demandes</a>
+                    </li>
+                    <li><a href="/logout/">Déconnexion</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% if info %}
+    <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
+    {% endif %}
+    <div id="infoClient">
         <fieldset>
             <legend>Les informations des clients</legend>
             <table class="table table-striped">
@@ -60,13 +61,15 @@
                     <td>{{item.prenom}}</td>
                     <td>{{item.adresse}}</td>
                     <td>{{item.tel}}</td>
-                    <td><a href="/gestionnaire/consulterClient/?id={{item.id}}&flag=1" class="text-success"> Consulter</a></td>
-                </tr> {% endfor %}
+                    <td><a href="/gestionnaire/consulterClient/?id={{item.id}}&flag=1" class="text-success">
+                        Consulter</a></td>
+                </tr>
+                {% endfor %}
 
                 </tbody>
             </table>
         </fieldset>
-        </div>
     </div>
+</div>
 </body>
 </html>

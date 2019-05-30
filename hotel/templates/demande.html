@@ -6,75 +6,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="/static/js/jquery.min.js" ></script>
+    <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/popper.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
-    <script src='/static/js/page.js' ></script>
+    <script src='/static/js/page.js'></script>
     <title>Demande {{demande.numero}}</title>
 </head>
 <body>
-    <div class="container">
-        <nav class="navbar navbar-inverse" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand">Information de demande {{demande.id}} </a>
-                </div>
-                <div>
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a href="" class="text-success">modifier</a>
-                        </li>
-                        <li>
-                            {% if request.session.username == 'root' and cd == '-1' %}
-                                <a href="/deleteDemande/?id={{demande.id}}&cd=-1" class="text-success">supprimer</a>
-                            {% elif request.session.username == 'root'%}
-                                <a href="/deleteDemande/?id={{demande.id}}&cd={{idc}}" class="text-success">supprimer</a>
-                            {% else %}
-                                <a href="/deleteDemande/?id={{demande.id}}&cd={{idc}}" class="text-success">supprimer</a>
-                            {% endif %}
-                        </li>
-                        <li>
-                            {% if request.session.username == 'root' and cd == '-1' %}
-                            <a href="/gestionnaire/listDemandes/?flag=1" class="text-success">retour</a>
-                            {% elif request.session.username == 'root' %}
-                            <a href="/gestionnaire/consulterClient/?id={{idc}}&flag=1" class="text-success">retour</a>
-                            {% else %}
-                            <a href="/mainPage/myDemandes/?id={{request.session.id}}&flag=1" class="text-success">retour</a>
-                            {% endif %}
-                        </li>
-                    </ul>
-                </div>
+<div class="container">
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">Information de demande {{demande.id}} </a>
             </div>
-        </nav>
-        {% if info %}
-            <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
-        {% endif %}
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">Plan</th>
-                <th scope="col">Date de checkin</th>
-                <th scope="col">Date de checkout</th>
-                <th scope="col">Nomber des personnes</th>
-                <th scope="col">Type de ressource</th>
-                <th scope="col">Temps de creation</th>
-                <th scope="col">Status</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for item in plans %}
-            <tr>
-                <th scope="row">{{item.numero}}</th>
-                <td>{{item.checkin}}</td>
-                <td>{{item.checkout}}</td>
-                <td>{{item.nbPerson}}</td>
-                <td>{{item.typeRessource}}</td>
-                <td>{{item.createTime}}</td>
-                <td>{{item.status}}</td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="" class="text-success">modifier</a>
+                    </li>
+                    <li>
+                        {% if request.session.username == 'root' and cd == '-1' %}
+                        <a href="/deleteDemande/?id={{demande.id}}&cd=-1" class="text-success">supprimer</a>
+                        {% elif request.session.username == 'root'%}
+                        <a href="/deleteDemande/?id={{demande.id}}&cd={{idc}}" class="text-success">supprimer</a>
+                        {% else %}
+                        <a href="/deleteDemande/?id={{demande.id}}&cd={{idc}}" class="text-success">supprimer</a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        <!--                            Cote gestionnaire listdemande -> demande-->
+                        {% if request.session.username == 'root' and cd == '-1' %}
+                        <a href="/gestionnaire/listDemandes/?flag=1" class="text-success">retour</a>
+                        <!--                            Cote gestionnaire listclient -> clientdemande-->
+                        {% elif request.session.username == 'root' %}
+                        <a href="/gestionnaire/consulterClient/?id={{idc}}&flag=1" class="text-success">retour</a>
+                        <!--                            Cote client mainpage -> clientdemande   -->
+                        {% else %}
+                        <a href="/mainPage/myDemandes/?id={{request.session.id}}&flag=1" class="text-success">retour</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% if info %}
+    <div id="alert" class="alert alert-{{infoType}}">{{info}}</div>
+    {% endif %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Plan</th>
+            <th scope="col">Date de checkin</th>
+            <th scope="col">Date de checkout</th>
+            <th scope="col">Nomber des personnes</th>
+            <th scope="col">Type de ressource</th>
+            <th scope="col">Temps de creation</th>
+            <th scope="col">Status</th>
+            <th scope="col">Opération</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in plans %}
+        <tr>
+            <th scope="row">{{item.numero}}</th>
+            <td>{{item.checkin}}</td>
+            <td>{{item.checkout}}</td>
+            <td>{{item.nbPerson}}</td>
+            <td>{{item.typeRessource}}</td>
+            <td>{{item.createTime}}</td>
+            <td>{{item.status}}</td>
+
+            <td>{% if item.status == 'accepte'%}
+                    {% if request.session.username == 'root' and cd == '-1' %}
+                    <a href="/gestionnaire/consulterRes/consultPlanRessource/?planId={{item.id}}&flag=1&cd=-1"
+                       class="text-success">Voir les ressources</a>
+                    {% elif request.session.username == 'root'%}
+                    <a href="/gestionnaire/consulterRes/consultPlanRessource/?planId={{item.id}}&id={{idc}}&flag=1&cd={{cd}}"
+                       class="text-success">Voir les ressources</a>
+                    {% else %}
+                    <a href="/mainPage/consulterRes/consultPlanRessource/?planId={{item.id}}&id={{request.session.id}}&flag=1"
+                       class="text-success">Voir les ressources</a>
+                    {% endif %}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
