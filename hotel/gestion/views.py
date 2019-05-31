@@ -135,12 +135,13 @@ def deleteRessource(request):
         resId = request.GET['resId']
         res = Ressource.objects.get(id=resId)
         meu = consulInfoRes(request, res)
+        plans = consulPlanRes(request,res)
         meubles = Meuble.objects.filter(status='disponible')
         cd = '-2'
         flag = '1'
         id = '-1'
-        if meu:
-            info = "Tu dois supprimer touts les meubles de ce ressource"
+        if meu or plans:
+            info = "Tu dois supprimer toutes les meubles et tous les plans de cette ressource"
             return render(request, 'ressource.html',
                           {'res': res, 'resMeu': meu, 'meubles': meubles, 'info': info, 'infoType': infoType,'cd':cd,'flag':flag,'id':id})
         else:
@@ -152,6 +153,14 @@ def deleteRessource(request):
                 info = "Cette ressource n'existe pas"
     res = Ressource.objects.all()
     return render(request, 'gestionnaire.html', {'res': res, 'infoType': infoType, 'info': info})
+
+
+def consulPlanRes(request,res):
+    concer_plan = PlanRessource.objects.filter(ressource=res)
+    plans = []
+    for i in concer_plan:
+        plans.append(i.plan)
+    return plans
 
 
 def consulInfoRes(request, ressource):
@@ -469,7 +478,7 @@ def accepterDemande(request):
         demande = Demande.objects.get(id=id)
         info = "il n y a plus ressource disponible"
         infoType = "warning"
-        if demande.status == "attendu":
+        if demande.status != "accepte":
             demandePlans = DemandePlan.objects.filter(demande=demande)
             plans = []
             for i in demandePlans:
@@ -504,6 +513,38 @@ def accepterDemande(request):
     return redirect('/gestionnaire/listDemandes/?flag=1')
 
 
+def refuserDemande(request):
+    """
+    Refuser une demande
+    """
+    if request.session.get("username") != "root":
+        infoType = 'warning'
+        info = "Reconnectez s'il vous plait"
+        return render(request, "index.html", {'info': info, 'infoType': infoType})
+    if request.method == "GET":
+        id = request.GET['id']
+        demande = Demande.objects.get(id=id)
+        if demande.status != "refuse":
+            demande.status = 'refuse'
+            demande.save()
+            demandePlans = DemandePlan.objects.filter(demande=demande)
+            plans = []
+            for i in demandePlans:
+                plans.append(i.plan)
+            for plan in plans:
+                if plan.status == 'accepte':
+                    PlanRessource.objects.filter(plan=plan).delete()
+                plan.status = "refuse"
+                plan.save()
+            info = "Cette demande est bien refuse"
+            infoType = "success"
+        else:
+            info = "Cette demande est deja refuse"
+            infoType = "danger"
+        demandes = Demande.objects.all()
+        return render(request, 'listDemandes.html',
+                      {'info': info, 'infoType': infoType, 'demandes': demandes, 'flag': '1'})
+    return redirect('/gestionnaire/listDemandes/?flag=1')
 
 # def acceptAllDemande(request):
 #     if request.session.get("username") != "root":

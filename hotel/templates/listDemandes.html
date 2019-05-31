@@ -86,6 +86,7 @@
                         <th scope="col">Status</th>
                         <th scope="col">Details</th>
                         <th scope="col">Accepter</th>
+                        <th scope="col">Refuser</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -97,6 +98,7 @@
                         <td>{{item.status}}</td>
                         <td><a href="/gestionnaire/consulterDemande/?id={{item.id}}&cd=-1" class="text-success">Consulter</a></td>
                         <td><a href="/gestionnaire/accepterDemande/?id={{item.id}}&flag=1" class="text-success">Accepter</a></td>
+                        <td><a href="/gestionnaire/refuserDemande/?id={{item.id}}&flag=1" class="text-success">Refuser</a></td>
                     </tr>
                     {% endfor %}
                     </tbody>
