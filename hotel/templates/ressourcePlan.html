@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/popper.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src='/static/js/page.js'></script>
+    <script src='/static/js/ressource.js'></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/ressource.css">
+    <title>Les plans concerné de Ressource {{res.nom}} {{res.id}}</title>
+</head>
+<body>
+<div class="container">
+    <div class='row-fluid'>
+<table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <h2>Liste Plan Concerné</h2>
+        <th>#</th>
+        <th>checkin</th>
+        <th>checkout</th>
+        <th>nbPerson</th>
+        <th>typeRessource</th>
+        <th>owner</th>
+        <th>status</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in plans %}
+    <tr>
+        <td>{{item.numero}}</td>
+        <td>{{item.checkin}}</td>
+        <td>{{item.checkout}}</td>
+        <td>{{item.nbPerson}}</td>
+        <td>{{item.typeRessource}}</td>
+        <td>{{item.owner.login}}</td>
+        <td>{{item.status}}</td>
+    </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+    </div>
+</div>
+</body>
+</html>

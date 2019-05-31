@@ -28,7 +28,7 @@
                         <a class="text-success" href="/gestionnaire/consulterRes/modifyRessource/?id={{res.id}}">modifier</a>
                     </li>
                     <li>
-                        <a class="text-success" href="/gestionnaire/consulterRes/deleteRessource/?id={{res.id}}">supprimer</a>
+                        <a class="text-success" href="/gestionnaire/consulterRes/deleteRessource/?resId={{res.id}}">supprimer</a>
                     </li>
                     <li>
                         <!--cd == -2 in case of no id-->
@@ -39,6 +39,9 @@
                         {% else %}
                         <a href="/mainPage/consulterRes/consultPlanRessource/?planId={{plan.id}}&id={{request.session.id}}&flag=1">retour</a>
                         {% endif %}
+                    </li>
+                    <li>
+                        <a class="text-success" href="/gestionnaire/consulterRes/consulterDemRes/?resId={{res.id}}">consulter demandes concerné</a>
                     </li>
                 </ul>
             </div>
@@ -70,7 +73,7 @@
                     <tr>
                         <li>Info de Meuble</li>
                         <th>Nom Meuble</th>
-                        {% if not id %}
+                        {% if request.session.username == 'root'  %}
                         <th>Status</th>
                         {%  endif %}
 
@@ -80,12 +83,14 @@
                     {% for item in resMeu %}
                     <tr>
                         <th>{{item.nom_Meuble}}</th>
-                        {% if not id %}
+
+                        {% if request.session.username == 'root'  %}
                         <td>{{item.status}}</td>
                         <td><a class="text-success"
                                href="/gestionnaire/consulterRes/removeMeu/?resId={{res.id}}&meuId={{item.id}}">Remove</a>
                         </td>
                         {%  endif %}
+
                     </tr>
                     {% endfor %}
                     </tbody>
