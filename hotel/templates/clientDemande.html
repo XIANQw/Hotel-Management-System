@@ -73,30 +73,7 @@
                 {% endif%}
                 {% endif %}
             </ul>
-            {% if demandes %}
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Create Date</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Details</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for item in demandes %}
-                <tr>
-                    <th scope="row">{{item.numero}}</th>
-                    <td>{{item.createTime}}</td>
-                    <td>{{item.status}}</td>
-                    {% if request.session.username == "root" %}
-                    <td><a href="/gestionnaire/consulterDemande/?id={{item.id}}&cd={{user.id}}" class="text-success">Consulter</a>
-                    </td>
-                    {% else %}
-                    <td><a href="/mainPage/consulterDemande/?id={{item.id}}&cd={{user.id}}" class="text-success">Consulter</a>
-                    </td>
-                    {% endif %}
-                </ul>
+
                 {% if demandes %}
                 <table class="table table-striped">
                     <thead>
@@ -123,8 +100,8 @@
                     </tbody>
                 </table>
                 {% endif %}
-            </fieldset>
-        </div>
+        </fieldset>
+
     </div>
 </div>
 </body>
