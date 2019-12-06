@@ -1,4 +1,4 @@
-# ProjetGLA
+# Hotel Management System
 Informatique L3 - Universite Paris-Sud
 
 ---
